@@ -1,6 +1,6 @@
 # Project Proposal
 
-Pod Members: **Add Pod Members Names**
+Pod Members: ** Anthony Martin, Nnaemeka Odedo, Duy Nguyen**
 
 ## Problem Statement
 
