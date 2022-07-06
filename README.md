@@ -6,7 +6,7 @@ Cohort: **Workday**
 
 Team Member Names:** Anthony Martin, Nnaemeka Odedo, Duy Nguyen**
 
-Mentors Names: **Emma Blair, **
+Mentors Names: **Emma Blair, Connie Nguyen, Saurabh Gupta **
 
 Project Code Repository Links
 
