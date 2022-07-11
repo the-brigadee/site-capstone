@@ -40,10 +40,10 @@ Include at least 10 user stories.
 
 
 ## Wireframe (Bonus)
-![Search Results Page](https://foodies-profile-page.webflow.io)
+[Search Results Page](https://foodies-profile-page.webflow.io)
 ![ezgif com-gif-maker-7](https://user-images.githubusercontent.com/96898896/178374659-a629d7ae-2f06-48d6-85d3-c418c5fa0100.gif)
 
-![Landing Page](https://foodies-9c8b88.webflow.io)
+[Landing Page](https://foodies-9c8b88.webflow.io)
 ![ezgif com-gif-maker-9](https://user-images.githubusercontent.com/96898896/178374936-57b40847-8f1b-4341-aa12-e127b4afbcf8.gif)
 
 
