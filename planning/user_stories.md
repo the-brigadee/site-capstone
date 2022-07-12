@@ -40,11 +40,8 @@ Include at least 10 user stories.
 
 
 ## Wireframe (Bonus)
-[Search Results Page](https://foodies-profile-page.webflow.io)
-![ezgif com-gif-maker-7](https://user-images.githubusercontent.com/96898896/178374659-a629d7ae-2f06-48d6-85d3-c418c5fa0100.gif)
+[Search Results Page & User Profile Page](https://foodies-profile-page.webflow.io)
+![Webflow-foodies-profile-page-12](https://user-images.githubusercontent.com/54002497/178555933-9331cafa-2832-4e31-8dd4-a55d46303133.gif)
 
 [Landing Page](https://foodies-9c8b88.webflow.io)
 ![Webflow - Foodies - 12 July 2022 (1)](https://user-images.githubusercontent.com/54002497/178556429-c60205e9-194c-4be1-836a-c74dec5c2a70.gif)
-
-[User Profile Page](https://foodies-profile-page.webflow.io/profile)
-![Webflow-foodies-profile-page-12](https://user-images.githubusercontent.com/54002497/178555933-9331cafa-2832-4e31-8dd4-a55d46303133.gif)
