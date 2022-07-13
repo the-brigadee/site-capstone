@@ -45,6 +45,3 @@ Include at least 10 user stories.
 ![image](https://user-images.githubusercontent.com/96898896/178838979-6941f684-9ce9-485a-aeb7-bf5d08c9cdc4.png)
 ![image](https://user-images.githubusercontent.com/96898896/178839065-af84b64b-ca54-49f5-8280-1e3858f76e84.png)
 
-
-
-- (Non-member) Sassy is a junior college student from Illinois county university studying medicine. She is a member of the “alpha zeta omega” sorority, a campus organization at the ICU, that is planning a bake sale as a fundraiser event. She is a 21 yr old from southern california who uses her laptops for research, school assignments and event organizing. understanding that she is in charge of baking, she would like to make cookies, muffins and cupcakes but she has never baked a muffin before- only cookies and cupcakes. Sassy is color blind, therefore, she will have a hard time discerning between buttons.
