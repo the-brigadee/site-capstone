@@ -40,8 +40,11 @@ Include at least 10 user stories.
 
 
 ## Wireframe (Bonus)
-[Search Results Page & User Profile Page](https://foodies-profile-page.webflow.io)
-![Webflow-foodies-profile-page-12](https://user-images.githubusercontent.com/54002497/178555933-9331cafa-2832-4e31-8dd4-a55d46303133.gif)
+[Wireframes Link](https://www.figma.com/file/a7gq3934n355ZIAS1mkVI8/Food-Recipe-Website?node-id=0%3A1)
+![image](https://user-images.githubusercontent.com/96898896/178838898-620dd6f3-62cb-4278-a3ff-72b2e0fd3412.png)
+![image](https://user-images.githubusercontent.com/96898896/178838979-6941f684-9ce9-485a-aeb7-bf5d08c9cdc4.png)
+![image](https://user-images.githubusercontent.com/96898896/178839065-af84b64b-ca54-49f5-8280-1e3858f76e84.png)
 
-[Landing Page](https://foodies-9c8b88.webflow.io)
-![Webflow - Foodies - 12 July 2022 (1)](https://user-images.githubusercontent.com/54002497/178556429-c60205e9-194c-4be1-836a-c74dec5c2a70.gif)
+
+
+- (Non-member) Sassy is a junior college student from Illinois county university studying medicine. She is a member of the “alpha zeta omega” sorority, a campus organization at the ICU, that is planning a bake sale as a fundraiser event. She is a 21 yr old from southern california who uses her laptops for research, school assignments and event organizing. understanding that she is in charge of baking, she would like to make cookies, muffins and cupcakes but she has never baked a muffin before- only cookies and cupcakes. Sassy is color blind, therefore, she will have a hard time discerning between buttons.
