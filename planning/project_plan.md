@@ -35,7 +35,7 @@ We aim to create an online platform for food enthusiasts, food influencers, food
 
 ## Data Model
 
-Describe your app's data model using diagrams or tables
+
 
 ## Endpoints
 
