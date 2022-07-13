@@ -34,11 +34,14 @@ We aim to create an online platform for food enthusiasts, food influencers, food
 ![Webflow - Foodies - 12 July 2022 (1)](https://user-images.githubusercontent.com/54002497/178556429-c60205e9-194c-4be1-836a-c74dec5c2a70.gif)
 
 ## Data Model
-
-
+![image](https://user-images.githubusercontent.com/96898896/178793138-138d437b-1381-44c9-8866-733d1c4b6004.png)
+![image](https://user-images.githubusercontent.com/96898896/178793245-493d95e7-da83-4a06-9d19-f76999a4f9f6.png)
+![image](https://user-images.githubusercontent.com/96898896/178793341-01e73d5e-02c1-4627-807a-46949bef4859.png)
+![image](https://user-images.githubusercontent.com/96898896/178793415-f13208e6-f985-4b71-8902-bd5847e9c433.png)
+![image](https://user-images.githubusercontent.com/96898896/178793482-fb64e2e2-de0a-4251-8827-54622a891025.png)
 
 ## Endpoints
+![image](https://user-images.githubusercontent.com/96898896/178793570-936856d8-5a62-4fe8-a4c1-33dab7b1b775.png)
 
-List the API endpoints you will need to implement.
 
 ***Don't forget to set up your Issues, Milestones, and Project Board!***
