@@ -26,7 +26,7 @@ We aim to create an online platform for food enthusiasts, food influencers, food
 
 
 ## Pages/Screens
-- [Wireframe](https://www.figma.com/file/a7gq3934n355ZIAS1mkVI8/Food-Recipe-Website?node-id=0%3A1)
+- [Wireframe](https://www.figma.com/file/a7gq3934n355ZIAS1mkVI8/Food-Recipe-Website?node-id=0%3A1) <br />
 ![image](https://user-images.githubusercontent.com/96898896/179095920-66ca5f02-7e37-44dc-8e82-019d06945a63.png)
 ![image](https://user-images.githubusercontent.com/96898896/179095997-347d8447-1561-416e-9c88-f453f354cdb3.png)
 ![image](https://user-images.githubusercontent.com/96898896/179096044-39794879-29ed-4eab-a154-333c6ae9ca70.png)
