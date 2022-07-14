@@ -37,11 +37,11 @@ We aim to create an online platform for food enthusiasts, food influencers, food
 ![image](https://user-images.githubusercontent.com/96898896/178793138-138d437b-1381-44c9-8866-733d1c4b6004.png)
 ![image](https://user-images.githubusercontent.com/96898896/178793245-493d95e7-da83-4a06-9d19-f76999a4f9f6.png)
 ![image](https://user-images.githubusercontent.com/96898896/178793341-01e73d5e-02c1-4627-807a-46949bef4859.png)
-![image](https://user-images.githubusercontent.com/96898896/178793415-f13208e6-f985-4b71-8902-bd5847e9c433.png)
+![image](https://user-images.githubusercontent.com/96898896/179043924-7b0af801-d489-4570-9e9d-06db2aebf47c.png)
 ![image](https://user-images.githubusercontent.com/96898896/178793482-fb64e2e2-de0a-4251-8827-54622a891025.png)
 
 ## Endpoints
-![image](https://user-images.githubusercontent.com/96898896/178793570-936856d8-5a62-4fe8-a4c1-33dab7b1b775.png)
+![image](https://user-images.githubusercontent.com/96898896/179043962-c1a05e12-7ed0-48b3-a69d-c22e285fac21.png)
 
 
 ***Don't forget to set up your Issues, Milestones, and Project Board!***
