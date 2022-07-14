@@ -26,12 +26,14 @@ We aim to create an online platform for food enthusiasts, food influencers, food
 
 
 ## Pages/Screens
-
-[Search Results Page & User Profile Page](https://foodies-profile-page.webflow.io)
-![Webflow-foodies-profile-page-12](https://user-images.githubusercontent.com/54002497/178555933-9331cafa-2832-4e31-8dd4-a55d46303133.gif)
-
-[Landing Page](https://foodies-9c8b88.webflow.io)
-![Webflow - Foodies - 12 July 2022 (1)](https://user-images.githubusercontent.com/54002497/178556429-c60205e9-194c-4be1-836a-c74dec5c2a70.gif)
+[Wireframe](https://www.figma.com/file/a7gq3934n355ZIAS1mkVI8/Food-Recipe-Website?node-id=0%3A1)
+![image](https://user-images.githubusercontent.com/96898896/179095920-66ca5f02-7e37-44dc-8e82-019d06945a63.png)
+![image](https://user-images.githubusercontent.com/96898896/179095997-347d8447-1561-416e-9c88-f453f354cdb3.png)
+![image](https://user-images.githubusercontent.com/96898896/179096044-39794879-29ed-4eab-a154-333c6ae9ca70.png)
+![image](https://user-images.githubusercontent.com/96898896/179096086-f6ea3f5a-4e8c-4415-8e14-11a0f1eee85d.png)
+![image](https://user-images.githubusercontent.com/96898896/179096112-19a5d2c7-cfa7-4051-ba34-5c1e78b77ad3.png)
+![image](https://user-images.githubusercontent.com/96898896/179096168-54867ce8-a71f-40fb-8204-946358443ba3.png)
+![image](https://user-images.githubusercontent.com/96898896/179096204-d61ab151-50ff-44a6-a1d2-966cb2e00912.png)
 
 ## Data Model
 ![image](https://user-images.githubusercontent.com/96898896/178793138-138d437b-1381-44c9-8866-733d1c4b6004.png)
