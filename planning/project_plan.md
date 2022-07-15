@@ -18,11 +18,16 @@ We aim to create an online platform for food enthusiasts, food influencers, food
 3. As a non-member, I want to categorize recipes for easy access so I can search for the dish I want faster.
 4. As a member, I want to share my new recipes with people around the world so people can try food from different cultures.
 5. As a member, I want to be able to leave reviews and comments so that people can improve their recipes.
-6. As a member, I want to be able to delete my account, posts or reviews so that I don’t run into trouble when I make a mistake. 
-7. As a member, I want to be able to plan out my meals for the week so I shop for all the ingredients at once. 
-8. As a member, I want to be able to follow other users and see the recipes that they created. 
-9. As a non-member, I want to be able to register for an user account so I can become a member and unlock more functionality.
-10. As a member, I want to be able to edit my account, posts or reviews so that I don’t run into trouble when I make a mistake. 
+6. As a member, I want to be able to delete my account so that I don’t run into trouble when I make a mistake. 
+7. As a member, I want to be able to delete my posts so that I don’t run into trouble when I make a mistake. 
+8. As a member, I want to be able to delete my reviews so that I don’t run into trouble when I make a mistake. 
+9. As a member, I want to be able to plan out my meals for the week so I shop for all the ingredients at once. 
+10. As a member, I want to be able to search and follow other users and see the recipes that they created so I can see what my friends’ new recipes.
+11. As a non-member, I want to be able to register for an user account so I can become a member and unlock more functionality.
+12. As a member, I want to be able to edit my account, posts or reviews so that I don’t run into trouble when I make a mistake. 
+13. As a member, I want to be able to edit my posts so that I don’t run into trouble when I make a mistake. 
+14. As a member, I want to be able to edit reviews so that I don’t run into trouble when I make a mistake. 
+
 
 
 ## Pages/Screens
