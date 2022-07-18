@@ -19,4 +19,9 @@
 
 .app-body{
   position: relative;
+  top: 56px;
+  display: flex;
+  flex-direction: row;
+  max-width: 100%;
+  width: 100%;
 }

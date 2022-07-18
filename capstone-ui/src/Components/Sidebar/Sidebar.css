@@ -1,8 +1,169 @@
-.sidebar{
-    position: fixed;
+.sidebar-closed{
+    position: -webkit-sticky;
+    position: sticky;
+    top: 56px;
     left: 0px;
     width: 72px;
-    min-height: 100vh;
-    background-color: #0FA2F4;
+    background-color: var(--primary-color);
     z-index: 10000;
+    max-height: calc(100vh - 56px); /* 56px represents the height of the Navbar */
+    min-height: calc(100vh - 56px); /* 56px represents the height of the Navbar */
+    min-width: 65px;
+}
+
+.sidebar-open{
+    position: sticky;
+    top:56px;
+    left: 0px;
+    width: 250px;
+    background-color: var(--primary-color);
+    z-index: 10000;
+    max-height: calc(100vh - 56px); /* 56px represents the height of the Navbar */
+    min-height: calc(100vh - 56px); /* 56px represents the height of the Navbar */
+    max-width: 190px;
+}
+
+.sidebar-closed-contents{
+    margin: 5px;
+    padding: 2px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 27px;
+}
+
+.sidebar-closed-contents *:hover{
+    background-color: rgba(255,255,255,.1);
+}
+
+.sidebar-closed-contents button{
+    background-color: transparent;
+    display: flex;
+    justify-content: center;
+    outline: none;
+    border: 0px;
+    flex-direction: row;
+    align-items: flex-end;
+    cursor: pointer;
+    gap: 8px;
+    padding: 0px;
+}
+.sidebar-closed-contents a{
+    background-color: transparent;
+    display: flex;
+    justify-content: center;
+    outline: none;
+    border: 0px;
+    flex-direction: row;
+    cursor: pointer;
+    text-decoration: none;
+    color: inherit;
+    align-items: flex-end;
+    gap: 8px;
+}
+
+.sidebar-closed-contents button img{
+    width: 24px;
+    height: 24px;
+    cursor: pointer;
+}
+
+.sidebar-closed-contents a img{
+    width: 24px;
+    height: 24px;
+    cursor: pointer;
+}
+
+.sidebar-closed-contents button img.sidebar-collapse{
+    transform: rotateZ(180deg);
+}
+
+/* Declarations for sidebar open styles */
+
+
+
+.sidebar-open-contents{
+    margin: 5px;
+    padding: 2px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    gap: 27px;
+}
+
+.sidebar-open-contents *:hover{
+    background-color: rgba(255,255,255,.1);
+}
+
+.sidebar-open-contents button{
+    /* max-width: 62px; */
+    /* height: 48px; */
+    background-color: transparent;
+    display: flex;
+    justify-content: flex-start;
+    outline: none;
+    border: 0px;
+    flex-direction: row;
+    align-items: flex-end;
+    cursor: pointer;
+    gap: 8px;
+    padding: 0px;
+}
+
+.sidebar-open-contents a{
+    /* max-width: 62px; */
+    /* height: 48px; */
+    background-color: transparent;
+    display: flex;
+    justify-content: flex-start;
+    outline: none;
+    border: 0px;
+    flex-direction: row;
+    cursor: pointer;
+    text-decoration: none;
+    color: inherit;
+    align-items: flex-end;
+    gap: 8px;
+}
+
+.sidebar-open-contents button p{
+    margin: 0px;
+    font-size: 1.2rem
+}
+
+
+.sidebar-open-contents a p{
+    margin: 0px;
+    font-size: 1.2rem
+}
+
+.sidebar-open-contents button img{
+    width: 24px;
+    height: 24px;
+    cursor: pointer;
+}
+
+.sidebar-open-contents a img{
+    width: 24px;
+    height: 24px;
+    cursor: pointer;
+}
+
+#category-dropdown{
+    width: 20px;
+    height: 20px;
+    align-self: center;
+}
+
+.drop{
+    transform: rotateZ(90deg);
+}
+
+.category-box{
+    margin-left: calc(32px + 5px); /* 32px is the length of the png 24px + the lenght of the gap 8px. The other number represents the 
+    the indent under categories*/
+}
+
+.disappear{
+    display: none;
 }

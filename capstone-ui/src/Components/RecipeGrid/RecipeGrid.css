@@ -1,0 +1,25 @@
+.recipe-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    place-items: center;
+    grid-gap: 1rem;
+    padding-bottom: 1rem;
+
+}
+
+.recipe-grid img {
+    max-height: 200px;
+    border-radius: 14px;
+}
+
+.recipe-container {
+    display: flex;
+    flex-direction: column;
+    background-color: lightgray;
+    margin: 10px;
+    border-radius: 14px;
+}
+
+.recipe-container h1 {
+    margin-left: 100px;
+}

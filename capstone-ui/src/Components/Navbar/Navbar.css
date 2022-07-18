@@ -1,13 +1,39 @@
 .navbar{
-    /* position: fixed; */
+    position: fixed;
     top: 0px;
     background-color: #BCBCBC;
     min-height: 56px;
     min-width: 100vw;
     max-height: 56px;
     z-index: 10000;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
 }
 
 .navbar .logo-container, .navbar .logo-container .logo {
     max-height: 56px;
+}
+
+.nav-btn {
+    max-height: 28px;
+    padding: .5rem;
+}
+
+.search-container input {
+    height: 30px;
+    width: 250px;
+    border-radius: 14px;
+    padding-left: .5rem;
+}
+
+.search-container i {
+    font-size: 20px;
+    margin-left: .5rem;  
+}
+
+.nav-btns {
+    display: flex;
+    flex-direction: row;
 }
