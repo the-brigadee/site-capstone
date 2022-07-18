@@ -45,7 +45,9 @@ export default function Sidebar(){
         
     }
 
-    //Function to close the categories dropdown
+    /*Function to close the categories dropdown
+            This function should be called when any link is clicked
+    */ 
     const closeDropdown = () => {
         setIsDropped(false)
     }
