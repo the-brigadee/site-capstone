@@ -1,0 +1,13 @@
+.navbar{
+    /* position: fixed; */
+    top: 0px;
+    background-color: #BCBCBC;
+    min-height: 56px;
+    min-width: 100vw;
+    max-height: 56px;
+    z-index: 10000;
+}
+
+.navbar .logo-container, .navbar .logo-container .logo {
+    max-height: 56px;
+}

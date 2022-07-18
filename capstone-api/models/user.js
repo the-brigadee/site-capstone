@@ -10,7 +10,7 @@ class User{
             email:user.email,
             first_name:user.first_name,
             last_name:user.last_name,
-            user_name:user.username,
+            username:user.username,
             dob:user.dob,
             created_at:user.created_at
 
@@ -87,11 +87,11 @@ class User{
             password,
             first_name,
             last_name,
-            user_name,
+            username,
             dob
         )
         VALUES ($1, $2, $3, $4, $5, $6)
-        RETURNING id, email, password, first_name, last_name, user_name, dob, created_at;
+        RETURNING id, email, password, first_name, last_name, username, dob, created_at;
     `,
     [lowercasedEmail, hashedPassword, credentials.firstName, credentials.lastName, credentials.userName, credentials.dob]
     )
@@ -122,7 +122,7 @@ class User{
         if(!userName){
             throw new BadRequestError("No username provided")
         }
-        const query=`SELECT * FROM users WHERE user_name=$1`
+        const query=`SELECT * FROM users WHERE username=$1`
 
         const result= await db.query(query, [userName.toLowerCase()])
 
