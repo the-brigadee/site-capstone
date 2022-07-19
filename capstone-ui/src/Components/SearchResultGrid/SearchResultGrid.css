@@ -1,0 +1,18 @@
+.results-container{
+    display: flex;
+    flex-direction: column;
+    background-color: lightgray;
+    margin: 30px 30px 0 30px;
+    border-radius: 14px;
+}
+
+.filter-btn{
+    width: 40px;
+    height: 40px;
+}
+
+.results-grid{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}

@@ -15,3 +15,5 @@ Rated Logo:- https://cdn-icons-png.flaticon.com/512/3629/3629632.png
 Not found image:- https://cdn-icons-png.flaticon.com/512/6537/6537649.png
 
 Categories dropDown arrow:- https://cdn-icons-png.flaticon.com/512/271/271228.png
+
+Filter icon:- https://cdn-icons.flaticon.com/png/512/3171/premium/3171047.png?token=exp=1658268262~hmac=032982963513064b3d09d891152518b3

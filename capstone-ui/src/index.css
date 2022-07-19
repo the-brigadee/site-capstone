@@ -14,4 +14,16 @@ code {
 
 :root{
   --primary-color: #0FA2F4;
+
+  /* Values pertaining to the Recipe card style
+  
+    Only Change this values if you wish to change the card sizes
+  */
+  --recipe-card-width: 283px;
+  --recipe-card-height: 200px;
+  --recipe-card-border-radius: 12px;
+  --recipe-card-spacing: 12px;
+  --recipe-card-border-thickness: 5px;
+
+  /* Continue adding variables below here */
 }

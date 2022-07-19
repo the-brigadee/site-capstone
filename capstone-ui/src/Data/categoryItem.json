@@ -1,0 +1,47 @@
+[
+    {
+        "name" : "Main course"
+    },
+    {
+        "name" : "Side dish"
+    },
+    {
+        "name" : "Breakfast"
+    },
+    {
+        "name" : "Appetizer"
+    },
+    {
+        "name" : "Dessert"
+    },
+    {
+        "name" : "Snack"
+    },
+    {
+        "name" : "Fingerfood"
+    },
+    {
+        "name" : "Drink"
+    },
+    {
+        "name" : "Beverage"
+    },
+    {
+        "name" : "Marinade"
+    },
+    {
+        "name" : "Sauce"
+    },
+    {
+        "name" : "Salad"
+    },
+    {
+        "name" : "Bread"
+    },
+    {
+        "name" : "Bread"
+    },
+    {
+        "name" : "Soup"
+    }
+]

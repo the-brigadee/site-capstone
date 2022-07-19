@@ -1,5 +1,6 @@
 import * as React from 'react'
 import {Link} from 'react-router-dom'
+import CategoryDropdown from '../CategoryDropdown/CategoryDropdown'
 import './Sidebar.css'
 
 export default function Sidebar(){
@@ -73,71 +74,12 @@ export default function Sidebar(){
                 </button>
 
 
-                {/* This div contains the various categories to be displayed when the dropdown is active */}
-                <div className={isDropped ? "category-box" : "disappear"}>
+                {/* Conditional rendering for the Category dropdown based on the {isDropped} state*/}
 
-                    <Link to='/'>
-                        <p> Main course </p>   
-                    </Link>
-
-                    <Link to='/'>
-                        <p> Side dish </p>   
-                    </Link>
-
-                    <Link to='/'>
-                        <p> Breakfast </p>   
-                    </Link>
-
-                    <Link to='/'>
-                        <p> Appetizer </p>   
-                    </Link>
-
-                    <Link to='/'>
-                        <p> Dessert </p>   
-                    </Link>
-
-                    <Link to='/'>
-                        <p> Snack </p>   
-                    </Link>
-
-                    <Link to='/'>
-                        <p> Fingerfood </p>   
-                    </Link>
-
-                    <Link to='/'>
-                        <p> Drink </p>   
-                    </Link>
-
-                    <Link to='/'>
-                        <p> Beverage </p>   
-                    </Link>
-
-                    <Link to='/'>
-                        <p> Marinade </p>   
-                    </Link>
-
-                    <Link to='/'>
-                        <p> Sauce </p>   
-                    </Link>
-
-                    <Link to='/'>
-                        <p> Salad </p>   
-                    </Link>
-
-                    <Link to='/'>
-                        <p> Bread </p>   
-                    </Link>
-
-                    <Link to='/'>
-                        <p> Soup </p>   
-                    </Link>
-
-                </div>
-
-                {/* Ending portion of the categories div */}
+                {isDropped ? <CategoryDropdown /> : <></>}
 
 
-                {/* Recent Link to the recent page */}
+                {/* Recent button */}
                 <Link to='/'>
                     <img src="https://cdn-icons.flaticon.com/png/512/2961/premium/2961948.png?token=exp=1658167259~hmac=bc3307a173b67dca683b25868ae2734d" alt="recent" />
                     {isExpand ? <p> Recents </p> : <></>}   
