@@ -26,12 +26,31 @@ router.post("/register", async (req, res, next) => {
     }
   });
 
+router.delete("/delete", async (req, res, next) => {
+  try {
+    // take the users email and password and create a new user in our database
+    const user = await User.delete(req.body);
+    return res.status(200).json({ user});
+  } catch (err) {
+    next(err);
+  }
+});
+
+router.put("/update", async (req, res, next) => {
+  try {
+    // take the users email and password and create a new user in our database
+    const user = await User.update(req.body);
+    return res.status(200).json({ user});
+  } catch (err) {
+    next(err);
+  }
+});
+
 router.get("/me",security.requireAuthenticatedUser, async(req,res,next)=>{
   try{
     const{email}=res.locals.user
     const user=await User.fetchUserByEmail(email)
     const publicUser= await User.makePublicUser(user)
-    console.log({user:publicUser});
     return res.status(200).json({user:publicUser});
   }catch(err){
     next(err)
