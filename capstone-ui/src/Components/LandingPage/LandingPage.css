@@ -1,0 +1,36 @@
+.landing-page{
+    position: relative;
+    width: 100%;
+}
+
+.landing-page .hero img, .landing-page .hero{
+    width: 100%;
+}
+
+.landing-page .hero-img-wrapper {
+    max-height: 300px;
+    overflow: hidden;
+}
+
+.landing-page .hero-text {
+    position: absolute;
+    top: 90px;
+    display: flex;
+    flex-direction: column;
+    left: 15px;
+    justify-content: center;
+    font-size: 60px;
+    color: white;
+    font-weight: 700;
+    max-width: 50%;
+}
+
+.landing-page h3 {
+    font-size: 20px;
+    padding-left: .5rem;
+    margin: 0;
+}
+
+.test {
+    max-width: 50px;
+}

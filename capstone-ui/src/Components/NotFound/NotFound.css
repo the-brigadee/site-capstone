@@ -1,0 +1,36 @@
+.notfound{
+    width: 100%;
+}
+
+.notfound-404{
+    margin-top: 50px;
+    margin-left: auto;
+    margin-right: auto;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    z-index: 2;
+}
+
+.notfound-404 h1{
+    font-size: 240px;
+    margin: 0px;
+    text-align: center;
+}
+
+.notfound-404 h3{
+    font-size: 60px;
+    margin: 0px;
+    text-align: center;
+}
+
+.notfound-img{
+    position: absolute;
+    opacity: 40%;
+    top: 50px;
+    margin-left: auto;
+    margin-right: auto;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
