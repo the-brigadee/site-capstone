@@ -22,12 +22,9 @@ export default function RecipeDetail() {
       {/* Main Information */}
       <RecipeMain />
 
-        {/* Detailed Step Information */}
-
-
-        <div className="recipe-detail-step">
-
-        </div>
+      {/* Detailed Step Information */}
+      <RecipeStep />
+        
     </div>
   )
 }
@@ -63,5 +60,37 @@ function RecipeMain(){
           <button> Delete </button>
         </div>
       </div>
+  )
+}
+
+function RecipeStep(){
+  return(
+    <div className="recipe-detail-step">
+
+      {/* recipe Ingredients */}
+      <div className="recipe-detail-ingredients">
+        <p className="ingredients-header"> Ingredients </p>
+        <hr />
+        <ul className='ingredients-list'>
+          <li> Pancakes </li>
+          <li> Chocolate Syrup </li>
+          <li> Butter </li>
+        </ul>
+      </div>
+
+
+      {/* Recipe directions */}
+      <div className="recipe-detail-directions">
+        <p className="directions-header"> Directions </p>
+        <hr />
+        <ol className='directions-list'>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+        </ol>
+      </div>
+    </div>
   )
 }

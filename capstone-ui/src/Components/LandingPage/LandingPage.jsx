@@ -22,7 +22,7 @@ export function Hero() {
             </div>
             <div className="hero-text">
                 Welcome to Reciholic!
-                <h3>Some other text here :D</h3>
+                <h3>Hunger Leads to Anger so Eat 😁</h3>
             </div>
         </div>
     )
