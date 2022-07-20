@@ -21,6 +21,7 @@
     max-height: calc(100vh - 56px); /* 56px represents the height of the Navbar */
     min-height: calc(100vh - 56px); /* 56px represents the height of the Navbar */
     max-width: 190px;
+    overflow-y: scroll;
 }
 
 .sidebar-closed-contents{
@@ -77,6 +78,7 @@
 .sidebar-closed-contents button img.sidebar-collapse{
     transform: rotateZ(180deg);
 }
+
 
 /* Declarations for sidebar open styles */
 
@@ -157,13 +159,4 @@
 
 .drop{
     transform: rotateZ(90deg);
-}
-
-.category-box{
-    margin-left: calc(32px + 5px); /* 32px is the length of the png 24px + the lenght of the gap 8px. The other number represents the 
-    the indent under categories*/
-}
-
-.disappear{
-    display: none;
 }

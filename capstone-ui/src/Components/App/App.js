@@ -5,12 +5,26 @@ import Navbar from '../Navbar/Navbar';
 import Sidebar from '../Sidebar/Sidebar';
 import LandingPage from '../LandingPage/LandingPage';
 import NotFound from '../NotFound/NotFound';
+import {AuthNavContextProvider, useAuthNavContext} from '../../Contexts/authNav'
+import ResultPage from '../ResultPage/ResultPage'
+import RecipeDetail from '../RecipeDetail/RecipeDetail';
+
+
+export default function AppContainer(){
+  return(
+    <AuthNavContextProvider>
+      <App />
+    </AuthNavContextProvider>
+  )
+}
+
 
 
 /**
  * 
  * @returns App function
  */
+
 function App() {
 
 
@@ -25,6 +39,8 @@ function App() {
             <Routes>
               {/* Declare individual routes under */}
               <Route path='/' element={<LandingPage/>} />
+              <Route path='/search' element={<ResultPage />}/>
+              <Route path='/recipe/:recipeId' element={<RecipeDetail />}/>
               <Route path='*' element={<NotFound />}/>
             </Routes>
 
@@ -48,5 +64,3 @@ function App() {
     </div>
   );
 }
-
-export default App;

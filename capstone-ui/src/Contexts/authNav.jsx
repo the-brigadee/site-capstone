@@ -14,15 +14,80 @@ import * as React from 'react'
 const AuthNavContext = React.createContext(null)
 
 //Create the custom provider we want to use for our context
-export const AuthNavConextProvider = ({children}) =>{
+export const AuthNavContextProvider = ({children}) =>{
 
     //create our state variables here
-    const [user, setUser] = React.useState(false)
+
+    // user state variable
+    const [user, setUser] = React.useState({})
+
+    // error state variable
+    const [error, setError] = React.useState({})
+
+    // loading state variable
+    const [isLoading, setIsLoading] = React.useState(false)
+
+    // current selected Category state variable
+    const [currCategory, setCurrentCategory] = React.useState("")
+
+    // Pop up type state variable
+    const [popupType, setPopupType] = React.useState("Login")
+    
+    //function for login button
+    const showLoginForm = () => {
+        setPopupType("Login")
+        showPopup()
+    }
+
+    //function for Register button
+    const showRegisterForm = () => {
+        setPopupType("Register")
+        showPopup()
+    }
+
+    // Close popup/modal function 
+    const showPopup = () => {
+        const overlay = document.querySelector('.overlay')
+        const popup = document.querySelector('.popup-card')
+
+        setTimeout(() => {
+            overlay.classList.add('active')
+            popup.classList.add('active')
+        }, 100)
+    }
+
+    // Close popup/modal function 
+    const closePopup = () => {
+        const overlay = document.querySelector('.overlay')
+        const popup = document.querySelector('.popup-card')
+        if (overlay.classList.contains('active')) {
+            overlay.classList.remove('active')
+        }
+        if (popup.classList.contains('active')) {
+            popup.classList.remove('active')
+        }
+    }
+
+    /**  This state variable helps the conditional rendering of the ResultsFeed page 
+     * 
+     *  it should have one of two values ("sidebar") or ("searchbar")
+     * */
+    const [resultsType, setResultsType] = React.useState("searchbar")
+
+    // Searched word state variable
+    const [searchWord, setSearchWord] = React.useState("")
 
     // Add all state variables to be passed to this object 
     const authNavvalue = {
-        user, setUser
+        user, setUser, 
+        currCategory, setCurrentCategory, 
+        popupType, setPopupType, showPopup, closePopup, showLoginForm, showRegisterForm,
+        resultsType, setResultsType, 
+        error, setError, 
+        isLoading, setIsLoading,
+        searchWord, setSearchWord
     }
+
 
     //Return value
     return(

@@ -1,0 +1,51 @@
+/* 
+    All variables are seriously calculated using geometry.
+
+    Please change variables in index.css located at '/src/index.css'
+*/
+.recipe-card{
+    position: relative;
+    min-width: var(--recipe-card-width);
+    min-height: var(--recipe-card-height);
+}
+
+.recipe-border-left{
+    background-color: var(--primary-color);
+    width: var(--recipe-card-width);
+    height: calc(var(--recipe-card-height) - var(--recipe-card-spacing));
+    position: absolute;
+    bottom: 0%;
+    right: 0%;
+    border-radius: var(--recipe-card-border-radius);
+    z-index: 1;
+}
+
+.recipe-border-top{
+    background-color: var(--primary-color);
+    width: calc(var(--recipe-card-width) - var(--recipe-card-spacing));
+    height: var(--recipe-card-height);
+    position: absolute;
+    bottom: 0%;
+    right: 0%;
+    border-radius: var(--recipe-card-border-radius);
+    z-index: 1;
+}
+
+.recipe-border-container{
+    border: var(--recipe-card-border-thickness) solid black;
+    position: absolute;
+    z-index: 2;
+    width: calc(var(--recipe-card-width) - var(--recipe-card-spacing) - var(--recipe-card-border-radius));
+    height: calc(var(--recipe-card-height) - var(--recipe-card-spacing) - var(--recipe-card-border-radius));
+    bottom: 0%;
+    right: 0%;
+}
+
+.recipe-card img{
+    z-index: 3;
+    position: absolute;
+    width: calc(var(--recipe-card-width) - var(--recipe-card-spacing) - var(--recipe-card-border-radius));
+    height: calc(var(--recipe-card-height) - var(--recipe-card-spacing) - var(--recipe-card-border-radius));
+    bottom: var(--recipe-card-border-thickness);
+    right: var(--recipe-card-border-thickness);
+}

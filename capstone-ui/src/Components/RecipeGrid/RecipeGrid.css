@@ -7,16 +7,11 @@
 
 }
 
-.recipe-grid img {
-    max-height: 200px;
-    border-radius: 14px;
-}
-
 .recipe-container {
     display: flex;
     flex-direction: column;
     background-color: lightgray;
-    margin: 10px;
+    margin: 10px 10px 0 10px;
     border-radius: 14px;
 }
 

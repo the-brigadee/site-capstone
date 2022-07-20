@@ -1,0 +1,66 @@
+.search-result-card{
+    display: flex;
+    padding: 30px;
+    gap: 20px;
+}
+
+.search-result-card img{
+    z-index: 3;
+    position: absolute;
+    width: calc(var(--recipe-card-width) - var(--recipe-card-spacing) - var(--recipe-card-border-radius));
+    height: calc(var(--recipe-card-height) - var(--recipe-card-spacing) - var(--recipe-card-border-radius));
+    bottom: var(--recipe-card-border-thickness);
+    right: var(--recipe-card-border-thickness);
+}
+
+.result-image{
+    position: relative;
+    min-width: var(--recipe-card-width);
+    min-height: var(--recipe-card-height);
+}
+
+.result-information{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.result-detail{
+    display: flex;
+    flex-direction: row;
+    gap: 15px;
+    align-items: center;
+}
+
+.result-stars{
+    overflow: hidden;
+    display: flex;
+    gap: 2px;
+}
+
+.search-result-card h1{
+    margin: 0px;
+}
+
+.search-result-card p{
+    margin: 0px;
+}
+
+.result-profile-img{
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    width: 60px;
+    height: 60px;
+}
+
+.result-profile-img img{
+    position: absolute;
+    border: 3px solid aliceblue;
+    border-radius: 50%;
+    width: 45px;
+    height: 45px;
+    z-index: 3;
+}

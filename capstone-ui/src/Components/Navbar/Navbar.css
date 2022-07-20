@@ -31,9 +31,14 @@
 .search-container i {
     font-size: 20px;
     margin-left: .5rem;  
+    cursor: pointer;
 }
 
 .nav-btns {
     display: flex;
     flex-direction: row;
+}
+
+.nav-btn {
+    cursor: pointer;
 }

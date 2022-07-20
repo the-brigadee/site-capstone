@@ -2,7 +2,6 @@ import * as React from 'react'
 import './LandingPage.css'
 import RecipeGrid from '../RecipeGrid/RecipeGrid'
 import Overlay from '../Overlay/Overlay'
-import Popup from '../Popup/Popup'
 
 export default function LandingPage(){
     return(
@@ -10,7 +9,6 @@ export default function LandingPage(){
             <Hero/>        
             <RecipeGrid />
             <Overlay />
-            <Popup />
         </div>
         
     )
