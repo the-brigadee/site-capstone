@@ -43,6 +43,9 @@ class ApiClient {
         this.setToken(null)
         localStorage.setItem(this.tokenName, "")
     }
+    async recipeSearch(searchWord){
+        return await this.request({ endpoint: `auth/login/${searchWord}`, method: `GET`, data:{} })
+    }
 }
 
 export default new ApiClient("http://localhost:3001")

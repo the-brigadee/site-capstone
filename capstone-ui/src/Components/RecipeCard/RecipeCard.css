@@ -5,9 +5,73 @@
 */
 .recipe-card{
     position: relative;
+    overflow: hidden;
     min-width: var(--recipe-card-width);
     min-height: var(--recipe-card-height);
 }
+
+.recipe-card img{
+    transition: all 0.45s ease;
+    backface-visibility: hidden;
+}
+
+/* .recipe-card img:before, */
+.recipe-card img:before,
+.recipe-card img:after {
+z-index: 3;
+position: absolute;
+width: calc(var(--recipe-card-width) - var(--recipe-card-spacing) - var(--recipe-card-border-radius));
+height: calc(var(--recipe-card-height) - var(--recipe-card-spacing) - var(--recipe-card-border-radius));
+bottom: var(--recipe-card-border-thickness);
+right: var(--recipe-card-border-thickness);
+  background-color: rgba(0, 0, 0, 0.5);
+  border-top: 32px solid rgba(0, 0, 0, 0.5);
+  border-bottom: 32px solid rgba(0, 0, 0, 0.5);
+  content: '';
+  transition: all 0.3s ease;
+  opacity: 0;
+  transform: scaleY(2);
+}
+
+
+
+/* --------------------------------------------------------------------------------------------------------------------------- */
+.recipe-card .recipe-img-text {
+    position: absolute;
+    width: calc(var(--recipe-card-width) - var(--recipe-card-spacing) - var(--recipe-card-border-radius));
+    height: calc(var(--recipe-card-height) - var(--recipe-card-spacing) - var(--recipe-card-border-radius));
+    bottom: var(--recipe-card-border-thickness);
+    right: var(--recipe-card-border-thickness);
+    display: flex;
+    flex-direction: column;
+    opacity: 0;
+    z-index: 2;
+    transition-delay: 0.1s;
+    overflow: hidden;
+  } 
+  
+.recipe-img-text > *{
+    padding: 0px 5px;
+    white-space: nowrap;
+}
+
+.recipe-card:hover:before,
+.recipe-card:hover:after {
+transform: scale(1);
+opacity: 1;
+}
+
+.recipe-card:hover img {
+opacity: 0.15;
+}
+
+.recipe-card:hover .recipe-img-text {
+opacity: 1;
+color: aliceblue;
+}
+
+
+  /* --------------------------------------------------------------------------------------------------------------------------- */
 
 .recipe-border-left{
     background-color: var(--primary-color);

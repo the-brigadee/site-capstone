@@ -13,11 +13,22 @@ export default function ResultPage() {
   // display filter state variable
   const [displayFilter, setDisplayFilter] = React.useState(false)
 
+  // filter condition state variable
+  const [filter, setFilter] = React.useState("")
+
   // Recipe array state variable
   const [recipeList, setRecipeList] = React.useState([{name : "nasty"}])
 
   // Banner Content state variable
   const [bannerContent, setBannerContent] = React.useState("")
+
+  // Onclick function to fiter the search result
+  const handleOnSetFilter = (mealType) => {
+    //This function sets the filter variable to a word, allowing us to filter the recipe list by meal type
+
+    //set filter variable
+    setFilter(mealType)
+  }
 
   //Create a React useEffect that will handle A ton of conditional rendering
   React.useEffect(() => {
@@ -34,7 +45,12 @@ export default function ResultPage() {
     }
 
     console.log(resultsType)
-  }, [resultsType, searchWord, currCategory])
+
+    // Clear the filter state variable everytime the component is unmounted
+    return () => {
+      handleOnSetFilter("")
+    }
+  }, [resultsType, searchWord, currCategory, filter])
 
   
   return (
@@ -48,7 +64,7 @@ export default function ResultPage() {
       </div>
 
       {/* the div containing the result display*/}
-        <SearchResultGrid recipeList={recipeList} displayFilter={displayFilter}/>
+        <SearchResultGrid recipeList={recipeList} displayFilter={displayFilter} handleOnSetFilter={handleOnSetFilter}/>
     </div>
   )
 }

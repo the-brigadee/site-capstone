@@ -1,6 +1,5 @@
 import * as React from 'react'
 import './Categories.css'
-import {Link} from 'react-router-dom'
 
 export default function Categories({item, handleCategoryOnClick}) {
   return (

@@ -9,7 +9,7 @@ export default function SearchResultCard() {
          {/* displays the result card */}
         <div className="result-image">
                 {/* Load the main image here */}
-            <Link to='/recipe/5'>
+            <Link to='/recipe/recipeDetail'>
                 <img src="https://tmbidigitalassetsazure.blob.core.windows.net/rms3-prod/attachments/37/1200x1200/Chocolate-Lover-s-Pancakes_EXPS_TOHCA19_133776_B03_15_3b_rms.jpg" alt=""/>
             </Link>
             {/* Background div. Do not delete */}
@@ -33,7 +33,9 @@ export default function SearchResultCard() {
             
             {/* displays result name */}
             <div className="result-name">
-                <h1> Chocolate pancake </h1>
+                <Link to='/recipe/recipeDetail'>
+                    <h1> Chocolate pancake </h1>
+                </Link>
             </div>
 
             {/* displays result details */}
@@ -41,12 +43,16 @@ export default function SearchResultCard() {
 
                 {/* displays user's profile image */}
                 <div className="result-profile-img">
-                    <img src="https://cdn-icons.flaticon.com/png/512/552/premium/552721.png?token=exp=1658167502~hmac=4de2ea76b4175bdc8780c1c48d4c6a78" alt="" />
+                    <Link to='/user/userId'>
+                        <img src="https://icons-for-free.com/iconfiles/png/512/person+user+icon-1320166085409390336.png" alt="" />
+                    </Link>
                 </div>
 
                 {/* displays the user's handle */}
                 <div className="result-profile-name">
-                    <p>Felix Augustus</p>
+                    <Link to='/user/userId'>
+                        <p>Felix Augustus</p>
+                    </Link>
                 </div>
 
                 {/* displays the result stars */}
@@ -58,7 +64,7 @@ export default function SearchResultCard() {
 
             {/* displays the contents of the result */}
             <div className="result-contains">
-                <p> Contains: meat, Fish, Doughnut </p>
+                <p> <b> recipe Description </b> </p>
             </div>
 
             {/* displays the result creation date in moment form */}

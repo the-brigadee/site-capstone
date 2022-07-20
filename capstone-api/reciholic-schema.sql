@@ -14,10 +14,11 @@ CREATE TABLE users (
 
 CREATE TABLE recipe (
     id SERIAL PRIMARY KEY,
+    api_id INTEGER NOT NULL UNIQUE,
     name TEXT NOT NULL,
     user_id INTEGER NOT NULL,
     category TEXT NOT NULL,
-    description VARCHAR(350) NOT NULL,
+    description TEXT NOT NULL,
     instructions TEXT NOT NULL,
     ingredients TEXT NOT NULL,
     calories INTEGER NOT NULL,

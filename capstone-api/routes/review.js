@@ -15,7 +15,7 @@ router.post("/create",security.requireAuthenticatedUser, async (req, res, next) 
   }
 });
 
-router.post("/",security.requireAuthenticatedUser, async (req, res, next) => {
+router.get("/",security.requireAuthenticatedUser, async (req, res, next) => {
   try {
     const {user_id}=res.locals?.user
     const review = await Review.fetchAllReviewsByUserId(user_id);

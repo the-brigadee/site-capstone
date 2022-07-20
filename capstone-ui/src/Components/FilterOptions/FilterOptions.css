@@ -1,0 +1,18 @@
+.filter-table{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 10px;
+    grid-gap: 12px;
+}
+
+button.filter-buttons{
+    background-color: var(--primary-color);
+    padding: 12px;
+    border-radius: 12px;
+    color: aliceblue;
+}
+
+.filter-options{
+    margin-bottom: 12px;
+}
