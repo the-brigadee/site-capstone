@@ -112,8 +112,9 @@
     color: white;
 }
 
-.error {
-    margin-top: 5px;
+.recipe-container .error {
+    margin-top: 30px;
     color: rgb(193, 0, 0); 
     font-weight: bolder;
+    padding-left: 2rem;
 }
