@@ -43,7 +43,8 @@ export default function SearchResultGrid({recipeList, displayFilter, handleOnSet
 
           {/* Result Details */}
           <div className="results-grid">
-            <SearchResultCard />
+            <SearchResultCard even={false}/>
+            <SearchResultCard even={true}/>
           </div>
     </div>
   )

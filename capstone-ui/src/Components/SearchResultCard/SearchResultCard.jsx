@@ -2,9 +2,9 @@ import * as React from 'react'
 import './SearchResultCard.css'
 import {Link} from 'react-router-dom'
 
-export default function SearchResultCard() {
+export default function SearchResultCard({even}) {
   return (
-    <div className='search-result-card'>
+    <div className={`search-result-card ${even ? "even" : ""}`}>
 
          {/* displays the result card */}
         <div className="result-image">

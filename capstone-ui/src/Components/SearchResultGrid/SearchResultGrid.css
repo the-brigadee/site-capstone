@@ -4,6 +4,7 @@
     background-color: lightgray;
     margin: 30px 30px 0 30px;
     border-radius: 14px;
+    animation: fadeIn .5s ease-in;
 }
 
 .filter-btn{
@@ -49,4 +50,13 @@
 .conditional-filter button:hover{
     background-color: rgb(146, 146, 146);
     border-radius: 12px ;
+}
+
+@keyframes fadeIn {
+    0%{
+        opacity: 0%;
+    }
+    100%{
+        opacity: 100%;
+    }
 }

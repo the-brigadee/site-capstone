@@ -2,6 +2,14 @@
     display: flex;
     padding: 30px;
     gap: 20px;
+    animation: slideInLeft .7s ease-in;
+}
+
+.search-result-card.even{
+    display: flex;
+    padding: 30px;
+    gap: 20px;
+    animation: slideInRight .7s ease-in;
 }
 
 .search-result-card img{
@@ -76,3 +84,38 @@
     color: inherit;
 }
 
+@keyframes slideInLeft {
+    0%{
+        transform: translateX(-500px) skewX(0deg);
+        opacity: 0%;
+    }
+    75%{
+        opacity: 36%;
+        transform: skewX(0deg);
+    }
+    90%{
+        transform: translateX(34px) skewX(.5deg);
+    }
+    100%{
+        transform: translateX(0px);
+        opacity: 100%;
+    }
+}
+
+@keyframes slideInRight {
+    0%{
+        transform: translateX(500px) skewX(0deg);
+        opacity: 0%;
+    }
+    75%{
+        opacity: 36%;
+        transform: skewX(0deg);
+    }
+    90%{
+        transform: translateX(-34px) skewX(-.5deg);
+    }
+    100%{
+        transform: translateX(0px);
+        opacity: 100%;
+    }
+}
