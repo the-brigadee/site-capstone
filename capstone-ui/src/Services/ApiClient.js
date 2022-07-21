@@ -50,6 +50,10 @@ class ApiClient {
     async getRecommended(){
         return await this.request({ endpoint: `recipe/random`, method: `GET`})
     }
+
+    async recipeCreate(recipe){
+        return await this.request({endpoint: `recipe/create`, method: `POST`, data:recipe})
+    }
 }
 
 export default new ApiClient("http://localhost:3001")

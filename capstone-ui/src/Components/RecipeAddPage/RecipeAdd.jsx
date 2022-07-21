@@ -6,42 +6,45 @@ import apiClient from "../../Services/ApiClient"
 import items from '../../Data/categoryItem.json'
 
 export default function RecipeAdd({imageUrl}) {
-  const {popupType, closePopup, showRegisterForm, showLoginForm, error, setError, setUser, isLoading, setIsLoading, user} = useAuthNavContext()
+  const {error, setError, isLoading, setIsLoading, user} = useAuthNavContext()
   const [form, setForm] = React.useState({
-    name: "",
-    category: "",
-    description: "",
-    instructions: "",
-    ingredients: "",
-    calories: "",
-    image_url: ""
+    name: '',
+    category: 'Main course',
+    description: '',
+    instructions: '',
+    ingredients: '',
+    calories: 0,
+    image_url: '',
 
 })
+
+const handleOnInputChange = (event) => {
+
+    setForm((f) => ({ ...f, [event.target.name]: event.target.value }))
+}
   const handleOnSubmit = async () => {
     setIsLoading(true)
     setError((e) => ({ ...e, form: null }))
 
-    var dataUse, errorUse
-    if (popupType === "Register") {
-        const {data, error} = await apiClient.signupUser({
-            firstName: form.first_name,
-            lastName: form.last_name,
-            email: form.email,
-            dob: form.dob,
-            password: form.password,
-            userName: form.username
-        })
-        dataUse = data
-        errorUse = error
-    }
-            
+    var errorUse
+    const {data,error} = await apiClient.recipeCreate({
+        name: form.name,
+        user_id: user.id,
+        category: form.category.toLowerCase(),
+        description: form.description,
+        instructions: form.instructions,
+        ingredients: form.ingredients,
+        calories: form.calories,
+        image_url: form.image_url,
+        
+    })
+    errorUse = error
     if (errorUse) setError((e) => ({ ...e, form: errorUse }))
-    if (dataUse?.user) {
-        apiClient.setToken(dataUse.token)
-        setUser(dataUse?.user)
+
+    if(!error){
+        setIsLoading(false)
+        return
     }
-    
-    setIsLoading(false)
 }
 
   return (
@@ -51,40 +54,43 @@ export default function RecipeAdd({imageUrl}) {
       <div className="form">
             <div className="input-field name">
                 <label htmlFor="Name">Name</label>
-                <input type="text" name="name"/>
+                <input type="text" name="name" value={form.name} onChange={handleOnInputChange}/>
             </div>
             <div className="input-field">
                 <label htmlFor="Category">Category</label>
-                <select id="category" name="category">
+                <select id="category" name="category" onChange={handleOnInputChange}>
+                    <option name="category" disabled={true}>--Select your option--</option>
                   {items.map((item,idx) => {
-                    return <option key={idx} value={item.name.toLowerCase()}>{item.name}</option>
+                    return <option key={idx} name="category">{item.name}</option>
                   })}
                 </select>
             </div>
             <div className="input-field">
                 <label htmlFor="Calories">Calories</label>
-                <input type="number" name="calories"/>
+                <input type="number" name="calories" value={form.calories} onChange={handleOnInputChange}/>
             </div>
             <div className="input-field">
                 <label htmlFor="Image_url">Image URL</label>
-                <input type="url" name="image_url"/>
+                <input type="url" name="image_url" value={form.image_url} onChange={handleOnInputChange}/>
             </div>
             <div className="input-field">
                 <label htmlFor="Ingredients">Ingredients (separated by comma)</label>
-                <input type="text" name="ingredients"/>
+                <input type="text" name="ingredients" value={form.ingredients} onChange={handleOnInputChange}/>
             </div>
             <div className="input-field">
                 <label htmlFor="Description">Description</label>
-                <textarea type="text" name="description" rows="4"></textarea>
+                <textarea type="text" name="description" rows="4" value={form.description} onChange={handleOnInputChange}></textarea>
             </div>
             <div className="input-field">
                 <label htmlFor="Instructions">Instructions (separated by period)</label>
-                <textarea type="text" name="instructions" rows="6"></textarea>
+                <textarea type="text" name="instructions" rows="6" value={form.instructions} onChange={handleOnInputChange}></textarea>
             </div>
             <div className="footer">
+                <Link to="/">
                 <button className="footer-btn recipeadd" disabled={isLoading} onClick={handleOnSubmit}>
                     {isLoading ? "Loading..." : "Add Recipe"}
                 </button>
+                </Link>
             </div>
         </div>
     </div>
