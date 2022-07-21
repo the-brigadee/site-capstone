@@ -35,12 +35,7 @@ class Recipe{
     `,
     [recipefact.name, recipefact.category, recipefact.description, recipefact.instructions,recipefact.ingredients, recipefact.calories,recipefact.image_url, recipefact.user_id]
     )
-
         return result.rows[0]
-
-        
-
-
     }
 
     static async deleteRecipe(id) {
@@ -77,6 +72,7 @@ class Recipe{
         console.log(results.rows)
         return results.rows
     }
+
 }
 
 module.exports=Recipe

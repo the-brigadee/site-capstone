@@ -96,6 +96,7 @@ export default function Navbar(){
                     {user?.email ? null : <img id="login" src="https://img.icons8.com/ios-glyphs/344/login-rounded-right--v1.png" alt="temp icon" className='nav-btn' onClick={showLoginForm}/>}
                     {user?.email ? null : <img id="register" src="https://static.thenounproject.com/png/6478-200.png" alt="temp icon" className='nav-btn' onClick={showRegisterForm}/>}
                     {user?.email ?<img id="logout" src="https://www.iconpacks.net/icons/2/free-exit-logout-icon-2857-thumb.png" alt="temp icon" className='nav-btn' onClick={handleLogout}/> : null}
+                    {user?.email ?<img id="add_recipe" src="https://static.thenounproject.com/png/1001670-200.png" alt="temp icon" className='nav-btn' onClick={handleLogout}/> : null}
             </div>
         </nav>
     )

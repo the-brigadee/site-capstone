@@ -44,7 +44,7 @@
     outline: none;
     border: 0px;
     flex-direction: row;
-    align-items: flex-end;
+    align-items: center;
     cursor: pointer;
     gap: 8px;
     padding: 0px;
@@ -64,14 +64,14 @@
 }
 
 .sidebar-closed-contents button img{
-    width: 24px;
-    height: 24px;
+    width: 35px;
+    height: 35px;
     cursor: pointer;
 }
 
 .sidebar-closed-contents a img{
-    width: 24px;
-    height: 24px;
+    width: 35px;
+    height: 35px;
     cursor: pointer;
 }
 
@@ -106,7 +106,7 @@
     outline: none;
     border: 0px;
     flex-direction: row;
-    align-items: flex-end;
+    align-items: center;
     cursor: pointer;
     gap: 8px;
     padding: 0px;
@@ -140,14 +140,14 @@
 }
 
 .sidebar-open-contents button img{
-    width: 24px;
-    height: 24px;
+    width: 35px;
+    height: 35px;
     cursor: pointer;
 }
 
 .sidebar-open-contents a img{
-    width: 24px;
-    height: 24px;
+    width: 35px;
+    height: 35px;
     cursor: pointer;
 }
 
