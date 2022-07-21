@@ -1,12 +1,13 @@
 import * as React from 'react'
 import './RecipeAdd.css'
-import { Link } from 'react-router-dom'
+import { Link, Navigate, useNavigate } from 'react-router-dom'
 import {useAuthNavContext} from "../../Contexts/authNav"
 import apiClient from "../../Services/ApiClient"
 import items from '../../Data/categoryItem.json'
 
 export default function RecipeAdd({imageUrl}) {
   const {error, setError, isLoading, setIsLoading, user} = useAuthNavContext()
+  const navigate = useNavigate()
   const [form, setForm] = React.useState({
     name: '',
     category: 'Main course',
@@ -41,10 +42,11 @@ const handleOnInputChange = (event) => {
     errorUse = error
     if (errorUse) setError((e) => ({ ...e, form: errorUse }))
 
-    if(!error){
-        setIsLoading(false)
-        return
+    if(data){
+        navigate("/")
     }
+
+    setIsLoading(false)
 }
 
   return (
@@ -86,11 +88,9 @@ const handleOnInputChange = (event) => {
                 <textarea type="text" name="instructions" rows="6" value={form.instructions} onChange={handleOnInputChange}></textarea>
             </div>
             <div className="footer">
-                <Link to="/">
                 <button className="footer-btn recipeadd" disabled={isLoading} onClick={handleOnSubmit}>
                     {isLoading ? "Loading..." : "Add Recipe"}
                 </button>
-                </Link>
             </div>
         </div>
     </div>

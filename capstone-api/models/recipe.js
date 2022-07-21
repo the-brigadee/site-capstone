@@ -14,11 +14,21 @@ class Recipe{
     }
     static async createRecipe(recipefact){
         const requiredFields=["name","category","ingredients","instructions", "user_id", "calories", "image_url", "description"]
+
+        //checks for missing fields
         requiredFields.forEach(field =>{
             if(!recipefact.hasOwnProperty(field)){
-                throw new BadRequestError(`Missing ${field} in request body.`)
+                throw new BadRequestError(`Missing ${field} in request body.`);
             }
         })
+
+        //checks for empty strings
+        requiredFields.forEach(field =>{
+            if(recipefact[field]===''||""){
+                throw new BadRequestError(`${field} cannot be empty.`)
+            }
+        })
+        
         const result = await db.query(`
         INSERT INTO recipe (
             name,
