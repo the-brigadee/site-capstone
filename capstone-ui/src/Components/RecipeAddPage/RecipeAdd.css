@@ -1,0 +1,119 @@
+.recipe-container {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    height: 65.5%;
+
+}
+
+.recipe-container .recipe-add {
+    color: black;
+    padding: 2rem;
+    display: flex;
+    align-items: center;
+    display: -webkit-box;
+    display: -ms-flexbox;
+}
+
+.recipe-container {
+    min-height: 30rem;
+    width: 100%;
+}
+
+
+
+.recipe-add .form {
+    display: flex;
+    flex-direction: column;
+    width: 90%;
+}
+
+.recipe-add .form .input-field {
+    display: flex;
+    flex-direction: column;
+    padding-top: 1rem;
+}
+.recipe-add .form .input-field input[name="name"]{
+    width:350px;
+}
+.recipe-add .form .input-field input[name="calories"]{
+    width:350px;
+}
+.recipe-add .form .input-field select[name="category"]{
+    width:365px;
+}
+
+
+.recipe-add .form .input-field label {
+    margin-bottom: 5px;
+}
+
+
+
+.recipe-add .form .input-field input {
+    height: 30px;
+    font-size: 16px;
+    border: 1px solid white;
+    border-radius: 20px;
+    background: white;
+    padding-left: 10px;
+    padding-right: 5px;
+}
+
+.recipe-add .form .input-field select {
+    height: 30px;
+    font-size: 16px;
+    border: 1px solid white;
+    border-radius: 20px;
+    background: white;
+    padding-left: 10px;
+    padding-right: 5px;
+}
+.recipe-add .form .input-field textarea {
+    height: auto;
+    font-size: 16px;
+    border: 1px solid white;
+    border-radius: 20px;
+    background: white;
+    padding-left: 10px;
+    padding-right: 5px;
+}
+
+.recipe-add .form .btn, .recipe-add .footer {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.recipe-add .footer {
+    color: white;
+    margin-top: auto;
+    height: 100px;
+    font-weight: 500;
+    font-size: 14px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+}
+
+.footer-btn {
+    height: 30px;
+    width: 90px;
+    font-size: 15px;
+    background: white;
+    border: none;
+    border-radius: 15px;
+    cursor: pointer;
+}
+
+.recipeadd{
+    background:var(--primary-color);
+    color: white;
+}
+
+.error {
+    margin-top: 5px;
+    color: rgb(193, 0, 0); 
+    font-weight: bolder;
+}

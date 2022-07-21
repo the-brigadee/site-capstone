@@ -9,6 +9,7 @@ import {AuthNavContextProvider, useAuthNavContext} from '../../Contexts/authNav'
 import ResultPage from '../ResultPage/ResultPage'
 import RecipeDetail from '../RecipeDetail/RecipeDetail';
 import UserProfilePage from '../UserProfilePage/UserProfilePage';
+import RecipeAdd from '../RecipeAddPage/RecipeAdd';
 
 
 export default function AppContainer(){
@@ -42,6 +43,7 @@ function App() {
               <Route path='/' element={<LandingPage/>} />
               <Route path='/search' element={<ResultPage />}/>
               <Route path='/recipe/:recipeId' element={<RecipeDetail />}/>
+              <Route path='/recipe/create' element={<RecipeAdd />}/>
               <Route path='/user/:userId' element={<UserProfilePage />}/>
               <Route path='*' element={<NotFound />}/>
             </Routes>
