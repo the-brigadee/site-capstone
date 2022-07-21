@@ -73,6 +73,14 @@ class Recipe{
         return results.rows
     }
 
+    static async getRecommendedRecipes() {
+        // get recipe array
+
+        const query = "SELECT name, id, category, calories, image_url FROM recipe ORDER BY random() LIMIT 6;"
+        const results = await db.query(query)
+        return results.rows
+    }
+
 }
 
 module.exports=Recipe

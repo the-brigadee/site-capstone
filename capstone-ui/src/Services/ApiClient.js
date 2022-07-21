@@ -46,6 +46,10 @@ class ApiClient {
     async recipeSearch(searchWord){
         return await this.request({ endpoint: `auth/login/${searchWord}`, method: `GET`, data:{} })
     }
+
+    async getRecommended(){
+        return await this.request({ endpoint: `recipe/random`, method: `GET`})
+    }
 }
 
 export default new ApiClient("http://localhost:3001")

@@ -67,7 +67,7 @@ opacity: 0.15;
 
 .recipe-card:hover .recipe-img-text {
 opacity: 1;
-color: aliceblue;
+color: rgba(240, 248, 255, 0.861);
 }
 
 
@@ -112,4 +112,9 @@ color: aliceblue;
     height: calc(var(--recipe-card-height) - var(--recipe-card-spacing) - var(--recipe-card-border-radius));
     bottom: var(--recipe-card-border-thickness);
     right: var(--recipe-card-border-thickness);
+}
+
+.recipe-card h2, p{
+    color: white;
+    font-weight: 600;
 }
