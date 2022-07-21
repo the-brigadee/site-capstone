@@ -19,8 +19,8 @@ app.use(express.json())
 
 app.use(security.extractUserFromJwt)
 
-app.use("/auth", authRoutes)
 app.use("/recipe", recipeRoutes)
+app.use("/auth", authRoutes)
 app.use("/review", reviewRoutes)
 app.use("/savedrecipe", savedrecipeRoutes)
 app.use("/mealplanner", mealplannerRoutes)

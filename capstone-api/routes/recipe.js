@@ -1,9 +1,16 @@
 const express=require("express");
-const {createUserJwt}=require("../utils/tokens")
 const security=require("../middleware/security")
 const router=express.Router();
 const Recipe = require("../models/recipe")
 
+router.get("/random", async function (req, res, next) {
+  try {
+      const recipes = await Recipe.getRecommendedRecipes()
+      return res.status(201).json({ recipes })
+  } catch (err) {
+      next(err)
+  }
+})
 
 router.post("/create",security.requireAuthenticatedUser, async (req, res, next) => {
   try {
