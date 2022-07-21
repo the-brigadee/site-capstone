@@ -13,6 +13,8 @@
     background-color: lightgray;
     margin: 10px 10px 0 10px;
     border-radius: 14px;
+    /* height: 65.5% */
+    /*  Change this if you don't don't like the look, this is the gray portion on the recommended section */
 }
 
 .recipe-container h1 {

@@ -81,7 +81,7 @@ export default function Sidebar(){
 
                 {/* Recent button */}
                 <Link to='/'>
-                    <img src="https://cdn-icons.flaticon.com/png/512/2961/premium/2961948.png?token=exp=1658167259~hmac=bc3307a173b67dca683b25868ae2734d" alt="recent" />
+                    <img src="https://www.shareicon.net/data/512x512/2015/09/28/108596_clock_512x512.png" alt="recent" />
                     {isExpand ? <p> Recents </p> : <></>}   
                 </Link>
 
@@ -94,7 +94,7 @@ export default function Sidebar(){
                 {/* Search Users button */}
                 
                 <Link to='/'>
-                    <img src="https://cdn-icons.flaticon.com/png/512/552/premium/552721.png?token=exp=1658167502~hmac=4de2ea76b4175bdc8780c1c48d4c6a78" alt="search users" />
+                    <img src="https://icons-for-free.com/iconfiles/png/512/person+user+icon-1320166085409390336.png" alt="search users" />
                     {isExpand ? <p> Users </p> : <></>}    
                 </Link>
                 
