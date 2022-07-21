@@ -3,6 +3,7 @@ import './SearchResultGrid.css'
 import SearchResultCard from '../SearchResultCard/SearchResultCard'
 import FilterOptions from '../FilterOptions/FilterOptions'
 import { useAuthNavContext } from '../../Contexts/authNav'
+import ReactPaginate from 'react-paginate'
 
 export default function SearchResultGrid({recipeList, displayFilter, handleOnSetFilter}) {
   //get resultsType from the authNavContext
@@ -26,6 +27,32 @@ export default function SearchResultGrid({recipeList, displayFilter, handleOnSet
     if(resultsType === "sidebar")setDisplayFilterOptions(false)
   })
 
+
+  //Fake data for now 
+  const itemsPerPage = 4;
+  const recipeLists = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21]
+
+
+  const [currentItems, setCurrentItems] = React.useState([]);
+  const [pageCount, setPageCount] = React.useState(0);
+  // Here we use item offsets; we could also use page offsets
+  // following the API or data you're working with.
+  const [itemOffset, setItemOffset] = React.useState(0);
+
+  React.useEffect(() => {
+    // Fetch items from another resources.
+    const endOffset = itemOffset + itemsPerPage;
+    setCurrentItems(recipeLists.slice(itemOffset, endOffset));
+    setPageCount(Math.ceil(recipeLists.length / itemsPerPage));
+    // window.scrollTo({top: 0});
+  }, [itemOffset, itemsPerPage, recipeList       ]);
+
+  // Invoke when user click to request another page.
+  const handlePageClick = (event) => {
+    const newOffset = (event.selected * itemsPerPage) % recipeLists.length;
+    setItemOffset(newOffset);
+  };
+
   return (
     <div className="results-container">
 
@@ -43,8 +70,28 @@ export default function SearchResultGrid({recipeList, displayFilter, handleOnSet
 
           {/* Result Details */}
           <div className="results-grid">
-            <SearchResultCard even={false}/>
-            <SearchResultCard even={true}/>
+            {
+              currentItems.map((recipe, idx) => {
+                return(
+                  <SearchResultCard even={idx % 2 === 0} key={idx}/>
+                )
+              })
+            }
+            <ReactPaginate
+              breakLabel="..."
+              nextLabel="next >"
+              onPageChange={handlePageClick}
+              pageRangeDisplayed={3}
+              pageCount={pageCount}
+              previousLabel="< previous"
+              renderOnZeroPageCount={null}
+              containerClassName="pagination"
+              pageClassName='page-number'
+              previousLinkClassName='page-next'
+              nextLinkClassName='page-next'
+              activeLinkClassName='page-current'
+              activeClassName='page-current-border'
+            />
           </div>
     </div>
   )

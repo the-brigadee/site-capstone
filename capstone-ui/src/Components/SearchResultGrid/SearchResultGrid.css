@@ -61,3 +61,41 @@
         opacity: 100%;
     }
 }
+
+ul.pagination {
+    list-style-type: none;
+    display: flex;
+    flex-direction: row;
+    gap: 30px;
+    cursor: pointer;
+    align-self: center;
+    height: 35px;
+    align-items: center;
+}
+
+li.page-number {
+    height: 30px;
+    width: 38px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--primary-color);
+    border-radius: 9px;
+}
+
+li.page-number:hover {
+    background-color: aliceblue;
+    text-decoration: underline;
+}
+
+li.page-number.page-current-border {
+    background-color: aliceblue;
+    text-decoration: underline;
+}
+
+.page-number a {
+    width: inherit;
+    line-height: 30px;
+    text-align: center;
+    padding: auto 0px;
+}
