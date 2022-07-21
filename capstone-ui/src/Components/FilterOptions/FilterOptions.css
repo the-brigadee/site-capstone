@@ -13,6 +13,9 @@ button.filter-buttons{
     color: aliceblue;
 }
 
+button.filter-buttons:hover{
+    padding: 12px;
+}
 .filter-options{
     margin-bottom: 12px;
 }
