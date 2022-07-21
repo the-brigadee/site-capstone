@@ -34,12 +34,12 @@
 }
 
 .popup-container .login {
-    height: 20rem;
+    min-height: 15rem;
     width: 15rem;
 }
 
 .popup-container .register {
-    height: 33rem;
+    min-height: 30rem;
     width: 30rem;
 }
 
