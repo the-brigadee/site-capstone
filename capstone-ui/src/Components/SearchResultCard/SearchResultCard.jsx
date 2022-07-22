@@ -34,20 +34,6 @@ export default function SearchResultCard({even, recipe}) {
             <Link to={`/recipe/${recipe.id}`}>
                 <img src={recipe.recipe_url ? recipe.recipe_url : "https://tmbidigitalassetsazure.blob.core.windows.net/rms3-prod/attachments/37/1200x1200/Chocolate-Lover-s-Pancakes_EXPS_TOHCA19_133776_B03_15_3b_rms.jpg"} alt=""/>
             </Link>
-            {/* Background div. Do not delete */}
-            <div className='recipe-border-top'>
-
-            </div>
-
-            {/* Background div do not delete */}
-            <div className='recipe-border-left'>
-
-            </div>
-
-            {/* Border div do not delete */}
-            <div className="recipe-border-container">
-
-            </div>
         </div>
 
         {/* displays the result information */}
@@ -66,14 +52,19 @@ export default function SearchResultCard({even, recipe}) {
                 {/* displays user's profile image */}
                 <div className="result-profile-img">
                     <Link to={`/user/${recipe.user_id}`}>
-                        <img src={recipe.user_url ? recipe.user_url : "https://icons-for-free.com/iconfiles/png/512/person+user+icon-1320166085409390336.png"} alt="" />
+                    {recipe.user_url 
+                    ? 
+                    <img src={recipe.user_url} /> 
+                    : 
+                    <img src="https://cdn.icon-icons.com/icons2/933/PNG/512/round-account-button-with-user-inside_icon-icons.com_72596.png" alt="" className='default'/>
+                    }
                     </Link>
                 </div>
 
                 {/* displays the user's handle */}
                 <div className="result-profile-name">
                     <Link to={`/user/${recipe.user_id}`}>
-                        <p>{recipe.owner}</p>
+                        <p>By {recipe.owner}</p>
                     </Link>
                 </div>
 

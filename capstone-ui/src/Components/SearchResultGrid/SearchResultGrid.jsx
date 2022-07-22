@@ -14,7 +14,7 @@ export default function SearchResultGrid({recipeList, displayFilter, handleOnSet
 
   // onclick function for the filter button
   const handleFilterOptionsOnClick = (event) => {
-    //stop default behaviour
+    //stop default behaviour 
     event.preventDefault()
 
     // reverse the displayfilteroptions variable
