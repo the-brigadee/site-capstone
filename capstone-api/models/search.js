@@ -28,7 +28,7 @@ class Search{
          *  (2) add (%) to both the front and the back of the string
          * */ 
         var filter = "%%"
-        if(searchfilter !== null && searchfilter != "") {
+        if(searchfilter !== null && searchfilter != "" && searchfilter !== undefined) {
             filter = `%${searchfilter.toLowerCase()}%`
         }
 
@@ -53,7 +53,7 @@ class Search{
         return result.rows
     }
 
-    static async searchUser(searchWord){
+    static async searchUser(searchWord, my_id){
 
         /**  make a new search word by adding (%) to the front and end of the word
          *  and changing the word to lowercase
@@ -62,17 +62,32 @@ class Search{
          const word = `%${searchWord.toLowerCase()}%`
         
          const result = await db.query(`
-         SELECT username, 
-             id, 
-             created_at, 
-             image_url,
-             description
-         FROM users
-         WHERE LOWER(username) LIKE $1
-         ;
-         `,[word])
+            SELECT users.id as user_id, 
+                users.username as username,
+                users.image_url as image_url,
+                users.description as description,
+                (SELECT count(*) 
+                    FROM recipe r 
+                    WHERE r.user_id = users.id
+                    ) as total_recipe,
+                ( SELECT count(*) 
+                    FROM follower_to_following ftf  
+                    WHERE ftf.following_id = users.id
+                    ) as num_following, 
+                (SELECT following_id 
+                    FROM 
+                    (SELECT ftf.following_id, 
+                            ftf.followed_id 
+                            FROM follower_to_following ftf 
+                            WHERE ftf.followed_id=users.id
+                    ) as user_follow WHERE following_id=$1
+                ) as is_following
+            FROM users 
+            WHERE LOWER(username) 
+            LIKE $2
+         `,[my_id, word])
  
-         //return the result
+         //return the result    
          return result.rows
     }
 

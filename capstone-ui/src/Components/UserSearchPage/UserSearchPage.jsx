@@ -3,6 +3,7 @@ import './UserSearchPage.css'
 import UserSearchGrid from '../UserSearchGrid/UserSearchGrid'
 import ApiClient from '../../Services/ApiClient'
 import { useAuthNavContext } from '../../Contexts/authNav'
+import Overlay from '../Overlay/Overlay'
 
 
 export default function UserSearchPage() {
@@ -33,10 +34,11 @@ export default function UserSearchPage() {
 
 
   return (
-    <div className='usersearchpage-page'>
+    <div className='usersearchpage'>
       
       {/* the div containing the result display*/}
         <UserSearchGrid usersList={usersList}/>
+        <Overlay />
     </div>
   )
 }

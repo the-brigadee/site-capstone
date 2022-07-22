@@ -18,13 +18,13 @@ app.use(cors())
 app.use(morgan("tiny"))
 app.use(express.json())
 
+
+app.use(security.extractUserFromJwt)
 /** This route does not require authentication to access, (based on our design of the WebApplication)
  * 
  * Therefore it should be placed above the authentication
  * */
-app.use("/search", searchRoutes)
-
-app.use(security.extractUserFromJwt)
+ app.use("/search", searchRoutes)
 
 app.use("/recipe", recipeRoutes)
 app.use("/auth", authRoutes)
