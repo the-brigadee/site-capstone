@@ -120,6 +120,10 @@ Styling for user's profile facts
     justify-content: flex-end;
 }
 
+.right-profile .setting-btns button {
+    cursor: pointer;
+}
+
 .change-password {
     display: flex;
     flex-direction: column;
