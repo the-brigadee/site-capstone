@@ -38,6 +38,7 @@ router.delete("/delete/:savedrecipeId",security.requireAuthenticatedUser, async 
 
 router.get("/:savedrecipeId", security.requireAuthenticatedUser, async function (req, res, next) {
   try {
+    
       const savedrecipeId = req.params.savedrecipeId
       const savedrecipe = await SavedRecipe.fetchSavedRecipeById(savedrecipeId)
       return res.status(201).json({ savedrecipe })
