@@ -219,7 +219,7 @@ export default function UserProfilePage() {
           <h3>Saved Recipes</h3>
           <Slider {...settings}>
                 {recipes?.map((recipe) => (
-                    <RecipeCard recipe_url={recipe.image_url} title={recipe.name} calories={recipe.calories} category={recipe.category} recipe_id={recipe.id} key={recipe.recipe_id} ownername={recipe.ownername} owner_url={recipe.owner_url ? recipe.owner_url : "https://i.pinimg.com/originals/18/28/f4/1828f4bb6ac67ac60e7ce82d1ed2eb72.jpg"} owner_id={recipe.ownder_id}/>
+                    <RecipeCard recipe_url={recipe.image_url} title={recipe.name} calories={recipe.calories} category={recipe.category} recipe_id={recipe.recipe_id} key={recipe.recipe_id} ownername={recipe.ownername} owner_url={recipe.owner_url ? recipe.owner_url : "https://i.pinimg.com/originals/18/28/f4/1828f4bb6ac67ac60e7ce82d1ed2eb72.jpg"} owner_id={recipe.ownder_id}/>
                 ))}
           </Slider>
         </div>
