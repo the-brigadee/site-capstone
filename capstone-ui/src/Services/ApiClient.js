@@ -48,6 +48,11 @@ class ApiClient {
         return await this.request({ endpoint: `search?searchtype=recipe&searchword=${searchWord}&filter=${filter}`, method: `GET`, data:{} })
     }
 
+    // the function that searches the backend for users
+    async userSearch(searchWord){
+        return await this.request({ endpoint: `search?searchtype=users&searchword=${searchWord}`, method: `GET`, data:{} })
+    }
+
     // the function that retrieves recipes with a specific filter
     async recipeCategory(currCategory){
         return await this.request({ endpoint: `search/recipes?category=${currCategory}`, method: `GET`, data:{} })
@@ -62,7 +67,11 @@ class ApiClient {
     }
 
     async recipeById(recipeId){
-        return await this.request({endpoint: `recipe/${recipeId}`, method: `GET`, data:recipeId})
+        return await this.request({endpoint: `recipe/${recipeId}`, method: `GET`, data:recipeId})}
+
+
+    async getUsersSavedRecipes(){
+        return await this.request({endpoint: `savedrecipe`, method: `GET`})
     }
 }
 

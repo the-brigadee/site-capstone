@@ -3,6 +3,8 @@ import './ResultPage.css'
 import SearchResultGrid from '../SearchResultGrid/SearchResultGrid'
 import { useAuthNavContext } from '../../Contexts/authNav'
 import ApiClient from '../../Services/ApiClient'
+import Overlay from '../Overlay/Overlay'
+
 
 export default function ResultPage() {
 
@@ -59,7 +61,7 @@ export default function ResultPage() {
 
 
       //Call the corresponding api request
-      const {data, error} = await ApiClient.recipeSearch(searchWord.replace(/ /g, '%20'),filter.replace(/ /g, '%20'))
+      const {data, error} = await ApiClient.recipeSearch(searchWord.replace(/ /g, '%20'), filter.replace(/ /g, '%20'))
       // If there is an error send it to the console
       if(error) console.error(error)
 
@@ -68,7 +70,6 @@ export default function ResultPage() {
       
     }
     else {
-
       
       //  Make filter options invisible when coming from sidebar
       setDisplayFilter(false)
@@ -86,6 +87,7 @@ export default function ResultPage() {
     }
   }
     
+  // run the above function
   run()
     // Clear the filter state variable everytime the component is unmounted
     return () => {
@@ -106,6 +108,7 @@ export default function ResultPage() {
 
       {/* the div containing the result display*/}
         <SearchResultGrid recipeList={recipeList} displayFilter={displayFilter} handleOnSetFilter={handleOnSetFilter} filter={filter}/>
+        <Overlay />
     </div>
   )
 }

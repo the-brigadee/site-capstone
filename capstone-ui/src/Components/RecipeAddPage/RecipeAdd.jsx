@@ -4,6 +4,8 @@ import { Link, Navigate, useNavigate } from 'react-router-dom'
 import {useAuthNavContext} from "../../Contexts/authNav"
 import apiClient from "../../Services/ApiClient"
 import items from '../../Data/categoryItem.json'
+import Overlay from '../Overlay/Overlay'
+
 
 export default function RecipeAdd({imageUrl}) {
   const {error, setError, isLoading, setIsLoading, user} = useAuthNavContext()
@@ -94,6 +96,7 @@ const handleOnInputChange = (event) => {
             </div>
         </div>
     </div>
+    <Overlay />
     </div>
   )
 }

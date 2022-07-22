@@ -87,11 +87,21 @@ class SavedRecipe{
         console.log(user_id);
 
         const results = await db.query(`
-        SELECT saved_recipes.user_id,recipe.user_id as owner_id, recipe.id as recipe_id, recipe.name, recipe.category, recipe.description, recipe.instructions, recipe.calories, recipe.image_url, recipe.created_at
+        SELECT saved_recipes.user_id,
+        recipe.user_id as owner_id, 
+        recipe.id as recipe_id, 
+        recipe.name, recipe.category,
+        recipe.calories, 
+        recipe.image_url, 
+        recipe.created_at,
+        users.username as ownername, 
+        users.image_url as owner_url 
         FROM saved_recipes
         INNER JOIN recipe 
-        ON saved_recipes.recipe_id=recipe.id
-        WHERE saved_recipes.user_id = $1`, [user_id])
+        ON saved_recipes.recipe_id=recipe.id 
+        JOIN users ON recipe.user_id=users.id
+        WHERE saved_recipes.user_id = $1;`, [user_id])
+        console.log(results.rows)
         return results.rows
     }
 }

@@ -3,6 +3,8 @@ import { useParams } from 'react-router-dom'
 import {useAuthNavContext} from "../../Contexts/authNav"
 import apiClient from "../../Services/ApiClient"
 import './RecipeDetail.css'
+import Overlay from '../Overlay/Overlay'
+
 
 export default function RecipeDetail() {
   
@@ -83,6 +85,7 @@ function RecipeMain(recipe, user){
           <button> Review </button>
           <button> Delete </button>
         </div>
+        <Overlay />
       </div>
   )
 }
