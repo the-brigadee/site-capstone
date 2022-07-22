@@ -60,6 +60,10 @@ class ApiClient {
     async recipeCreate(recipe){
         return await this.request({endpoint: `recipe/create`, method: `POST`, data:recipe})
     }
+
+    async recipeById(recipeId){
+        return await this.request({endpoint: `recipe/${recipeId}`, method: `GET`, data:recipeId})
+    }
 }
 
 export default new ApiClient("http://localhost:3001")

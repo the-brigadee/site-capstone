@@ -1,5 +1,7 @@
 import * as React from 'react'
 import { useParams } from 'react-router-dom'
+import {useAuthNavContext} from "../../Contexts/authNav"
+import apiClient from "../../Services/ApiClient"
 import './RecipeDetail.css'
 
 export default function RecipeDetail() {
@@ -10,27 +12,50 @@ export default function RecipeDetail() {
   /**
    * Use React useEffect to get more details of the recipe from the API backend.
    */
+   const [recipe, setRecipe] = React.useState([])
+   const {setError, user} = useAuthNavContext()
+   React.useEffect(() => {
+       const getRecipeById = async () => {
+           const {data, error} = await apiClient.recipeById(recipeId)
+           if (error) setError((e) => ({ ...e, recommended: error }))
+           if (data?.recipe) {
+            setRecipe(data.recipe);
+           }
+       }
+       getRecipeById()
+   }, [setRecipe, setError, recipeId])
 
   React.useEffect( () => { 
     console.log("DELETE this LINE and the LINE BENEATH it")
     console.log("------------------------------------------------------------")
   })
+  
 
   return (
     <div className='recipe-detail-container'>
 
       {/* Main Information */}
-      <RecipeMain />
+      <RecipeMain recipe={recipe} user={user} />
 
       {/* Detailed Step Information */}
-      <RecipeStep />
+      <RecipeStep recipe={recipe}/>
         
     </div>
   )
 }
  
 
-function RecipeMain(){
+function RecipeMain(recipe, user){
+  const date= new Date(recipe?.recipe?.created_at?.split("T")[0]).toDateString().split(" ")
+  const nth = function(d) {
+    if (d > 3 && d < 21) return 'th';
+    switch (d % 10) {
+        case 1:  return "st";
+        case 2:  return "nd";
+        case 3:  return "rd";
+        default: return "th";
+    }
+}
   return(
       <div className="recipe-detail-main">
 
@@ -38,16 +63,15 @@ function RecipeMain(){
         <div className="recipe-detail-info">
           {/* Recipe image  */}
           <div className="recipe-detail-img">
-            <img src="https://tmbidigitalassetsazure.blob.core.windows.net/rms3-prod/attachments/37/1200x1200/Chocolate-Lover-s-Pancakes_EXPS_TOHCA19_133776_B03_15_3b_rms.jpg" alt="" />
+            <img src={recipe.recipe.image_url} alt="" />
           </div>
           {/* Recipe Text */}
           <div className="recipe-detail-text">
-            <h1> Chocolate Pancake </h1>
-            <h3> Created on July 4<sup>th</sup> 1776 </h3>
-            <h3> Recipe by Felix Augustus </h3>
-            <h4> Categories : </h4>
-            <h4> Calories: 350 kcal</h4>
-            <h5> <b> placeholder stars </b> 3 stars </h5>
+            <h1> {recipe.recipe.name} </h1>
+            <h3> Created on {date[1]} {parseInt(date[2])}<sup>{nth(parseInt(date[2]))}</sup> {date[3]}</h3>
+            <h3> Recipe by {user?.name} </h3>
+            <h4> Categories : {recipe.recipe.category?.charAt(0).toUpperCase()+ recipe.recipe.category?.slice(1)} </h4>
+            <h4> Calories: {recipe.recipe.calories} kcal</h4>
           </div>
         </div>
           
@@ -63,7 +87,7 @@ function RecipeMain(){
   )
 }
 
-function RecipeStep(){
+function RecipeStep(recipe){
   return(
     <div className="recipe-detail-step">
 
@@ -72,9 +96,8 @@ function RecipeStep(){
         <p className="ingredients-header"> Ingredients </p>
         <hr />
         <ul className='ingredients-list'>
-          <li> Pancakes </li>
-          <li> Chocolate Syrup </li>
-          <li> Butter </li>
+          {recipe?.recipe?.ingredients?.split(',').map(element => {
+              return <li>{element}</li>;})}
         </ul>
       </div>
 
@@ -84,11 +107,8 @@ function RecipeStep(){
         <p className="directions-header"> Directions </p>
         <hr />
         <ol className='directions-list'>
-          <li></li>
-          <li></li>
-          <li></li>
-          <li></li>
-          <li></li>
+        {recipe?.recipe?.instructions?.split('.'||'!').map(element => {
+              return <li>{element}</li>;})}
         </ol>
       </div>
     </div>
