@@ -7,15 +7,22 @@
 }
 
 button.filter-buttons{
-    background-color: var(--primary-color);
+    background-color: rgb(146, 146, 146);
     padding: 12px;
     border-radius: 12px;
-    color: aliceblue;
+    color: white;
 }
 
 button.filter-buttons:hover{
     padding: 12px;
+    background-color: var(--primary-color);
 }
+
+button.filter-buttons.active{
+    padding: 12px;
+    background-color: var(--primary-color);
+}
+
 .filter-options{
     margin-bottom: 12px;
 }

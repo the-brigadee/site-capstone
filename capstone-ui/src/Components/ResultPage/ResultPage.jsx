@@ -98,11 +98,11 @@ export default function ResultPage() {
     <div className='result-page'>
 
       {/* The main banner  */}
-      <div className="result-header">
+      {/* <div className="result-header">
         <h1 className="result-text">
           {bannerContent}
         </h1>
-      </div>
+      </div> */}
 
       {/* the div containing the result display*/}
         <SearchResultGrid recipeList={recipeList} displayFilter={displayFilter} handleOnSetFilter={handleOnSetFilter} filter={filter}/>

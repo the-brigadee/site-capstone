@@ -54,6 +54,7 @@ export default function SearchResultGrid({recipeList, displayFilter, handleOnSet
     setItemOffset(newOffset);
   };
   
+  const [selected, setSelected] = React.useState("none")
 
   return (
     <div className="results-container">
@@ -66,7 +67,7 @@ export default function SearchResultGrid({recipeList, displayFilter, handleOnSet
               <p> Filter </p>
             </button>
             : <></>}
-            {displayFilterOptions ? <FilterOptions handleOnSetFilter={handleOnSetFilter}/> : <></>}
+            {displayFilterOptions ? <FilterOptions handleOnSetFilter={handleOnSetFilter} setSelected={setSelected} selected={selected}/> : <></>}
             <hr />
           </div>
 
