@@ -8,20 +8,20 @@ export default function RecipeCard({title, recipe_url, recipe_id, ownername, own
 
     var categories = ''
 
-    if(categoryList.length > 0){
+    if(categoryList?.length > 0){
       categoryList.map((categor) => {
         categories += categor
         categories += " "
       })
     }
 
-    if(categories.trim().length > 22) categories = categories.trim().substring(0,18) + "..."
+    if(categories.trim()?.length > 22) categories = categories.trim().substring(0,18) + "..."
     return categories.trim()
   }
 
   const titleDisplay = () =>{
     var word = title;
-    if(word.length > 40){
+    if(word?.length > 40){
       word = word.substring(0,36) + "..."
     }
     return word
