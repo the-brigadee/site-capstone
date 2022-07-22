@@ -19,7 +19,6 @@ export default function UserSearchPage() {
       //Call the corresponding api request
       const {data, error} = await ApiClient.userSearch(searchWord.replace(/ /g, '%20'))
 
-      console.log(data.result)
       // If there is an error send it to the console
       if(error) console.error(error)
 
