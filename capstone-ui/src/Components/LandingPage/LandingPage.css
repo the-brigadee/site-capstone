@@ -7,10 +7,29 @@
     width: 100%;
 }
 
+
+/*  What you want to change for hero banner  */
 .hero {
     padding-top: 12px;
     background-color: #adadad;
-    padding-bottom: 12px;
+    padding-bottom: 12px; 
+}
+.hero-img-wrapper {
+    background-image: url("https://static01.nyt.com/images/2020/04/30/dining/30substitutions/30substitutions-superJumbo.jpg");
+
+
+
+    filter: blur(8px);
+    opacity: 75%;
+    -webkit-filter: blur(8px);
+
+
+    
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    min-height: 300px;
+    height: 300px;
 }
 
 .hero img{
@@ -23,17 +42,7 @@
     overflow: hidden;
 }
 
-.hero-img-wrapper {
-    background-image: url("https://static01.nyt.com/images/2020/04/30/dining/30substitutions/30substitutions-superJumbo.jpg");
-    filter: blur(8px);
-    opacity: 55%;
-    -webkit-filter: blur(8px);
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
-    min-height: 300px;
-    height: 300px;
-}
+
 
 .landing-page .hero-text {
     z-index: 2;      
