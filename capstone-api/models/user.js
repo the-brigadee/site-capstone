@@ -12,6 +12,8 @@ class User{
             last_name:user.last_name,
             username:user.username,
             dob:user.dob,
+            bio: user.description,
+            imageUrl: user.image_url,
             created_at:user.created_at
 
         }
