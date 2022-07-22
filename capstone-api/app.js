@@ -7,6 +7,7 @@ const reviewRoutes = require("./routes/review")
 const savedrecipeRoutes = require("./routes/savedrecipe")
 const mealplannerRoutes = require("./routes/mealplanner")
 const followRoutes = require("./routes/follow")
+const searchRoutes = require("./routes/search")
 
 const morgan = require("morgan")
 const cors = require("cors")
@@ -16,6 +17,12 @@ app.use(cors())
 
 app.use(morgan("tiny"))
 app.use(express.json())
+
+/** This route does not require authentication to access, (based on our design of the WebApplication)
+ * 
+ * Therefore it should be placed above the authentication
+ * */
+app.use("/search", searchRoutes)
 
 app.use(security.extractUserFromJwt)
 

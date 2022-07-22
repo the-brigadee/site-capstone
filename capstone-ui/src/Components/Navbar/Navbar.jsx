@@ -57,8 +57,8 @@ export default function Navbar(){
 
         event.preventDefault()
 
-        // If the search Field is not an empty string then navigate OTHERWISE do nothing
-        if (searchField !== '' && searchField !== ""){
+        // If the search Field is not an empty string And the search field is nothing blank space then navigate OTHERWISE do nothing
+        if (searchField !== '' && searchField !== "" && searchField.trim() !== ""){
             setResultsType("searchbar")
             setSearchWord(searchField)
             navigate('/search')

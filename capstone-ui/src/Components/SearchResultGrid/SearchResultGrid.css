@@ -99,3 +99,25 @@ li.page-number.page-current-border {
     text-align: center;
     padding: auto 0px;
 }
+
+.no-result p {
+    text-align: center;
+    margin: 15px 0px;
+    line-height: 35px;
+    font-size: 2em;
+}
+
+.no-result {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+.no-result h3 {
+    font-size: 1.89em;
+    margin: 11px 0px 11px 0px;
+}
+
+h3.no-match {
+    margin: 0px 0px 11px 0px;
+}
