@@ -1,0 +1,192 @@
+/*-------------------------------
+Entire Container
+-------------------------------*/
+
+.user-profile-container {
+    display: flex;
+    flex-direction: column;
+    margin: 30px 30px 0 30px;
+    width: 100%;
+}
+
+.user-profile {
+    display: flex;
+    flex-direction: row;
+    background-color:lightgray;
+    border-radius: 14px;
+    padding: 10px;
+}
+
+/*-------------------------------
+ Left profile side (img and facts)
+ ------------------------------- */
+.left-profile {
+    display: flex;
+    flex-direction: column;
+}
+
+.left-profile img {
+    width: 10rem;
+    border-radius: 50%;
+    border: .5rem solid white;
+}
+
+.left-profile .user-data {
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+    border-radius: 14px;
+    padding: 5px;
+    margin-top: 8px;
+}
+
+.left-profile .user-data h3 {
+    margin: 0;
+}
+
+/*-------------------------------
+Right profile sides (user facts) 
+-------------------------------*/
+
+.right-profile {
+    display: flex;
+    flex-direction: column;
+    border-radius: 14px;
+    background-color: white;
+    /* margin-left: 10rem;
+    margin-right: 10rem; */
+    margin-left: 10px;
+    padding: 10px;
+    width: 100%;
+}
+
+/*-------------------------------
+Editing user profile form
+-------------------------------*/
+
+.right-profile .split {
+    display: flex;
+    gap: 30px;
+}
+
+.right-profile label {
+    padding: 2px;
+}
+
+.right-profile .input-row textarea {
+    width: 210%;
+    border-radius: 14px;
+    padding-top: 5px;
+    padding-left: 5px;
+}
+
+.right-profile .input-row {
+    display: flex;
+    flex-direction: column;
+    width: 20%;
+}
+
+.right-profile .input-row input {
+    height: 30px;
+    border-radius: 14px;
+    padding-left: 5px;
+}
+
+.right-profile .input-row input[type="date"] {
+    color: rgb(89, 89, 89);
+    width: 95%;
+}
+
+/*-------------------------------
+Styling for user's profile facts 
+---------------------------------*/
+
+.right-profile .user-facts {
+    display: flex;
+    flex-direction: column;
+}
+
+.right-profile button {
+    height: 30px;
+    background-color: var(--primary-color);
+    border-radius: 5px;
+    border: none;
+    color: white;
+    margin: 5px;
+}
+
+.right-profile .setting-btns {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.change-password {
+    display: flex;
+    flex-direction: column;
+}
+
+/*-------------------------------
+Slider styling
+--------------------------------*/
+.carousel h3{
+    margin-bottom: 0;
+}
+
+.slick-slider {
+    position: relative;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0 20px;
+    max-width: 1620px;
+}
+
+.slick-slider .recipe-border-top, .slick-slider .recipe-border-left {
+    display: none;
+}
+
+.slick-next, .slick-prev {
+    background-color: black !important;
+    transform: translate(0, -110%) !important;
+    
+}
+
+/* .slick-next {
+    right: -45px;
+}
+
+.slick-prev {
+    left: 25px !important;
+}
+
+.slick-next {
+    right: -35px !important;
+}
+
+.slick-slide .recipe-card {
+    height: 185px;
+} */
+
+.slick-slide .recipe-img-text {
+    z-index: 1000000;
+    background-color: rgba(0, 0, 0, 0.3) !important;
+}
+
+@media only screen and (max-width: 1650px) {
+    .slick-slider {
+        max-width: 1450px !important;
+    }
+}
+
+@media only screen and (max-width: 1575px) {
+    .slick-slider {
+        max-width: 1250px !important;
+    }
+}
+
+@media only screen and (max-width: 1350px) {
+    .slick-slider {
+        max-width: 1050px !important;
+    }
+}

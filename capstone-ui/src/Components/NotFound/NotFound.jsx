@@ -1,5 +1,7 @@
 import React from 'react'
 import './NotFound.css'
+import Overlay from '../Overlay/Overlay'
+
 
 function NotFound() {
 
@@ -17,6 +19,7 @@ function NotFound() {
             <h1> 404 </h1>
             <h3> Page does not exist </h3>
         </div>
+        <Overlay />
     </div>
   )
 }
