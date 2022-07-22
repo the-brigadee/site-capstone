@@ -43,8 +43,14 @@ class ApiClient {
         this.setToken(null)
         localStorage.setItem(this.tokenName, "")
     }
-    async recipeSearch(searchWord){
-        return await this.request({ endpoint: `auth/login/${searchWord}`, method: `GET`, data:{} })
+    // the function that searches the backend for recipes
+    async recipeSearch(searchWord, filter){
+        return await this.request({ endpoint: `search?searchtype=recipe&searchword=${searchWord}&filter=${filter}`, method: `GET`, data:{} })
+    }
+
+    // the function that retrieves recipes with a specific filter
+    async recipeCategory(currCategory){
+        return await this.request({ endpoint: `search/recipes?category=${currCategory}`, method: `GET`, data:{} })
     }
 
     async getRecommended(){

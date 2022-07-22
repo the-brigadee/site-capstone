@@ -7,6 +7,13 @@ export default function FilterOptions({handleOnSetFilter}) {
     <div className='filter-options'>
         <h2> Meal Types </h2>
         <div className='filter-table'>
+            
+            {/*  Button to remove filter options */}
+            <button onClick={() => {handleOnSetFilter("")}} className='filter-buttons'>
+                <p>None</p>
+            </button>
+
+            {/* other filter buttons */}
             {items.map((category, idx) => {
                 return <FilterButtons key={idx} category={category} handleOnSetFilter={handleOnSetFilter}/>
             })}

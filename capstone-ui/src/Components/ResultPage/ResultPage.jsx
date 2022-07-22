@@ -2,13 +2,14 @@ import * as React from 'react'
 import './ResultPage.css'
 import SearchResultGrid from '../SearchResultGrid/SearchResultGrid'
 import { useAuthNavContext } from '../../Contexts/authNav'
+import ApiClient from '../../Services/ApiClient'
 
 export default function ResultPage() {
 
   /** Get the resultsType,
    *  searchWord
    *  state from the authcontext*/  
-  const {resultsType, searchWord, currCategory} = useAuthNavContext()
+  const {resultsType, searchWord, currCategory, setResultsType} = useAuthNavContext()
 
   // display filter state variable
   const [displayFilter, setDisplayFilter] = React.useState(false)
@@ -17,7 +18,7 @@ export default function ResultPage() {
   const [filter, setFilter] = React.useState("")
 
   // Recipe array state variable
-  const [recipeList, setRecipeList] = React.useState([{name : "nasty"}])
+  const [recipeList, setRecipeList] = React.useState([])
 
   // Banner Content state variable
   const [bannerContent, setBannerContent] = React.useState("")
@@ -28,27 +29,67 @@ export default function ResultPage() {
 
     //set filter variable
     setFilter(mealType)
+
+    //set the results type to the special condition if mealType is not ("")
+    if(mealType !== "") setResultsType("searchbar filter")
   }
 
   //Create a React useEffect that will handle A ton of conditional rendering
   React.useEffect(() => {
 
+    async function run() {
+
+    /**  Special condition for the resultsType, 
+     * 
+     * check if resultsType does not contain (filter)
+    */
+    if(!resultsType.includes("filter")){
+      //set the filter to empty
+      handleOnSetFilter("")
+    }
     // If the webpage is routed to using the search bar setDisplayFilter to true
-    // Create the banner content
-    if(resultsType === "searchbar") {
+    if(resultsType.includes("searchbar")) {
+      // display the filter button
       setDisplayFilter(true)
+      // Create the banner content
       setBannerContent(`Search Result for ${searchWord}`)
+
+      // If the searchword is empty, do nothing //Error checking 
+      if(searchWord === "")  return
+
+
+      //Call the corresponding api request
+      const {data, error} = await ApiClient.recipeSearch(searchWord.replace(/ /g, '%20'),filter.replace(/ /g, '%20'))
+      // If there is an error send it to the console
+      if(error) console.error(error)
+
+      //If there is data, set recipe list to it
+      if(data) setRecipeList(data.result)
+      
     }
     else {
+
+      
+      //  Make filter options invisible when coming from sidebar
       setDisplayFilter(false)
+
+      //Call the corresponding api request
+      const {data, error} = await ApiClient.recipeCategory(currCategory.replace(/ /g, '%20'))
+      // If there is an error send it to the console
+      if(error) console.error(error)
+
+      //If there is data, set recipe list to it
+      if(data) setRecipeList(data.result)
+
+      // Create the banner content
       setBannerContent(`Available ${currCategory} Dishes`)
     }
-
-    console.log(resultsType)
-
+  }
+    
+  run()
     // Clear the filter state variable everytime the component is unmounted
     return () => {
-      handleOnSetFilter("")
+      // handleOnSetFilter("")
     }
   }, [resultsType, searchWord, currCategory, filter])
 
@@ -64,7 +105,7 @@ export default function ResultPage() {
       </div>
 
       {/* the div containing the result display*/}
-        <SearchResultGrid recipeList={recipeList} displayFilter={displayFilter} handleOnSetFilter={handleOnSetFilter}/>
+        <SearchResultGrid recipeList={recipeList} displayFilter={displayFilter} handleOnSetFilter={handleOnSetFilter} filter={filter}/>
     </div>
   )
 }
