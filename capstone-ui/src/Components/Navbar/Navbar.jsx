@@ -61,7 +61,20 @@ export default function Navbar(){
         if (searchField !== '' && searchField !== "" && searchField.trim() !== ""){
             setResultsType("searchbar")
             setSearchWord(searchField)
-            navigate('/search')
+
+
+            /** redirect based on the searchType
+             * 
+             * 1) if searchType is ("") then go to recipe search page
+             * 
+             * 2) if searchType is ("users") then go to the user search page
+             *  */
+            if(searchType === ""){
+                navigate('/search')
+            }
+            if(searchType === "users"){
+                navigate('/usersearch')
+            }
         }
     }
 
@@ -78,6 +91,25 @@ export default function Navbar(){
         setError(null)
     }
 
+    /**  Select Searchbar state variable
+     * 
+     *   Can only be one of two states for now 
+     * 
+     *  1) ("") - default = search for recipes
+     * 
+     *  2) ("users") - type = search for users
+    */
+    const [searchType, setSearchType] = React.useState("")
+
+    // handle the change of the select button
+    const handleSearchType = (e) => {
+
+        // prevent default behaviour
+        e.preventDefault()
+
+        //Change the search type to the option chose
+        setSearchType(e.target.value)
+    }
     return(
         <nav className='navbar'>
             <div className="logo-container">
@@ -87,6 +119,10 @@ export default function Navbar(){
             </div>
             {/* Search bar */}
             <div className="search-container">
+                <select  name="searchtype" onChange={handleSearchType}>
+                    <option value="">recipes</option>
+                    <option value="users">users</option>
+                </select>
                 <input type="text" name="search" placeholder="Search for recipe" value={searchField} onChange={handleSearchOnChange} onSubmit={handleSearchOnSubmit} onKeyDown={handleKeyDown}/>
                         <i id="search-icon" className="fa-solid fa-magnifying-glass" onClick={handleSearchOnSubmit}></i>
                 </div>

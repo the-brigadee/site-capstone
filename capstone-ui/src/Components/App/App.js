@@ -10,6 +10,7 @@ import ResultPage from '../ResultPage/ResultPage'
 import RecipeDetail from '../RecipeDetail/RecipeDetail';
 import UserProfilePage from '../UserProfilePage/UserProfilePage';
 import RecipeAdd from '../RecipeAddPage/RecipeAdd';
+import UserSearchPage from '../UserSearchPage/UserSearchPage';
 
 
 export default function AppContainer(){
@@ -42,6 +43,7 @@ function App() {
               {/* Declare individual routes under */}
               <Route path='/' element={<LandingPage/>} />
               <Route path='/search' element={<ResultPage />}/>
+              <Route path='/usersearch' element={<UserSearchPage />}/>
               <Route path='/recipe/:recipeId' element={<RecipeDetail />}/>
               <Route path='/recipe/create' element={<RecipeAdd />}/>
               <Route path='/user/:userId' element={<UserProfilePage />}/>
@@ -52,19 +54,6 @@ function App() {
           </div>
         </BrowserRouter>
         
-
-      {/* <React.Fragment>
-        
-        Create React routers for page navigation.
-       
-        <BrowserRouter>
-          <Routes>
-            Declare individual routes under
-            <Route path='/' element={<Landing />} />
-            
-          </Routes>
-        </BrowserRouter>
-      </React.Fragment> */}
     </div>
   );
 }

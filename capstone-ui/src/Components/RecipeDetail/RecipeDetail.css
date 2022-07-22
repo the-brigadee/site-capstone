@@ -7,14 +7,16 @@
     gap: 30px;
 }
 
-.recipe-detail-main{
-    background-color: lightgray;
+.recipe-detail-main {
+    background-color: transparent;
     border-radius: 14px;
     display: flex;
     flex-direction: column;
     gap: 10px;
     padding: 30px;
     flex-wrap: wrap;
+    border: 1px solid var(--border-color);
+    box-shadow: 0px 0px 10px darkgray;
 }
 
 .recipe-detail-main > * {
