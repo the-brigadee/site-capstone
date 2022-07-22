@@ -86,11 +86,21 @@ class Recipe{
     static async getRecommendedRecipes() {
         // get recipe array
 
-        const query = "SELECT name, id, category, calories, image_url FROM recipe ORDER BY random() LIMIT 6;"
+        const query = `SELECT name as title, 
+                        recipe.id as recipe_id,
+                        category, 
+                        calories, 
+                        recipe.image_url as recipe_url, 
+                        users.id as owner_id, 
+                        users.username as ownername, 
+                        users.image_url as owner_url 
+                        FROM recipe 
+                        JOIN users ON recipe.user_id=users.id 
+                        ORDER BY random() LIMIT 6`
         const results = await db.query(query)
         return results.rows
     }
-
+    
 }
 
 module.exports=Recipe

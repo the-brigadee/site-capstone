@@ -53,6 +53,7 @@ export default function SearchResultGrid({recipeList, displayFilter, handleOnSet
     const newOffset = (event.selected * itemsPerPage) % recipeList.length;
     setItemOffset(newOffset);
   };
+  
 
   return (
     <div className="results-container">

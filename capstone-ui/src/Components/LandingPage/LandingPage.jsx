@@ -18,10 +18,9 @@ export function Hero() {
     return (
         <div className="hero">
             <div className="hero-img-wrapper">
-                <img src="https://static01.nyt.com/images/2020/04/30/dining/30substitutions/30substitutions-superJumbo.jpg" alt="hero img" />
             </div>
             <div className="hero-text">
-                Welcome to Reciholic!
+                Welcome to <br /> Reciholic!
                 <h3>Hunger Leads to Anger so Eat 😁</h3>
             </div>
         </div>

@@ -14,7 +14,7 @@ code {
   }
 
 :root{
-  --primary-color: #0FA2F4;
+  --primary-color: #ff7f50;
 
   /* Values pertaining to the Recipe card style
   
@@ -26,5 +26,6 @@ code {
   --recipe-card-spacing: 12px;
   --recipe-card-border-thickness: 5px;
 
+  --recipe-img-height: 169px
   /* Continue adding variables below here */
 }

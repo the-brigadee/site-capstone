@@ -1,7 +1,8 @@
 .navbar{
     position: fixed;
     top: 0px;
-    background-color: #BCBCBC;
+    background-color: #fff;
+    border-bottom: 1px solid #f0f1f2;
     min-height: 56px;
     min-width: 100vw;
     max-height: 56px;

@@ -4,7 +4,8 @@
     top: 56px;
     left: 0px;
     width: 72px;
-    background-color: var(--primary-color);
+    background-color: #fff;
+    border-right: 1px solid #f0f1f2;
     z-index: 10000;
     max-height: calc(100vh - 56px); /* 56px represents the height of the Navbar */
     min-height: calc(100vh - 56px); /* 56px represents the height of the Navbar */
@@ -16,7 +17,8 @@
     top:56px;
     left: 0px;
     width: 250px;
-    background-color: var(--primary-color);
+    background-color: #fff;
+    border-right: 1px solid #f0f1f2;
     z-index: 10000;
     max-height: calc(100vh - 56px); /* 56px represents the height of the Navbar */
     min-height: calc(100vh - 56px); /* 56px represents the height of the Navbar */
@@ -58,7 +60,7 @@
     flex-direction: row;
     cursor: pointer;
     text-decoration: none;
-    color: inherit;
+    color: black;
     align-items: flex-end;
     gap: 8px;
 }
@@ -123,7 +125,7 @@
     flex-direction: row;
     cursor: pointer;
     text-decoration: none;
-    color: inherit;
+    color: black;
     align-items: flex-end;
     gap: 8px;
 }

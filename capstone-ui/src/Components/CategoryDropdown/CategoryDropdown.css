@@ -19,7 +19,7 @@ p.link-direct:before {
   height: 2px;
   bottom: 0;
   left: 0;
-  background-color: #FFF;
+  background-color: var(--primary-color);
   visibility: hidden;
   transition: all 0.3s ease-in-out;
 }

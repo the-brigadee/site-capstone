@@ -21,9 +21,19 @@ export default function RecipeGrid(){
     return(
         <div className="recipe-container"> 
             <h1 className="grid-title">Recommended</h1>
+            <hr />
             <div className="recipe-grid">
-                {recipes?.map((recipe) => (
-                    <RecipeCard imageUrl={recipe.image_url} name={recipe.name} calories={recipe.calories} category={recipe.category} id={recipe.id} key={recipe.id}/>
+                {recipes?.map((recipe, idx) => (
+                    <RecipeCard title={recipe.title}
+                    recipe_url={recipe.recipe_url}
+                    recipe_id={recipe.recipe_id}
+                    ownername={recipe.ownername}
+                    owner_url={recipe.owner_url}
+                    owner_id={recipe.owner_id}
+                    category={recipe.category}
+                    calories={recipe.calories}
+                    key={idx}
+                    />
                 ))}
             </div>
         </div>

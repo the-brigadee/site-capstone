@@ -1,22 +1,33 @@
 .recipe-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    place-items: center;
-    grid-gap: 1rem;
+    display: flex;
     padding-bottom: 1rem;
-
+    flex-wrap: wrap;
+    gap: 12px;
+    justify-content: center;
 }
+
 
 .recipe-container {
     display: flex;
     flex-direction: column;
-    background-color: lightgray;
     margin: 10px 10px 0 10px;
     border-radius: 14px;
+    width: inherit;
     /* height: 65.5% */
     /*  Change this if you don't don't like the look, this is the gray portion on the recommended section */
 }
 
 .recipe-container h1 {
-    margin-left: 100px;
+    margin: 12px 0px 0px 15px;
+}
+
+.recipe-container hr {
+    margin: 15px 0px;
+}
+
+.recipe-card-owner-img img{
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    box-shadow: 0px 0px 2px var(--primary-color);
 }

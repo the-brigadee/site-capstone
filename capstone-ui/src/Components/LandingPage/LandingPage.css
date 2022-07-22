@@ -7,12 +7,36 @@
     width: 100%;
 }
 
+.hero {
+    padding-top: 12px;
+    background-color: #adadad;
+    padding-bottom: 12px;
+}
+
+.hero img{
+    opacity: 63%;
+    filter: invert(1);
+}
+
 .landing-page .hero-img-wrapper {
     max-height: 300px;
     overflow: hidden;
 }
 
+.hero-img-wrapper {
+    background-image: url("https://static01.nyt.com/images/2020/04/30/dining/30substitutions/30substitutions-superJumbo.jpg");
+    filter: blur(8px);
+    opacity: 55%;
+    -webkit-filter: blur(8px);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    min-height: 300px;
+    height: 300px;
+}
+
 .landing-page .hero-text {
+    z-index: 2;      
     position: absolute;
     top: 90px;
     display: flex;
@@ -20,12 +44,12 @@
     left: 15px;
     justify-content: center;
     font-size: 60px;
-    color: white;
+    color: black;
     font-weight: 700;
     max-width: 50%;
 }
 
-.landing-page h3 {
+.hero-text h3 {
     font-size: 20px;
     padding-left: .5rem;
     margin: 0;
