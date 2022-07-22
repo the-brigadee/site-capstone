@@ -3,6 +3,8 @@
     display: -ms-flexbox;
     display: flex;
     height: 65.5%;
+    background-color: white;
+    border: 1px solid var(--border-color);
 
 }
 
@@ -35,17 +37,24 @@
 }
 .recipe-add .form .input-field input[name="name"]{
     width:350px;
+    background-color: white;
+    border: 3px solid var(--border-color);
 }
 .recipe-add .form .input-field input[name="calories"]{
     width:350px;
+    background-color: white;
+    border: 3px solid var(--border-color);
 }
 .recipe-add .form .input-field select[name="category"]{
     width:365px;
+    background-color: white;
+    border: 3px solid var(--border-color);
 }
 
 
 .recipe-add .form .input-field label {
     margin-bottom: 5px;
+    color: var(--primary-color);
 }
 
 
@@ -58,6 +67,8 @@
     background: white;
     padding-left: 10px;
     padding-right: 5px;
+    background-color: white;
+    border: 3px solid var(--border-color);
 }
 
 .recipe-add .form .input-field select {
@@ -68,6 +79,8 @@
     background: white;
     padding-left: 10px;
     padding-right: 5px;
+    background-color: white;
+    border: 3px solid var(--border-color);
 }
 .recipe-add .form .input-field textarea {
     height: auto;
@@ -77,6 +90,8 @@
     background: white;
     padding-left: 10px;
     padding-right: 5px;
+    background-color: white;
+    border: 3px solid var(--border-color);
 }
 
 .recipe-add .form .btn, .recipe-add .footer {
