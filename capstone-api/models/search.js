@@ -95,6 +95,7 @@ class Search{
         FROM recipe reci 
         JOIN users ON reci.user_id=users.id
         WHERE LOWER(category) LIKE $1
+        AND random() > 0.27
         LIMIT 100
         ;
          `,[category])
