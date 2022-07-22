@@ -27,12 +27,6 @@ export default function RecipeDetail() {
        getRecipeById()
    }, [setRecipe, setError, recipeId])
 
-  React.useEffect( () => { 
-    console.log("DELETE this LINE and the LINE BENEATH it")
-    console.log("------------------------------------------------------------")
-  })
-  
-
   return (
     <div className='recipe-detail-container'>
 
