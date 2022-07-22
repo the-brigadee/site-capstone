@@ -3,10 +3,22 @@ const security=require("../middleware/security")
 const router=express.Router();
 const Recipe = require("../models/recipe")
 
+
+
 router.get("/random", async function (req, res, next) {
   try {
       const recipes = await Recipe.getRecommendedRecipes()
       return res.status(201).json({ recipes })
+  } catch (err) {
+      next(err)
+  }
+})
+
+router.get("/:recipeId", async function (req, res, next) {
+  try {
+      const recipeId = req.params.recipeId
+      const recipe = await Recipe.fetchRecipeById(recipeId)
+      return res.status(201).json({ recipe })
   } catch (err) {
       next(err)
   }
@@ -44,15 +56,7 @@ router.delete("/delete/:recipeId",security.requireAuthenticatedUser, async (req,
 });
 
 
-router.get("/:recipeId", security.requireAuthenticatedUser, async function (req, res, next) {
-  try {
-      const recipeId = req.params.recipeId
-      const recipe = await Recipe.fetchRecipeById(recipeId)
-      return res.status(201).json({ recipe })
-  } catch (err) {
-      next(err)
-  }
-})
+
 
 
 module.exports=router;

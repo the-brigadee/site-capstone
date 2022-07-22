@@ -41,8 +41,8 @@ export default function RecipeDetail() {
 }
  
 
-function RecipeMain(recipe, user){
-  const date= new Date(recipe?.recipe?.created_at?.split("T")[0]).toDateString().split(" ")
+function RecipeMain(recipe){
+  const date= new Date(recipe?.recipe?.recipeadd_date?.split("T")[0]).toDateString().split(" ")
   const nth = function(d) {
     if (d > 3 && d < 21) return 'th';
     switch (d % 10) {
@@ -59,13 +59,13 @@ function RecipeMain(recipe, user){
         <div className="recipe-detail-info">
           {/* Recipe image  */}
           <div className="recipe-detail-img">
-            <img src={recipe.recipe.image_url} alt="" />
+            <img src={recipe.recipe.recipe_url} alt="" />
           </div>
           {/* Recipe Text */}
           <div className="recipe-detail-text">
             <h1> {recipe.recipe.name} </h1>
             <h3> Created on {date[1]} {parseInt(date[2])}<sup>{nth(parseInt(date[2]))}</sup> {date[3]}</h3>
-            <h3> Recipe by {user?.name} </h3>
+            <h3> Recipe by {recipe.recipe.username} </h3>
             <h4> Categories : {recipe.recipe.category?.charAt(0).toUpperCase()+ recipe.recipe.category?.slice(1)} </h4>
             <h4> Calories: {recipe.recipe.calories} kcal</h4>
           </div>
@@ -93,8 +93,8 @@ function RecipeStep(recipe){
         <p className="ingredients-header"> Ingredients </p>
         <hr />
         <ul className='ingredients-list'>
-          {recipe?.recipe?.ingredients?.split(',').map(element => {
-              return <li>{element}</li>;})}
+          {recipe?.recipe?.ingredients?.split(',').map((element,idx) => {
+              return <li key={idx}>{element}</li>;})}
         </ul>
       </div>
 
@@ -104,8 +104,12 @@ function RecipeStep(recipe){
         <p className="directions-header"> Directions </p>
         <hr />
         <ol className='directions-list'>
-        {recipe?.recipe?.instructions?.split('.'||'!').map(element => {
-              return <li>{element}</li>;})}
+        {recipe?.recipe?.instructions?.split('.'||'!').map((element,idx) => {
+          if(element!==""){
+              return <li key={idx}>{element}</li>;
+          }
+        })}
+              
         </ol>
       </div>
     </div>
