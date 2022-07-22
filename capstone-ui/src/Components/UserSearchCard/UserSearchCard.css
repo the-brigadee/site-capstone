@@ -1,0 +1,85 @@
+.search-user-card{
+    margin: 0px 20px;
+    border-bottom: 1.4px solid var(--border-color);
+    display: flex;
+    padding: 30px 60px;
+    gap: 20px;
+    /* overflow: hidden;
+    background: linear-gradient(45deg, rgba(12, 12, 12, 0.932), rgba(12, 12, 12, 0.932) 50%, white 50%);
+    background-size: 201% 100%;
+    background-position: 100%;
+    transition: background-position 275ms ease; */
+     /* animation: slideInLeft .7s ease-in; */
+}
+
+.search-user-card > a{
+    display: flex;
+    gap: 60px;
+    flex-wrap: wrap;
+    text-decoration: none;
+}
+
+.usersearchpage > .results-container {
+    margin: 60px 60px 0px 60px;
+}
+
+.result-user-image{
+    flex: 1;
+}
+
+.result-user-information{
+    flex: 5;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.result-user-image {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    min-width: calc(16/9 * var(--recipe-search-img-height));
+    min-height: var(--recipe-search-img-height);
+    max-width: calc(16/9 * var(--recipe-search-img-height));
+    max-height: var(--recipe-search-img-height);
+}
+
+.result-user-image img {
+    border-radius: 50%;
+    border: 3px solid var(--border-color);
+    max-width: calc(16/9 * var(--recipe-search-img-height));
+    max-height: var(--recipe-search-img-height);
+    /* border: 1px solid var(--border-color); */
+    box-shadow: 0px 0px 10px darkgray;
+    /* transition: .37s ease-in; */
+}
+
+.result-user-name h1 {
+    color: black;
+    text-decoration: none;
+}
+
+.result-user-numbers {
+    display: flex;
+    justify-content: space-between;
+    color: black;
+}
+
+.result-user-metrics {
+    display: flex;
+    justify-content: space-between;
+}
+
+.result-followbtn > button {
+    background-color: var(--primary-color);
+    padding: 12px;
+    border-radius: 12px;
+    color: white;
+    outline: none;
+    border: 0px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}

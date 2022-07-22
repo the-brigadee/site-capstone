@@ -46,8 +46,10 @@ router.get("/", async function (req, res, next) {
     } 
     // If the searchtype is "user" search for users
     else if (query["searchtype"] === "users"){
+      //get the user id from res.locals if they are logged in if not set user_id to null 
+      const user_id = res.locals?.user ? res.locals?.user.user_id : null
         // call the search function here
-        result = await Search.searchUser(query["searchword"])
+        result = await Search.searchUser(query["searchword"], user_id)
     }
     // the searchtype is invalid
     else{
