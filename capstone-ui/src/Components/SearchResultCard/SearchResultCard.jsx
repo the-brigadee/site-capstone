@@ -9,16 +9,20 @@ export default function SearchResultCard({even, recipe}) {
     // Displayed recipe description state variable
     const [description, setDescription] = React.useState(null)
     //run everytime the component is mounted
-    React.useEffect(() => {
-        
+
+    const presentableDescription = () => {
         // function to cut description string
         if(recipe.description.length > 417){
-            setDescription(stripHtml(recipe.description).result.substring(0,417) + "...")
+            return stripHtml(recipe.description).result.substring(0,417) + "..."
         }
         else{
-            setDescription(stripHtml(recipe.description).result)
+            return stripHtml(recipe.description).result
         }
 
+    }
+    React.useEffect(() => {
+        
+        
     }, [])
 
   return (
@@ -82,7 +86,7 @@ export default function SearchResultCard({even, recipe}) {
 
             {/* displays the contents of the result */}
             <div className="result-contains">
-                <p> <b> {description} </b> </p>
+                <p> <b> {presentableDescription()} </b> </p>
             </div>
 
             {/* displays the result creation date in moment form */}
