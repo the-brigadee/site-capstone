@@ -23,9 +23,10 @@ class Recipe{
         })
 
         //checks for empty strings
+        //fixed so that error's first letter is capitalized
         requiredFields.forEach(field =>{
             if(recipefact[field]===''||""){
-                throw new BadRequestError(`${field} cannot be empty.`)
+                throw new BadRequestError(`${field.charAt(0).toUpperCase()+ field.slice(1)} cannot be empty.`)
             }
         })
         
@@ -65,8 +66,19 @@ class Recipe{
         if (!id) {
             throw new BadRequestError(`Missing ${field} in request body.`)
         } 
-        
-        const result = await db.query("SELECT * FROM recipe WHERE id = $1;", [id])
+        const result = await db.query(`SELECT recipe.name, 
+        recipe.id,
+        recipe.category, 
+        recipe.calories, 
+        recipe.image_url as recipe_url,
+        recipe.created_at as recipeadd_date,
+        recipe.ingredients,
+        recipe.instructions,
+        users.id as user_id, 
+        users.username
+        FROM recipe 
+        JOIN users ON recipe.user_id=users.id
+        WHERE recipe.id = $1`, [id])
     
         return result.rows[0]
     }
