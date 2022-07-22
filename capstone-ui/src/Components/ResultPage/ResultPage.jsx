@@ -3,6 +3,8 @@ import './ResultPage.css'
 import SearchResultGrid from '../SearchResultGrid/SearchResultGrid'
 import { useAuthNavContext } from '../../Contexts/authNav'
 import ApiClient from '../../Services/ApiClient'
+import Overlay from '../Overlay/Overlay'
+
 
 export default function ResultPage() {
 
@@ -106,6 +108,7 @@ export default function ResultPage() {
 
       {/* the div containing the result display*/}
         <SearchResultGrid recipeList={recipeList} displayFilter={displayFilter} handleOnSetFilter={handleOnSetFilter} filter={filter}/>
+        <Overlay />
     </div>
   )
 }

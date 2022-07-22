@@ -9,7 +9,7 @@ import {AuthNavContextProvider, useAuthNavContext} from '../../Contexts/authNav'
 import ResultPage from '../ResultPage/ResultPage'
 import RecipeDetail from '../RecipeDetail/RecipeDetail';
 import UserProfilePage from '../UserProfilePage/UserProfilePage';
-import RecipeAdd from '../RecipeAddPage/RecipeAdd';
+import RecipeAdd from '../RecipeAddPage/RecipeAdd'
 
 
 export default function AppContainer(){

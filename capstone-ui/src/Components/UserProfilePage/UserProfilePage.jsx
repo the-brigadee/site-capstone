@@ -6,6 +6,7 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import {useAuthNavContext} from "../../Contexts/authNav"
 import apiClient from "../../Services/ApiClient"
+import Overlay from '../Overlay/Overlay'
 
 export default function UserProfilePage() {
   // setting for npm react slick library
@@ -156,6 +157,7 @@ export default function UserProfilePage() {
                 ))}
           </Slider>
         </div>
+        <Overlay />
     </div>
   )
 }

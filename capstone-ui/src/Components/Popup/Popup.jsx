@@ -2,8 +2,10 @@ import * as React from 'react'
 import './Popup.css'
 import {useAuthNavContext} from "../../Contexts/authNav"
 import apiClient from "../../Services/ApiClient"
+import { useNavigate } from 'react-router-dom'
 
 export default function Popup(){
+    //needed functions from useAuthNavContext
     const {popupType, closePopup, showRegisterForm, showLoginForm, error, setError, setUser, isLoading, setIsLoading, user} = useAuthNavContext()
     const [form, setForm] = React.useState({
         email: "",
@@ -15,6 +17,8 @@ export default function Popup(){
         first_name: "",
 
     })
+
+    const navigate = useNavigate()
 
     //Function that handles the value of form for login/signup
     const handleOnFormInputChange = (event) => {
@@ -86,6 +90,7 @@ export default function Popup(){
         }
         
         setIsLoading(false)
+        navigate("/")
     }
 
     //useEffect to close the popup form when user are logged in
