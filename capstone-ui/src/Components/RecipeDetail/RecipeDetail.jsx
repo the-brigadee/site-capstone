@@ -42,6 +42,7 @@ export default function RecipeDetail() {
  
 
 function RecipeMain(recipe, user){
+  console.log(recipe)
   const date= new Date(recipe?.recipe?.created_at?.split("T")[0]).toDateString().split(" ")
   const nth = function(d) {
     if (d > 3 && d < 21) return 'th';
