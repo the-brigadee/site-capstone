@@ -25,15 +25,13 @@
 .search-container input {
     height: 30px;
     width: 250px;
-    border-radius: 14px;
+    border-radius: 0;
     padding-left: .5rem;
+    outline: 0px solid;
+    border: 1px solid var(--border-color);
+    box-shadow: 0px 0px 0px var(--border-color);
 }
 
-.search-container i {
-    font-size: 20px;
-    margin-left: .5rem;  
-    cursor: pointer;
-}
 
 .nav-btns {
     display: flex;
@@ -42,4 +40,57 @@
 
 .nav-btn {
     cursor: pointer;
+}
+
+.search-container {
+    background-color: lightgray;
+    border-radius: 12px;
+    display: flex;
+}
+
+.search-container select {
+    background: none;
+    border: 0px;
+    display: flex;
+    text-align: center;
+    padding: 2px;
+}
+
+.round {
+    height: 34px;
+    width: 34px;
+    display: flex;
+    justify-content: center;
+}
+
+.search-container i {
+    font-size: 20px;
+    cursor: pointer;
+    align-self: center;
+}
+
+.round:hover{
+    background-color: var(--primary-color);
+    border-radius: 0px 12px 12px 0px;
+}
+
+.round:hover i{
+    filter: invert(1);
+}
+
+.round:active {
+    animation: radialdisappear .7s ease;       
+}
+
+@keyframes radialdisappear {
+    0%{
+        opacity: 100%;
+        transform: scale(1);
+    }
+    50%{
+        transform: rotateZ(180deg) scale(.3);
+    }
+    100%{
+        transform: rotateZ(360deg) scale(0);
+    }
 }

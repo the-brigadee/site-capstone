@@ -112,7 +112,16 @@ export default function Navbar(){
 
         //Change the search type to the option chose
         setSearchType(e.target.value)
+
+        //set placeholder text
+        if(e.target.value === "")
+        setSearchPlaceholder("Search for recipe")
+
+        if(e.target.value === "users")
+        setSearchPlaceholder("Search for user")
     }
+
+    const [searchPlaceholder, setSearchPlaceholder] = React.useState("Search for recipe")
     return(
         <nav className='navbar'>
             <div className="logo-container">
@@ -126,8 +135,10 @@ export default function Navbar(){
                     <option value="">recipes</option>
                     <option value="users">users</option>
                 </select>
-                <input type="text" name="search" placeholder="Search for recipe" value={searchField} onChange={handleSearchOnChange} onSubmit={handleSearchOnSubmit} onKeyDown={handleKeyDown}/>
-                        <i id="search-icon" className="fa-solid fa-magnifying-glass" onClick={handleSearchOnSubmit}></i>
+                <input type="text" name="search" placeholder={searchPlaceholder} value={searchField} onChange={handleSearchOnChange} onSubmit={handleSearchOnSubmit} onKeyDown={handleKeyDown}/>
+                        <div className="round">
+                            <i id="search-icon" className="fa-solid fa-magnifying-glass" onClick={handleSearchOnSubmit}></i>
+                        </div>
                 </div>
             
             {/* Buttons sections, temporary icon for login and register for now */}
