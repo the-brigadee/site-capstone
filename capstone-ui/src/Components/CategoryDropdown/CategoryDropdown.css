@@ -4,28 +4,5 @@
     gap: 10px;
     margin-left: calc(32px + 5px); /* 32px is the length of the png 24px + the lenght of the gap 8px. The other number represents the 
     the indent under categories*/
+    overflow: hidden;
 }
-
-
-p.link-direct
-{
-    position: relative;
-}
-
-p.link-direct:before {
-  content: "";
-  position: absolute;
-  width: 0;
-  height: 2px;
-  bottom: 0;
-  left: 0;
-  background-color: var(--primary-color);
-  visibility: hidden;
-  transition: all 0.3s ease-in-out;
-}
-
-p.link-direct:hover:before {
-    visibility: visible;
-    width: 100%;
-  }
-  

@@ -6,8 +6,9 @@ import { useAuthNavContext } from '../../Contexts/authNav'
 import ReactPaginate from 'react-paginate'
 
 export default function SearchResultGrid({recipeList, displayFilter, handleOnSetFilter, filter}) {
+
   //get resultsType from the authNavContext
-  const {resultsType, searchWord} = useAuthNavContext()
+  const {resultsType, searchWord, transition, setTransition} = useAuthNavContext()
 
   // display filter options state variable
   const [displayFilterOptions, setDisplayFilterOptions] = React.useState(false)
@@ -22,11 +23,11 @@ export default function SearchResultGrid({recipeList, displayFilter, handleOnSet
     else setDisplayFilterOptions(true)
   }
 
-  // If resultsType is "sidebar" set it to false
+  
   React.useEffect(() => {
+    // If resultsType is "sidebar" set it to false
     if(resultsType === "sidebar")setDisplayFilterOptions(false)
   })
-
 
   //Number of items per page
   const itemsPerPage = 4;
@@ -46,12 +47,17 @@ export default function SearchResultGrid({recipeList, displayFilter, handleOnSet
     setCurrentItems(recipeList.slice(itemOffset, endOffset));
     setPageCount(Math.ceil(recipeList.length / itemsPerPage));
     // window.scrollTo({top: 0});
+
+
+    //update transition state variable used to fix the continuous css 
+    setTransition(transition+1)
   }, [itemOffset, itemsPerPage,recipeList]);
 
   // Invoke when user click to request another page.
   const handlePageClick = (event) => {
     const newOffset = (event.selected * itemsPerPage) % recipeList.length;
     setItemOffset(newOffset);
+    setTransition(transition+1)
   };
   
   const [selected, setSelected] = React.useState("none")
@@ -85,7 +91,7 @@ export default function SearchResultGrid({recipeList, displayFilter, handleOnSet
             {
               currentItems.map((recipe, idx) => {
                 return(
-                  <SearchResultCard even={(idx+1)  % 2 === 0} recipe={recipe} key={idx} />
+                  <SearchResultCard even={(idx+1+transition)  % 2 === 0} recipe={recipe} key={idx} />
                 )
               })
             }

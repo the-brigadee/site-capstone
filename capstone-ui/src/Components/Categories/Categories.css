@@ -2,4 +2,34 @@ p.link-direct{
     margin-top: 0px;
     margin-bottom: 0px;
     cursor: pointer;
+    position: relative;
+}
+
+p.link-direct:before {
+  content: "";
+  position: absolute;
+  width: 0;
+  height: 2px;
+  bottom: 0;
+  left: 0;
+  background-color: var(--primary-color);
+  visibility: hidden;
+  transition: all 0.05s ease-in-out;
+}
+
+p.link-direct:active:before {
+    visibility: visible;
+    width: 100%;
+  }
+  
+
+p.link-direct:hover {
+    /* From https://css.glass */
+background: rgba(255, 127, 80, 0.24);
+border-radius: 3px;
+box-shadow: 0 4px 25px rgba(240, 241, 242, 0.891);
+backdrop-filter: blur(125px);
+-webkit-backdrop-filter: blur(125px);
+border: 1px solid rgb(240, 241, 242, 0.3);
+transform: translateX(12px);
 }

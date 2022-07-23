@@ -77,6 +77,10 @@ export const AuthNavContextProvider = ({children}) =>{
     // Searched word state variable
     const [searchWord, setSearchWord] = React.useState("")
 
+    // search card transition state variable. Used to make search css transition continuous
+    const [transition, setTransition] = React.useState(1)
+
+
     // Add all state variables to be passed to this object 
     const authNavvalue = {
         user, setUser, 
@@ -85,7 +89,8 @@ export const AuthNavContextProvider = ({children}) =>{
         resultsType, setResultsType, 
         error, setError, 
         isLoading, setIsLoading,
-        searchWord, setSearchWord
+        searchWord, setSearchWord,
+        transition, setTransition
     }
 
 
