@@ -82,7 +82,11 @@ export default function Popup(){
             errorUse = error
         }
                 
-        if (errorUse) setError((e) => ({ ...e, form: errorUse }))
+        if (errorUse) {
+            setError((e) => ({ ...e, form: errorUse }))
+            setIsLoading(false)
+            return
+            }
         if (dataUse?.user) {
             apiClient.setToken(dataUse.token)
             setUser(dataUse?.user)
