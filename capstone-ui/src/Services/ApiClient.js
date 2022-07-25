@@ -75,6 +75,16 @@ class ApiClient {
     async getUsersSavedRecipes(){
         return await this.request({endpoint: `savedrecipe`, method: `GET`})
     }
+
+    async handleFollow(user_id, followed_id){
+        return await this.request({endpoint: `follow/create`, method: `POST`, data: {"followed_id" : followed_id, "following_id" : user_id}})
+    }
+
+    async updateProfile(creds){
+        return await this.request({endpoint: `auth/update`, method: `PUT`, data:creds})}
+
+    async updatePassword(creds){
+        return await this.request({endpoint: `auth/update/password`, method: `PUT`, data:creds})}
 }
 
 export default new ApiClient("http://localhost:3001")

@@ -7,6 +7,7 @@ import "slick-carousel/slick/slick-theme.css";
 import {useAuthNavContext} from "../../Contexts/authNav"
 import apiClient from "../../Services/ApiClient"
 import Overlay from '../Overlay/Overlay'
+import { useNavigate } from 'react-router-dom';
 
 export default function UserProfilePage() {
   // setting for npm react slick library
@@ -54,7 +55,9 @@ export default function UserProfilePage() {
     ]
   };
 
-  const {user, setError} = useAuthNavContext()
+  const navigate = useNavigate()
+
+  const {user, setError, setUser, setIsLoading, isLoading, error, userDetails} = useAuthNavContext()
   const [recipes, setRecipes] = React.useState([])
   // useState for showing the buttons
   const [isEditing, setIsEditing] = React.useState(false)
@@ -85,7 +88,7 @@ export default function UserProfilePage() {
     getSavedRecipes()
   }, [setRecipes])
 
-    //Function that handles the value of form for login/signup
+    //Function that handles the value of form for updating user profile
     const handleOnFormInputChange = (event) => {
       //prevent the events default behaviour  
       event.preventDefault()
@@ -108,7 +111,50 @@ export default function UserProfilePage() {
       //set the value of the form
   
       setForm((f) => ({ ...f, [event.target.name]: event.target.value }))
-      
+  }
+
+  // logout function
+  const handleLogout = async () => {
+    await apiClient.logoutUser()
+    setUser({})
+    setError(null)
+    navigate("/", {state: true})
+}
+
+  // function and make call to the backend to update user profile
+  const handleOnSave = async () => {
+        if (infoDisplay === "form") {
+          const {data, error} = await apiClient.updateProfile({
+              first_name: form.first_name,
+              last_name: form.last_name,
+              dob: form.dob,
+              username: form.username,
+              user_id: user.id,
+              description: form.bio
+          })
+          if (error) {
+            setError((e) => ({ ...e, profile: error }))
+            setIsLoading(false)
+            return
+            }
+          if (data?.user) {
+              setUser(data?.user)
+          }
+        } else if (infoDisplay === "password") {
+          const {data, error} = await apiClient.updatePassword({
+              old_password: form.old_password,
+              new_password: form.new_password,
+              user_id: 1
+          })
+          if (error) {
+            setError((e) => ({ ...e, passwordUpdate: error }))
+            setIsLoading(false)
+            return
+            }
+          if (data?.user) {
+            handleLogout()
+          }
+        }
   }
 
   // the editing profile form, show when user click on edit profile button
@@ -144,9 +190,9 @@ export default function UserProfilePage() {
   const userProfile = (<div className="user-display">
                         <div className="user-facts">
                           <h1>{`${user.first_name} ${user.last_name}`}</h1>
-                          <h4>Joined on {user.created_at}</h4>
+                          <h4>Joined on {user.created_at.split("T")[0]}</h4>
                           <span>{user.bio}</span>
-                          <span>Birthday: {user.dob}</span>
+                          <span>Birthday: {user.dob.split("T")[0]}</span>
                         </div>
                       </div>)
   
@@ -155,6 +201,7 @@ export default function UserProfilePage() {
                             <div className="input-row">
                               <label htmlFor="old_password">Old Password</label>
                               <input type="password" name="old_password" placeholder="old password" onChange={handleOnFormInputChange}/>
+                              {error?.passwordUpdate ? <span className="error">Incorrect current password!</span> : null}
                             </div>
                             <div className="input-row">
                                 <label htmlFor="New Password">New Password</label>
@@ -185,8 +232,11 @@ export default function UserProfilePage() {
       setIsEditing(true)
       setInfoDisplay("form")
     } else if (e.target.id === "save") {
-      setIsEditing(false)
-      setInfoDisplay("profile")
+      handleOnSave()
+      if (!error?.passwordUpdate) {
+        setIsEditing(false)
+        setInfoDisplay("profile")
+      }
     }
   }
 
@@ -203,9 +253,9 @@ export default function UserProfilePage() {
             </button>
             <div className="user-data">
               <h3>{user.username}</h3>
-              <span># recipe created</span>
-              <span># following</span>
-              <span># followers</span>
+              <span>{userDetails?.total_recipe ? userDetails.total_recipe : 0} recipe created</span>
+              <span>{userDetails?.num_following ? userDetails.num_following : 0} following</span>
+              <span>{userDetails?.num_followers ? userDetails.num_followers : 0} followers</span>
             </div>
           </div>
           <div className="right-profile">

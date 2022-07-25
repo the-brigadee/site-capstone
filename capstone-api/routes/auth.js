@@ -26,7 +26,7 @@ router.post("/register", async (req, res, next) => {
     }
   });
 
-router.delete("/delete", async (req, res, next) => {
+router.delete("/delete", security.requireAuthenticatedUser, async (req, res, next) => {
   try {
     // take the users email and password and create a new user in our database
     const user = await User.delete(req.body);
@@ -36,11 +36,21 @@ router.delete("/delete", async (req, res, next) => {
   }
 });
 
-router.put("/update", async (req, res, next) => {
+router.put("/update", security.requireAuthenticatedUser, async (req, res, next) => {
   try {
     // take the users email and password and create a new user in our database
-    const user = await User.update(req.body);
-    return res.status(200).json({ user});
+    const user = await User.updateProfile(req.body);
+    return res.status(200).json({user});
+  } catch (err) {
+    next(err);
+  }
+});
+
+router.put("/update/password", security.requireAuthenticatedUser, async (req, res, next) => {
+  try {
+    // take the users email and password and create a new user in our database
+    const user = await User.updatePassword(req.body);
+    return res.status(200).json({user});
   } catch (err) {
     next(err);
   }
@@ -51,7 +61,8 @@ router.get("/me",security.requireAuthenticatedUser, async(req,res,next)=>{
     const{email}=res.locals.user
     const user=await User.fetchUserByEmail(email)
     const publicUser= await User.makePublicUser(user)
-    return res.status(200).json({user:publicUser});
+    const details = await User.getUserSideProfileDetails(user.id)
+    return res.status(200).json({user:publicUser, details: details});
   }catch(err){
     next(err)
   }

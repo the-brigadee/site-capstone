@@ -32,7 +32,7 @@ export default function AppContainer(){
 
 function App() {
 
-  const {setError, setUser, setIsLoading} = useAuthNavContext()
+  const {setUser, setIsLoading, setError, setUserDetails} = useAuthNavContext()
 
   React.useEffect(() => {
     const fetchUser = async () => {
@@ -42,6 +42,7 @@ function App() {
       }
       if (data?.user) {
         setUser(data.user)
+        setUserDetails(data.details)
         setError((e) => ({ ...e, user: null }))
       }
     }
@@ -57,17 +58,11 @@ function App() {
     setIsLoading(false)
   }, [setUser, setIsLoading, setError])
 
-  const handleLogout = async () => {
-    await apiClient.logoutUser()
-    setUser({})
-    setError(null)
-  }
-
   //return statement
   return (
     <div className="App">
         <BrowserRouter>
-          <Navbar handleLogout={handleLogout} />
+          <Navbar/>
           <div className='app-body'>
             <Sidebar />
           {/* Create React routers for page navigation. */}

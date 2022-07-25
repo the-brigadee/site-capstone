@@ -6,7 +6,7 @@ import { useNavigate } from 'react-router-dom'
 
 export default function Popup(){
     //needed functions from useAuthNavContext
-    const {popupType, closePopup, showRegisterForm, showLoginForm, error, setError, setUser, isLoading, setIsLoading, user} = useAuthNavContext()
+    const {popupType, closePopup, showRegisterForm, showLoginForm, error, setError, setUser, isLoading, setIsLoading, user, isPwChanged, setIsPwChanged} = useAuthNavContext()
     const [form, setForm] = React.useState({
         email: "",
         password: "",
@@ -82,12 +82,16 @@ export default function Popup(){
             errorUse = error
         }
                 
-        if (errorUse) setError((e) => ({ ...e, form: errorUse }))
+        if (errorUse) {
+            setError((e) => ({ ...e, form: errorUse }))
+            setIsLoading(false)
+            return
+            }
         if (dataUse?.user) {
             apiClient.setToken(dataUse.token)
             setUser(dataUse?.user)
+            setIsPwChanged(false)
         }
-        
         setIsLoading(false)
         navigate("/")
     }
@@ -176,6 +180,7 @@ export default function Popup(){
             <div className={`popup-card ${popupType.toLowerCase()}`} onClick={(e) => e.stopPropagation()}>
                 <button className="close-btn" onClick={(e) => {e.stopPropagation();closePopup();}}>&times;</button>
                 <h1>{popupType}</h1>
+                {isPwChanged ? <span className="error">Please login with your new password.</span> : null}
                 {(error?.form) ? <span className="error">{error?.form}</span> : null}
                 {(error?.email !== null && form.email !== "") ? <span className="error">Please enter a valid email.</span> : null}
                 {formHTML}
