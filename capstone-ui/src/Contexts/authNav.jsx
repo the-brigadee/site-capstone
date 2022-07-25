@@ -32,6 +32,12 @@ export const AuthNavContextProvider = ({children}) =>{
 
     // Pop up type state variable
     const [popupType, setPopupType] = React.useState("Login")
+
+    //state variable for when user is logged out from changing password
+    const [isPwChanged, setIsPwChanged] = React.useState(false)
+
+    //state variable for user's stats about followers
+    const [userDetails, setUserDetails] = React.useState({})
     
     //function for login button
     const showLoginForm = () => {
@@ -45,7 +51,7 @@ export const AuthNavContextProvider = ({children}) =>{
         showPopup()
     }
 
-    // Close popup/modal function 
+    // Show popup/modal function 
     const showPopup = () => {
         const overlay = document.querySelector('.overlay')
         const popup = document.querySelector('.popup-card')
@@ -90,7 +96,9 @@ export const AuthNavContextProvider = ({children}) =>{
         error, setError, 
         isLoading, setIsLoading,
         searchWord, setSearchWord,
-        transition, setTransition
+        transition, setTransition,
+        isPwChanged, setIsPwChanged,
+        userDetails, setUserDetails
     }
 
 
