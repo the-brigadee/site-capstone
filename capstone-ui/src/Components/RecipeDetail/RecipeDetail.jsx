@@ -67,21 +67,14 @@ function RecipeMain(recipe){
               if (data?.savedrecipe) {
                 setSavedRecipe(data.savedrecipe)
               }
+              data?.savedrecipe?.map((idx)=> {
+                if(parseInt(idx.recipe_id)===parseInt(recipeId)){
+                  setIsSaved(true);
+                }
+              })
       }
       getSavedRecipes()
-    }, [isSaved, setError])
-
-
-    React.useEffect(()=>{
-      const ifSaved= async () =>{
-        savedrecipe.map((idx)=> {
-          if(parseInt(idx.recipe_id)===parseInt(recipeId)){
-            setIsSaved(true);
-          }
-        })
-      }
-      ifSaved();
-      })
+    }, [isSaved, setError,recipeId])
 
   const date= new Date(recipe?.recipe?.recipeadd_date?.split("T")[0]).toDateString().split(" ")
   const nth = function(d) {
