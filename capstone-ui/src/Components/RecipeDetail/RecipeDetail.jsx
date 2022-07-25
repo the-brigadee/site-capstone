@@ -25,8 +25,6 @@ export default function RecipeDetail() {
            }
        }
        getRecipeById()
-
-       console.log(recipe)
    }, [setRecipe, setError, recipeId])
 
   return (

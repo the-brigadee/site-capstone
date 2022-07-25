@@ -88,6 +88,13 @@ export default function Navbar({handleLogout}){
         }
     }
 
+    const handleLogout = async () => {
+        await apiClient.logoutUser()
+        setUser({})
+        setError(null)
+        navigate("/")
+    }
+
     /**  Select Searchbar state variable
      * 
      *   Can only be one of two states for now 
