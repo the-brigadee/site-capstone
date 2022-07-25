@@ -32,7 +32,7 @@ export default function AppContainer(){
 
 function App() {
 
-  const {setError, setUser, setIsLoading} = useAuthNavContext()
+  const {setUser, setIsLoading, setError, setUserDetails} = useAuthNavContext()
 
   React.useEffect(() => {
     const fetchUser = async () => {
@@ -42,6 +42,7 @@ function App() {
       }
       if (data?.user) {
         setUser(data.user)
+        setUserDetails(data.details)
         setError((e) => ({ ...e, user: null }))
       }
     }

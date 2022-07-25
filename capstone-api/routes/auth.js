@@ -40,7 +40,7 @@ router.put("/update", security.requireAuthenticatedUser, async (req, res, next) 
   try {
     // take the users email and password and create a new user in our database
     const user = await User.updateProfile(req.body);
-    return res.status(200);
+    return res.status(200).json({user});
   } catch (err) {
     next(err);
   }

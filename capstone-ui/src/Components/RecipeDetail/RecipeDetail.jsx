@@ -42,7 +42,40 @@ export default function RecipeDetail() {
  
 
 function RecipeMain(recipe){
-  const {user} = useAuthNavContext()
+  const [savedrecipe, setSavedRecipe] = React.useState([])
+  const [isSaved, setIsSaved] = React.useState(false)
+  const {recipeId} = useParams()
+  const {setError, user} = useAuthNavContext()
+
+    const saveRecipe = async () => {
+        const {data, error} = await apiClient.savedRecipe({
+          user_id:user.id,
+          recipe_id:recipeId
+        })
+        if (error) setError((e) => ({ ...e, recommended: error }))
+
+        if(data.savedrecipe==='Successfully Unsaved Recipe!'){
+          setIsSaved(false);
+        }
+    }
+
+
+    React.useEffect(()=>{
+      const getSavedRecipes = async () => {
+        const {data, error} = await apiClient.getUsersSavedRecipes()
+              if (error) setError((e) => ({ ...e, savedRecipe: error }))
+              if (data?.savedrecipe) {
+                setSavedRecipe(data.savedrecipe)
+              }
+              data?.savedrecipe?.map((idx)=> {
+                if(parseInt(idx.recipe_id)===parseInt(recipeId)){
+                  setIsSaved(true);
+                }
+              })
+      }
+      getSavedRecipes()
+    }, [isSaved, setError,recipeId])
+
   const date= new Date(recipe?.recipe?.recipeadd_date?.split("T")[0]).toDateString().split(" ")
   const nth = function(d) {
     if (d > 3 && d < 21) return 'th';
@@ -53,6 +86,7 @@ function RecipeMain(recipe){
         default: return "th";
     }
 }
+
 
   return(
       <div className="recipe-detail-main">
@@ -77,7 +111,7 @@ function RecipeMain(recipe){
         {/* Recipe Edit buttons */}
         <div className="recipe-edit-buttons">
           <button> Add Plan </button>
-          <button> Save </button>
+          {isSaved ? <button onClick={()=>{saveRecipe(); setIsSaved(false)}}> Unsave </button> :<button onClick={()=>{saveRecipe();setIsSaved(true)}}> Save </button>}
           <button> Review </button>
           {recipe.recipe.user_id===user.id && <button> Delete </button>}
           

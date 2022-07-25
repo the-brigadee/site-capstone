@@ -69,8 +69,8 @@ class ApiClient {
     async recipeById(recipeId){
         return await this.request({endpoint: `recipe/${recipeId}`, method: `GET`, data:recipeId})}
 
-    async savedRecipe(recipeId,creds){
-        return await this.request({endpoint: `savedrecipe/create`, method: `POST`, data:recipeId,creds})}  
+    async savedRecipe(recipeId){
+        return await this.request({endpoint: `savedrecipe/create`, method: `POST`, data:recipeId})}  
     
     async getUsersSavedRecipes(){
         return await this.request({endpoint: `savedrecipe`, method: `GET`})
@@ -91,6 +91,11 @@ class ApiClient {
     async getProfileOwned(profileId){
         return await this.request({endpoint: `profile/owned/${profileId}`, method: `GET`, data: {}})
     }
+    async updateProfile(creds){
+        return await this.request({endpoint: `auth/update`, method: `PUT`, data:creds})}
+
+    async updatePassword(creds){
+        return await this.request({endpoint: `auth/update/password`, method: `PUT`, data:creds})}
 }
 
 export default new ApiClient("http://localhost:3001")
