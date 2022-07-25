@@ -7,7 +7,7 @@ import apiClient from "../../Services/ApiClient"
 import tippy from 'tippy.js';
 import 'tippy.js/dist/tippy.css';
 
-export default function Navbar({handleLogout}){
+export default function Navbar(){
     //using tippy.js for tooltip hover message
     tippy('#login', {
         content: "Login",
@@ -35,7 +35,7 @@ export default function Navbar({handleLogout}){
 
     //useState variable for tracking User search text.
     const [searchField, setSearchField] = React.useState('')
-    const {showLoginForm, showRegisterForm, setSearchWord, setResultsType, user} = useAuthNavContext()
+    const {showLoginForm, showRegisterForm, setSearchWord, setResultsType, user, setUser, setError} = useAuthNavContext()
 
     //Function that handles the value of searchField depending on the value of User's input text
     const handleSearchOnChange = (event) => {
