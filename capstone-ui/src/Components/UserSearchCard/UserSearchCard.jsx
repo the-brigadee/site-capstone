@@ -2,15 +2,18 @@ import * as React from 'react'
 import './UserSearchCard.css'
 import { Link } from 'react-router-dom'
 import { useAuthNavContext } from '../../Contexts/authNav'
+import ApiClient from '../../Services/ApiClient'
 
 export default function UserSearchCard({people, even}) {
 
     //get the user from nav context 
-    const {user} = useAuthNavContext()
-    console.log(people)
+    const {user, showLoginForm, setError} = useAuthNavContext()
+
+    // followingorNot state variable
+    const [followingOrNot, setFollowingOrNot] = React.useState(people.is_following)
 
     // const useableUser
-    const userCheck = user ? user : {id : -1}
+    var userCheck = user.id ? user : {id : -1}
 
     const bioToScreen = () => {
         if(!people.description) return ""
@@ -20,9 +23,45 @@ export default function UserSearchCard({people, even}) {
             word = word.substring(0, 27) + "..."
         }
     }
-  return (
+
+  
+    // function to handle unfollowing
+    const handleOnClickFollowingBtn = async (event) => {
+
+        // prevent the default behaviour 
+        event.preventDefault()
+
+        // Check if the user is not logged in 
+        if (userCheck.id === -1){
+            //display the login form
+            showLoginForm()
+        }
+
+        // call the appropriate api
+        const {data, error} = await ApiClient.handleFollow(userCheck.id, people.user_id)
+
+        if(data){
+            setFollowingOrNot(data.follow.followed_id)
+        }
+        if(error){
+            setError((e) => ({ ...e, form: error }))
+        }
+    }
+
+  // rerender card when follow or following button is clicke
+  React.useEffect(() => {
+    // useableUser
+    userCheck = user.id ? user : {id : -1}
+
+    // Check if the user is not logged in 
+    if (userCheck.id === -1){
+        setFollowingOrNot(null)
+    }
+}, [followingOrNot, user])
+
+return (
     <div className={`search-user-card ${even ? "even" : ""}`}>
-       <Link to={`/profile/5`}>
+       <Link to={`/profile/${people.user_id}`}>
         {/* displays the result card */}
         <div className="result-user-image">
                     {/* Load the main image here */}
@@ -69,9 +108,9 @@ export default function UserSearchCard({people, even}) {
                         :
                         // {/* conditionally render the following or followers button */}
                         <div className="result-followbtn">
-                            {people.is_following ? 
-                            <button> Following </button> :
-                            <button> Follow </button>}
+                            {followingOrNot ? 
+                            <button onClick={handleOnClickFollowingBtn}> Following </button> :
+                            <button onClick={handleOnClickFollowingBtn}> Follow </button>}
                         </div>
                     }
                     
