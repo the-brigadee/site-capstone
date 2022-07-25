@@ -82,6 +82,8 @@
     max-height: var(--recipe-img-height);
     min-height: var(--recipe-img-height);
     min-width: calc(16/ 9 * var(--recipe-img-height));
+    object-fit: cover;
+
 }
 
 .recipe-card-owner-img{
