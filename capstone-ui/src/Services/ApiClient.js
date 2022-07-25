@@ -79,6 +79,18 @@ class ApiClient {
     async handleFollow(user_id, followed_id){
         return await this.request({endpoint: `follow/create`, method: `POST`, data: {"followed_id" : followed_id, "following_id" : user_id}})
     }
+
+    async getProfileDetails(profileId, user_id){
+        return await this.request({endpoint: `profile/${profileId}`, method: `GET`, data: {}})
+    }
+
+    async getProfileSaved(profileId){
+        return await this.request({endpoint: `profile/saved/${profileId}`, method: `GET`, data: {}})
+    }
+
+    async getProfileOwned(profileId){
+        return await this.request({endpoint: `profile/owned/${profileId}`, method: `GET`, data: {}})
+    }
 }
 
 export default new ApiClient("http://localhost:3001")

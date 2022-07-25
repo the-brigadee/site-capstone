@@ -88,10 +88,28 @@ class Recipe{
             throw new BadRequestError("No user_id provided")
         }
 
-        const query = `SELECT * FROM recipe WHERE user_id = $1`
+        const query = `SELECT * FROM recipe WHERE user_id = $1
+        LIMIT 10`
 
         const results = await db.query(query, [user_id])
         console.log(results.rows)
+        return results.rows
+    }
+
+    static async fetchAllSavedRecipesByUserId(user_id) {
+        if (!user_id) {
+            throw new BadRequestError("No user_id provided")
+        }
+
+        const query = `SELECT * 
+                        FROM recipe 
+                        WHERE id IN (
+                            SELECT recipe_id 
+                            FROM saved_recipes 
+                            WHERE user_id=$1);
+        `
+
+        const results = await db.query(query, [user_id])
         return results.rows
     }
 

@@ -1,0 +1,96 @@
+.user-detailpage {
+    position: relative;
+    width: 100%;
+    padding: 30px ;
+}
+
+.profile-detail-main{
+    display: flex;
+    border: 1px solid var(--border-color);
+    box-shadow: 0px 0px 10px lightgray;
+    border-radius: 12px;
+    padding: 30px;
+    gap: 30px;
+}
+
+.profile-detail-image{
+    flex: 1;
+}
+
+.profile-detail-text{
+    flex: 5;
+    display: flex;
+    flex-direction: column;
+    max-height: 350px;
+    justify-content: space-between;
+    padding-left: 13px;
+}
+
+.profile-detail-text > * {
+    margin: 0px;
+}
+.profile-detail-page-interaction{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    gap: 10px;
+}
+
+.profile-detail-image img{
+    width: 300px;
+    height: 300px;
+    border-radius: 50%;
+    border: 10px solid black;
+    box-shadow: rgb(255 127 80 / 89%) 0px 3px 8px;
+}
+
+.profile-detail-image img.default{
+    border: 10px solid var(--border-color);
+    box-shadow: none;
+}
+
+.profile-detail-name h1{
+    margin: 0px;
+}
+
+.follow-to-following{
+    display: flex;
+    flex-direction: row;
+    gap: 70px;
+}
+
+.profile-detail-page-interaction button {
+    background-color: var(--primary-color);
+    padding: 12px;
+    border-radius: 12px;
+    color: aliceblue;
+    outline: none;
+    border: 0px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.profile-detail-page-interaction button:hover {
+    background-color: rgb(146, 146, 146);
+    border-radius: 12px;
+}
+
+.profile-total-recipes p {
+    margin: 0px;
+}
+
+.profile-banner{
+    text-align: center;
+}
+
+.profile-detail-recipe h1{
+    text-align: center;
+}
+
+.profile-detail-recipe{
+    padding: 30px;
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+}

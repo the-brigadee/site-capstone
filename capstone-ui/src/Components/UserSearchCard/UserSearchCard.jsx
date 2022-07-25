@@ -49,7 +49,7 @@ export default function UserSearchCard({people, even}) {
         }
     }
 
-  // rerender card when follow or following button is clicke
+  // rerender card when follow or following button is clicked
   React.useEffect(() => {
     // useableUser
     userCheck = user.id ? user : {id : -1}

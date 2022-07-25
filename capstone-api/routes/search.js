@@ -1,7 +1,6 @@
 /**
  * This file (Search.js) handles all search functionality.
  * 
- *  It does not require user authentication and therefore will be placed above  { app.use(security.extractUserFromJwt) within the app.js file}
  */
 
 
