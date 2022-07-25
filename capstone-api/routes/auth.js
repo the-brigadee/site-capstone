@@ -51,7 +51,8 @@ router.get("/me",security.requireAuthenticatedUser, async(req,res,next)=>{
     const{email}=res.locals.user
     const user=await User.fetchUserByEmail(email)
     const publicUser= await User.makePublicUser(user)
-    return res.status(200).json({user:publicUser});
+    const details = await User.getUserSideProfileDetails(user.id)
+    return res.status(200).json({user:publicUser, details: details});
   }catch(err){
     next(err)
   }

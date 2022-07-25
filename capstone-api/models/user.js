@@ -134,7 +134,6 @@ class User{
         throw new UnauthorizedError("Invalid email/password combo")
     }
 
-
     static async register(credentials){
         //user should submit their email and password
         //if any of these fields are missing, throw an error
@@ -194,64 +193,24 @@ class User{
 
     }
 
+    static async getUserSideProfileDetails(id) {
+        //  function to get a user's stats about recipes and following
 
-        static async register(credentials){
-        //user should submit their email and password
-        //if any of these fields are missing, throw an error
-        const requiredFields=["email","password","firstName","lastName","userName", "dob"]
-        requiredFields.forEach(field =>{
-            if(!credentials.hasOwnProperty(field)){
-                throw new BadRequestError(`Missing ${field} in request body.`)
-            }
-        })
-
-        if (credentials.email.indexOf("@") <= 0) {
-            throw new BadRequestError("Invalid email");
-          }
-
-        //make sure no user already exists in the system with that email
-        //if one does, throw an error
-        const existingUserEmail= await User.fetchUserByEmail(credentials.email)
-        if(existingUserEmail){
-            throw new BadRequestError(`Duplicate email: ${credentials.email}`)
-        }
-        //make sure no user already exists in the system with that username
-        //if one does, throw an error
-        const existingUserName= await User.fetchUserByUserName(credentials.userName)
-        if(existingUserName){
-            throw new BadRequestError(`Duplicate username: ${credentials.userName}`)
-        }
-
-
-
-        //take the users password, and hash it
-        const hashedPassword = await bcrypt.hash(credentials.password, BCRYPT_WORK_FACTOR);
-        //take the users email, and lowercase it
-        const lowercasedEmail=credentials.email.toLowerCase()
-
-        //create a new user in the db with all their info
         const result = await db.query(`
-        INSERT INTO users (
-            email,
-            password,
-            first_name,
-            last_name,
-            username,
-            dob
-        )
-        VALUES ($1, $2, $3, $4, $5, $6)
-        RETURNING id, email, password, first_name, last_name, username, dob, created_at;
-    `,
-    [lowercasedEmail, hashedPassword, credentials.firstName, credentials.lastName, credentials.userName, credentials.dob]
-    )
+                SELECT (SELECT count(*) 
+                FROM recipe r 
+                WHERE r.user_id = $1
+                ) as total_recipe,
+            ( SELECT count(*) 
+                FROM follower_to_following ftf  
+                WHERE ftf.following_id = $1
+                ) as num_following, 
+            (SELECT count(*)
+                FROM follower_to_following ftf
+                WHERE ftf.followed_id = $1) as num_followers
+        `,[id])
 
-        //return the user
-        const user=result.rows[0]
-        return User.makePublicUser(user)
-
-        
-
-
+         return result.rows[0]
     }
     
     static async fetchUserByEmail(email){
