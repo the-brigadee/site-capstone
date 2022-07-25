@@ -68,7 +68,6 @@ function RecipeMain(recipe){
               if (data?.savedrecipe) {
                 setSavedRecipe(data.savedrecipe)
               }
-              console.log(data);
       }
       getSavedRecipes()
     }, [isSaved, setError])
