@@ -11,6 +11,7 @@ import RecipeDetail from '../RecipeDetail/RecipeDetail';
 import UserProfilePage from '../UserProfilePage/UserProfilePage';
 import RecipeAdd from '../RecipeAddPage/RecipeAdd';
 import UserSearchPage from '../UserSearchPage/UserSearchPage';
+import UserDetailPage from '../UserDetailPage/UserDetailPage';
 
 
 export default function AppContainer(){
@@ -47,6 +48,7 @@ function App() {
               <Route path='/recipe/:recipeId' element={<RecipeDetail />}/>
               <Route path='/recipe/create' element={<RecipeAdd />}/>
               <Route path='/user/:userId' element={<UserProfilePage />}/>
+              <Route path='/profile/:userId' element={<UserDetailPage />}/>
               <Route path='*' element={<NotFound />}/>
             </Routes>
 

@@ -51,7 +51,7 @@ export default function SearchResultCard({even, recipe}) {
 
                 {/* displays user's profile image */}
                 <div className="result-profile-img">
-                    <Link to={`/user/${recipe.user_id}`}>
+                    <Link to={`/profile/${recipe.user_id}`}>
                     {recipe.user_url 
                     ? 
                     <img src={recipe.user_url} /> 
@@ -63,7 +63,7 @@ export default function SearchResultCard({even, recipe}) {
 
                 {/* displays the user's handle */}
                 <div className="result-profile-name">
-                    <Link to={`/user/${recipe.user_id}`}>
+                    <Link to={`/profile/${recipe.user_id}`}>
                         <p>By {recipe.owner}</p>
                     </Link>
                 </div>

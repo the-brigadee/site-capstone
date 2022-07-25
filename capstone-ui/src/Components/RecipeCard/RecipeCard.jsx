@@ -42,11 +42,11 @@ export default function RecipeCard({title, recipe_url, recipe_id, ownername, own
         {/* display the image of the owner of the recipe */}
         <div className="recipe-card-owner-img">        
           {owner_url ? 
-            <Link to={`/user/${owner_id}`}>
+            <Link to={`/profile/${owner_id}`}>
               <img src={owner_url} alt="Recipe owner image"/> 
             </Link> 
             : 
-            <Link to={`/user/${owner_id}`}>
+            <Link to={`/profile/${owner_id}`}>
               <img src="https://cdn.icon-icons.com/icons2/933/PNG/512/round-account-button-with-user-inside_icon-icons.com_72596.png" alt="Recipe owner image" className='default'/>
             </Link>
               }
@@ -56,7 +56,7 @@ export default function RecipeCard({title, recipe_url, recipe_id, ownername, own
 
           {/* Name of recipe owner */}
           <div className="recipe-card-owner">
-          <Link to={`/user/${owner_id}`}>
+          <Link to={`/profile/${owner_id}`}>
               <h3> By {ownername} </h3>
             </Link>
           </div>
