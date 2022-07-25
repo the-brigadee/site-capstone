@@ -65,7 +65,7 @@ return (
         {/* displays the result card */}
         <div className="result-user-image">
                     {/* Load the main image here */}
-                    <img src={people.image_url ? people.image_url : "https://cdn.icon-icons.com/icons2/933/PNG/512/round-account-button-with-user-inside_icon-icons.com_72596.png"} alt="user profile picture"/>
+                    <img src={people.image_url ? people.image_url : "https://cdn.icon-icons.com/icons2/933/PNG/512/round-account-button-with-user-inside_icon-icons.com_72596.png"} alt="user profile picture" className={people.image_url ? "" : "default"}/>
                 
             </div>
 
@@ -82,12 +82,12 @@ return (
 
                     {/* users following */}
                     <div className="result-user-following">
-                        {people.num_following} following
+                        <p>{people.num_following} following</p>
                     </div>
 
                     {/* users number of recipes created */}
                     <div className="result-user-count">
-                        {people.total_recipe} recipes 
+                        <p> {people.total_recipe} recipes </p>
                     </div>
                 </div>
 

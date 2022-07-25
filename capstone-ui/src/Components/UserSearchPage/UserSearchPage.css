@@ -2,3 +2,7 @@
     position: relative;
     width: 100%;
 }
+
+.usersearchpage .results-grid{
+    padding: 30px 0px;
+}
