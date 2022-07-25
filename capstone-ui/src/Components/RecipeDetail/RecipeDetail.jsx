@@ -25,7 +25,6 @@ export default function RecipeDetail() {
            }
        }
        getRecipeById()
-
    }, [setRecipe, setError, recipeId])
 
   return (
