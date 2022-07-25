@@ -106,7 +106,6 @@ export default function UserProfilePage() {
       //set the value of the form
   
       setForm((f) => ({ ...f, [event.target.name]: event.target.value }))
-      console.log(form)
   }
 
   // the editing profile form, show when user click on edit profile button
