@@ -26,7 +26,7 @@ class SavedRecipe{
             throw new BadRequestError(`Recipe does not exist`)
         }
 
-        const existingSavedRecipe= await SavedRecipe.fetchSavedRecipeById(savedrecipefact.recipe_id)
+        const existingSavedRecipe= await SavedRecipe.fetchSavedRecipeById(savedrecipefact.recipe_id, savedrecipefact.user_id)
 
         if(existingSavedRecipe){
             const result = await db.query("DELETE FROM saved_recipes WHERE user_id = $1 and recipe_id=$2;", [savedrecipefact.user_id, savedrecipefact.recipe_id])
@@ -45,7 +45,7 @@ class SavedRecipe{
     `,
     [savedrecipefact.user_id, savedrecipefact.recipe_id]
     )
-    
+
     
     return result.rows[0]
 
@@ -57,13 +57,13 @@ class SavedRecipe{
 
     }
 
-    static async fetchSavedRecipeById(id) {
+    static async fetchSavedRecipeById(recipe_id, user_id) {
         
-        if (!id) {
+        if (!recipe_id || !user_id) {
             throw new BadRequestError(`Missing ${field} in request body.`)
         } 
         
-        const result = await db.query("SELECT * FROM saved_recipes WHERE recipe_id = $1;", [id])
+        const result = await db.query("SELECT * FROM saved_recipes WHERE recipe_id = $1 and user_id=$2;", [recipe_id, user_id])
     
         return result.rows[0]
     }

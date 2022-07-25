@@ -83,6 +83,8 @@ export default function UserProfilePage() {
                 setRecipes(data.savedrecipe)
             }
     }
+    
+
     getSavedRecipes()
   }, [setRecipes])
 
