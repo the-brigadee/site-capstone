@@ -66,11 +66,7 @@ return (
         {/* displays the result card */}
         <div className="result-user-image">
                     {/* Load the main image here */}
-<<<<<<< Updated upstream
-                    <img src={people.image_url ? people.image_url : "https://cdn.icon-icons.com/icons2/933/PNG/512/round-account-button-with-user-inside_icon-icons.com_72596.png"} alt="user profile picture" className={people.image_url ? "" : "default"}/>
-=======
-                    <img src={people.image_url ? people.image_url : "https://cdn.icon-icons.com/icons2/933/PNG/512/round-account-button-with-user-inside_icon-icons.com_72596.png"} alt="user profile "/>
->>>>>>> Stashed changes
+                    <img src={people.image_url ? people.image_url : "https://cdn.icon-icons.com/icons2/933/PNG/512/round-account-button-with-user-inside_icon-icons.com_72596.png"} alt="user profile" className={people.image_url ? "" : "default"}/>
                 
             </div>
 
