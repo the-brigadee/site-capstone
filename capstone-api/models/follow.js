@@ -21,28 +21,49 @@ class Follow{
             }
         })
 
+        /**
+         * Check if the user being followed Exists 
+         * 
+         * If not, Throw an error
+         */
         const existingfollowed= await User.fetchUserByID(followfact.followed_id)
-        console.log(existingfollowed);
         if(!existingfollowed){
             throw new BadRequestError(`User does not exist`)
         }
 
+         /**
+         * Check if the user Following  Exists, 
+         * 
+         * If not, Throw an error
+         */
         const existingfollowing= await User.fetchUserByID(followfact.following_id)
-        console.log(existingfollowing);
         if(!existingfollowing){
             throw new BadRequestError(`User does not exist`)
         }
 
-        const alreadyfollowing= await User.fetchFollowById(followfact.following_id)
-        console.log(existingfollowing);
-        if(!existingfollowing){
-            throw new BadRequestError(`User does not exist`)
+        /**
+         *  If the user is already following the selected user, unfollow the user.
+         */
+        const alreadyfollowing= await Follow.fetchFollowById(followfact.following_id, followfact.followed_id)
+
+        if(alreadyfollowing){
+            const result = await db.query(`
+            DELETE FROM follower_to_following 
+                WHERE following_id=$1 
+                AND followed_id = $2;
+            `, [followfact.following_id, followfact.followed_id])
+
+            return {"followed_id": null,
+            "following_id": null}
         }
 
-
-
-
-
+        /**
+         *  If (1) the user doing the following exists, 
+         *      (2) the user being followed exists and 
+         *      (3) the aren't already following each other,
+         * 
+         *      Then allow them to follow each other
+         */
         const result = await db.query(`
         INSERT INTO follower_to_following (
             followed_id,
@@ -55,10 +76,6 @@ class Follow{
     )
 
         return result.rows[0]
-
-        
-
-
     }
 
     static async deleteFollow(id) {
@@ -74,9 +91,8 @@ class Follow{
 
 
     static async fetchFollowById(user_id, followId) {
-        
         const result = await db.query("SELECT * FROM follower_to_following WHERE following_id=$1 AND followed_id = $2;", [user_id,followId])
-    
+
         return result.rows[0]
     }
 
@@ -91,7 +107,6 @@ class Follow{
         INNER JOIN users 
         ON follower_to_following.followed_id=users.id
         WHERE following_id = $1;`, [user_id])
-        console.log(results.rows)
         return results.rows
     }
 }

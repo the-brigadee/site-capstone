@@ -9,7 +9,7 @@ router.post("/create",security.requireAuthenticatedUser, async (req, res, next) 
   try {
     const follow = await Follow.createFollow(req.body);
     console.log(follow);
-    return res.status(200).json({ follow });
+    return res.status(201).json({ follow });
   } catch (err) {
     next(err);
   }

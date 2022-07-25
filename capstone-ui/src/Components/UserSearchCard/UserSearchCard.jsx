@@ -22,7 +22,7 @@ export default function UserSearchCard({people, even}) {
     }
   return (
     <div className={`search-user-card ${even ? "even" : ""}`}>
-       <Link to={`/user/5`}>
+       <Link to={`/profile/5`}>
         {/* displays the result card */}
         <div className="result-user-image">
                     {/* Load the main image here */}
