@@ -31,7 +31,7 @@ export default function RecipeDetail() {
     <div className='recipe-detail-container'>
 
       {/* Main Information */}
-      <RecipeMain recipe={recipe} user={user} />
+      <RecipeMain recipe={recipe} />
 
       {/* Detailed Step Information */}
       <RecipeStep recipe={recipe}/>
@@ -42,6 +42,7 @@ export default function RecipeDetail() {
  
 
 function RecipeMain(recipe){
+  const {user} = useAuthNavContext()
   const date= new Date(recipe?.recipe?.recipeadd_date?.split("T")[0]).toDateString().split(" ")
   const nth = function(d) {
     if (d > 3 && d < 21) return 'th';
@@ -52,6 +53,7 @@ function RecipeMain(recipe){
         default: return "th";
     }
 }
+
   return(
       <div className="recipe-detail-main">
 
@@ -77,7 +79,8 @@ function RecipeMain(recipe){
           <button> Add Plan </button>
           <button> Save </button>
           <button> Review </button>
-          <button> Delete </button>
+          {recipe.recipe.user_id===user.id && <button> Delete </button>}
+          
         </div>
         <Overlay />
       </div>
