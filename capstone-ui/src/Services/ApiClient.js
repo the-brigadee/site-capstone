@@ -69,7 +69,9 @@ class ApiClient {
     async recipeById(recipeId){
         return await this.request({endpoint: `recipe/${recipeId}`, method: `GET`, data:recipeId})}
 
-
+    async savedRecipe(recipeId,creds){
+        return await this.request({endpoint: `savedrecipe/create`, method: `POST`, data:recipeId,creds})}  
+    
     async getUsersSavedRecipes(){
         return await this.request({endpoint: `savedrecipe`, method: `GET`})
     }

@@ -25,16 +25,6 @@ router.get("/",security.requireAuthenticatedUser, async (req, res, next) => {
   }
 });
 
-router.delete("/delete/:savedrecipeId",security.requireAuthenticatedUser, async (req, res, next) => {
-  try {
-    const savedrecipeId = req.params.savedrecipeId
-    const savedrecipe = await SavedRecipe.deleteSavedRecipe(savedrecipeId)
-    return res.status(201).json({ savedrecipe })
-} catch (err) {
-    next(err)
-}
-});
-
 
 router.get("/:savedrecipeId", security.requireAuthenticatedUser, async function (req, res, next) {
   try {
