@@ -30,7 +30,8 @@ class SavedRecipe{
         console.log(existingSavedRecipe);
 
         if(existingSavedRecipe){
-            throw new BadRequestError(`You have already saved this recipe`)
+            const result = await db.query("DELETE FROM saved_recipes WHERE user_id = $1 and recipe_id=$2;", [savedrecipefact.user_id, savedrecipefact.recipe_id])
+            return("Successfully Unsaved Recipe!")
         }
 
 
@@ -56,18 +57,6 @@ class SavedRecipe{
 
 
     }
-
-    static async deleteSavedRecipe(id) {
-        
-        if (!id) {
-            throw new BadRequestError(`Missing ${field} in request body.`)
-        } 
-        
-        const result = await db.query("DELETE FROM saved_recipes WHERE recipe_id = $1;", [id])
-
-        return "Successfully deleted saved recipe"
-    }
-
 
     static async fetchSavedRecipeById(id) {
         
