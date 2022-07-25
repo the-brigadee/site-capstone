@@ -41,7 +41,6 @@ function App() {
         setError((e) => ({ ...e, user: error }))
       }
       if (data?.user) {
-        console.log(data.user)
         setUser(data.user)
         setError((e) => ({ ...e, user: null }))
       }
