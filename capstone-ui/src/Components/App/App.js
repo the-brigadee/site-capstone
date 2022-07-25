@@ -12,6 +12,7 @@ import UserProfilePage from '../UserProfilePage/UserProfilePage';
 import RecipeAdd from '../RecipeAddPage/RecipeAdd';
 import UserSearchPage from '../UserSearchPage/UserSearchPage';
 import UserDetailPage from '../UserDetailPage/UserDetailPage';
+import apiClient from '../../Services/ApiClient';
 
 
 export default function AppContainer(){
@@ -31,12 +32,42 @@ export default function AppContainer(){
 
 function App() {
 
+  const {setError, setUser, setIsLoading} = useAuthNavContext()
+
+  React.useEffect(() => {
+    const fetchUser = async () => {
+      const { data, error } = await apiClient.fetchUserFromToken()
+      if (error?.response?.data?.error?.status !== 304) {
+        setError((e) => ({ ...e, user: error }))
+      }
+      if (data?.user) {
+        setUser(data.user)
+        setError((e) => ({ ...e, user: null }))
+      }
+    }
+
+    const token = localStorage.getItem("reciholic_token")
+    if (token) {
+      apiClient.setToken(token)
+      setIsLoading(true)
+      setError(null)
+      fetchUser()
+    }
+
+    setIsLoading(false)
+  }, [setUser, setIsLoading, setError])
+
+  const handleLogout = async () => {
+    await apiClient.logoutUser()
+    setUser({})
+    setError(null)
+  }
 
   //return statement
   return (
     <div className="App">
         <BrowserRouter>
-          <Navbar />
+          <Navbar handleLogout={handleLogout} />
           <div className='app-body'>
             <Sidebar />
           {/* Create React routers for page navigation. */}
