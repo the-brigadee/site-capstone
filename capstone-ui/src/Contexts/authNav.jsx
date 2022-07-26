@@ -51,6 +51,11 @@ export const AuthNavContextProvider = ({children}) =>{
         showPopup()
     }
 
+    const showMealPlannerForm = () => {
+        setPopupType("MealPlanner")
+        showPopup()
+    }
+
     // Show popup/modal function 
     const showPopup = () => {
         const overlay = document.querySelector('.overlay')
@@ -91,7 +96,7 @@ export const AuthNavContextProvider = ({children}) =>{
     const authNavvalue = {
         user, setUser, 
         currCategory, setCurrentCategory, 
-        popupType, setPopupType, showPopup, closePopup, showLoginForm, showRegisterForm,
+        popupType, setPopupType, showPopup, closePopup, showLoginForm, showRegisterForm, showMealPlannerForm,
         resultsType, setResultsType, 
         error, setError, 
         isLoading, setIsLoading,

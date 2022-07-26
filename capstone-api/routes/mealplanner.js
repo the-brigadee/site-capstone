@@ -8,7 +8,7 @@ const MealPlanner = require("../models/mealplanner")
 router.post("/create",security.requireAuthenticatedUser, async (req, res, next) => {
   try {
     const mealplanner = await MealPlanner.createMealPlanner(req.body);
-    console.log(mealplanner);
+    
     return res.status(200).json({ mealplanner });
   } catch (err) {
     next(err);

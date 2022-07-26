@@ -38,6 +38,11 @@
     width: 15rem;
 }
 
+.popup-container .mealplanner {
+    min-height: 15rem;
+    width: 15rem;
+}
+
 .popup-container .register {
     min-height: 30rem;
     width: 30rem;
@@ -119,6 +124,16 @@
 }
 
 .popup-card .form .input-field input {
+    height: 30px;
+    font-size: 16px;
+    border: 1px solid white;
+    border-radius: 20px;
+    background: white;
+    padding-left: 10px;
+    padding-right: 5px;
+}
+
+.popup-card .form .input-field select {
     height: 30px;
     font-size: 16px;
     border: 1px solid white;
