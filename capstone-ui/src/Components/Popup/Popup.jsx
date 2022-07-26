@@ -17,6 +17,12 @@ export default function Popup(){
         first_name: "",
 
     })
+    //Form made specifically for meal planner
+    const [formPlan, setFormPlan] = React.useState({
+        recipe_id: '',
+        day: 'Sunday',
+        user_id: '',
+    })
 
     const navigate = useNavigate()
 
@@ -51,8 +57,15 @@ export default function Popup(){
 
         setForm((f) => ({ ...f, [event.target.name]: event.target.value }))
     }
+    //Function that handles the value of form for mealplanner form
+    const handleOnFormInputChangeMealPlanner = (event) => {
+        //prevent the events default behaviour  
+        event.preventDefault()
+        
+        setFormPlan((f) => ({ ...f, [event.target.name]: event.target.value }))
+    }
 
-    //signup/signin function
+    //signup/signin/mealplanner function
     const handleOnSubmit = async () => {
         setIsLoading(true)
         setError((e) => ({ ...e, form: null }))
@@ -82,6 +95,16 @@ export default function Popup(){
             })
             dataUse = data
             errorUse = error
+        }else if (popupType === "MealPlanner") {
+            const {data, error} = await apiClient.createMealPlan({
+                recipe_id: formPlan.recipe_id,
+                weekday: formPlan.day,
+                user_id: user?.id
+            })
+            dataUse = data
+            errorUse = error
+            
+            
         }
                 
         if (errorUse) {
@@ -95,12 +118,17 @@ export default function Popup(){
             setIsPwChanged(false)
         }
         setIsLoading(false)
-        navigate("/")
+        if(popupType!=="MealPlanner"){
+            navigate("/")
+        }else if(popupType==="MealPlanner"){
+            closePopup()
+        }
+        
     }
 
     //useEffect to close the popup form when user are logged in
     React.useEffect(() => {
-        if (user?.email) {
+        if (user?.email && popupType!=="MealPlanner") {
             closePopup()
         }
     })
@@ -173,9 +201,33 @@ export default function Popup(){
                 </button>
             </div>
         </div>
+    }else if(popupType==="MealPlanner"){
+        formHTML = 
+        <div className="form">
+            <div className="input-field">
+                <label htmlFor="RecipeID">Recipe's ID</label>
+                <input type="number" name="recipe_id" onChange={handleOnFormInputChangeMealPlanner}/>
+            </div>
+            <div className="input-field">
+                <label htmlFor="Password">Day of week</label>
+                <select id="day" name="day" onChange={handleOnFormInputChangeMealPlanner}>
+                    <option name="day" disabled={true}>--Select your option--</option>
+                    <option name="day">Sunday</option>
+                    <option name="day">Monday</option>
+                    <option name="day">Tuesday</option>
+                    <option name="day">Wednesday</option>
+                    <option name="day">Thursday</option>
+                    <option name="day">Friday</option>
+                    <option name="day">Saturday</option>
+                </select>
+            </div>
+            <div className="footer">
+                <button className="footer-btn" disabled={isLoading} onClick={handleOnSubmit}>
+                    {isLoading ? "Loading..." : "ADD"}
+                </button>
+            </div>
+        </div>
     }
-
-    // Add meal plan popup here
 
     return(
         <div className="popup-container" >
