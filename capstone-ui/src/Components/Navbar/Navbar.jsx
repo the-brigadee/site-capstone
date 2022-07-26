@@ -37,6 +37,10 @@ export default function Navbar(){
         content: "Add Recipe",
         offset: [0, 20],
     });
+    tippy('#mealplanner', {
+        content: "Meal Planner",
+        offset: [0, 20],
+    });
 
     // extract the navigate function
     const navigate = useNavigate()
@@ -159,6 +163,9 @@ export default function Navbar(){
                     </Link>
                     <Link to="/recipe/create">
                     {user?.email ?<img id="addrecipe" src="https://static.thenounproject.com/png/1001670-200.png" alt="temp icon" className='nav-btn'/> : null}
+                    </Link>
+                    <Link to="/mealplanner">
+                    {user?.email ?<img id="mealplanner" src="https://cdn-icons-png.flaticon.com/512/2843/2843614.png" alt="temp icon" className='nav-btn'/> : null}
                     </Link>
                     {user?.email ?<img id="logout" src="https://www.iconpacks.net/icons/2/free-exit-logout-icon-2857-thumb.png" alt="temp icon" className='nav-btn' onClick={handleLogout}/> : null}
                     
