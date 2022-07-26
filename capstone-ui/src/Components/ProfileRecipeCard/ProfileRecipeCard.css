@@ -1,0 +1,79 @@
+.profile-recipe-card {
+    display: flex;
+    padding: 30px;
+    gap: 20px;
+    animation: slideInLeft .7s ease-in;
+
+    margin: 0px 20px;
+    border-bottom: 1.4px solid var(--border-color);
+
+    overflow: hidden;
+    background: linear-gradient(45deg, rgba(12, 12, 12, 0.932), rgba(12, 12, 12, 0.932) 50%, white 50%);
+    background-size: 201% 100%;
+    background-position: 100%;
+    transition: background-position 275ms ease;
+}
+
+.profile-recipe-card.even{
+    animation: slideInRight .7s ease-in;
+}
+
+.remove{
+    display: none;
+}
+
+/* Hover effects for the search results card */
+.profile-recipe-card:hover {
+    box-shadow: 0px 0px 0px black;
+    border-radius: 20px;
+    border: 1px solid var(--border-color);
+    margin: 0px 20px;
+    background-position: 0 100%;
+}
+
+.profile-recipe-card:hover .result-image img{
+    animation: imageParentHover .37s ease;
+    box-shadow: 0px 0px 0px black;
+    border-radius: 10%;
+    border: 0px;
+    transition: 2s ease;
+    transform: scale(1.02);
+}
+
+.profile-recipe-card:hover .default{
+    filter: invert(1);
+}
+
+.profile-recipe-card:hover .result-profile-name p{
+    color: white;
+}
+
+.profile-recipe-card:hover .result-name h1{
+    color: var(--primary-color);
+}
+
+.profile-recipe-card:hover .result-contains p{
+    color: white;
+    margin: 0px;
+    line-height: 19px;
+    font-size: 12px;
+}
+
+.profile-recipe-card:hover .result-creation-date p{
+    color: lightgray;
+    margin: 0px;
+    line-height: 21px;
+    font-size: 14px;
+}
+
+.profile-recipe-card .result-information .result-contains p{
+    margin: 0px;
+}
+
+.profile-recipe-card .result-creation-date p {
+    margin: 0px;
+}
+
+.profile-recipe-card .result-name h1{
+    margin: 0px;
+}

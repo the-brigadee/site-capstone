@@ -24,7 +24,7 @@ router.get("/owned/:profileId", async (req, res, next) => {
     const {profileId} = req.params
 
     // call the correct function
-    const result = await Recipe.fetchAllRecipesByUserId(profileId);
+    const result = await Recipe.fetchAllOwnedRecipesByUserId(profileId);
     return res.status(200).json({ result });
   } catch (err) {
     next(err);

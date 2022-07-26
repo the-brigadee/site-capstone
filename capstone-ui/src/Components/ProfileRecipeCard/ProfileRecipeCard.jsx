@@ -4,7 +4,7 @@ import { stripHtml } from "string-strip-html"
 import {Link} from 'react-router-dom'
 import moment from 'moment'
 
-export default function ProfileRecipeCard({recipe}) {
+export default function ProfileRecipeCard({recipe, displayType, profileId, even}) {
 
         // Displayed recipe description state variable
         const [description, setDescription] = React.useState(null)
@@ -25,10 +25,8 @@ export default function ProfileRecipeCard({recipe}) {
             
         }, [])
 
-        
-
   return (
-    <div className='profile-recipe-card'>
+    <div className={`profile-recipe-card ${even ? "even" : ""}`}>
 
          {/* displays the result card */}
          <div className="result-image">
@@ -49,7 +47,7 @@ export default function ProfileRecipeCard({recipe}) {
             </div>
 
             {/* displays result details */}
-            <div className="result-detail">
+            <div className={`result-detail ${displayType==="Owned" || profileId == recipe.user_id? "remove" : ""}`}>
 
                 {/* displays user's profile image */}
                 <div className="result-profile-img">

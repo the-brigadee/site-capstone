@@ -12,7 +12,7 @@ export default function UserDetailPage() {
   const {profileId} = useParams()
 
    //get the user from nav context 
-  const {user, showLoginForm, setError} = useAuthNavContext()
+  const {user, showLoginForm, setError, transition, setTransition} = useAuthNavContext()
 
   // display type state variable  Should display either (owned recipes ) or (saved recipes)
 
@@ -30,6 +30,7 @@ export default function UserDetailPage() {
     else{
       setDisplayType("Owned")
     }
+    setTransition(transition+1)
   }
   return (
     <div className='user-detailpage'>
@@ -43,7 +44,7 @@ export default function UserDetailPage() {
 
       {/* profile Recipe info */}
       <RecipeDisplay showLoginForm={showLoginForm} setError={setError} profileId={profileId} displayType={displayType}
-      handleSavedOwnedRecipes={handleSavedOwnedRecipes}/>
+      handleSavedOwnedRecipes={handleSavedOwnedRecipes} transition={transition} setTransition={setTransition}/>
 
         <Overlay />
     </div>
@@ -72,6 +73,8 @@ function ProfileMain({user, showLoginForm, setError, profileId, displayType, han
     if (userCheck.id === -1){
         //display the login form
         showLoginForm()
+        setError((e) => ({ ...e, form: "You need to be logged In!" }))
+        return
     }
 
     // call the appropriate api
@@ -91,12 +94,18 @@ function ProfileMain({user, showLoginForm, setError, profileId, displayType, han
         //check if user is logged in
         userCheck = user.id ? user : {id : -1}
 
+        // Check if the user is not logged in 
+        if (userCheck.id === -1){
+          setFollowingOrNot(null)
+        }
+
         // Call the appropriate API 
         const {data,error} = await ApiClient.getProfileDetails(profileId, userCheck.id)
 
         if(data){
           setProfile(data.result)
-          setFollowingOrNot(profile.is_following)
+          setFollowingOrNot(data.result.is_following)
+          
         }
         if(error){
           setError(error)
@@ -104,7 +113,7 @@ function ProfileMain({user, showLoginForm, setError, profileId, displayType, han
       }
   
       run()
-    }, [])
+    }, [profileId,followingOrNot])
 
   return(
       <div className="profile-detail-main">
@@ -170,7 +179,7 @@ function ProfileMain({user, showLoginForm, setError, profileId, displayType, han
   )
 }
 
-function RecipeDisplay({showLoginForm, setError, profileId, displayType}){
+function RecipeDisplay({showLoginForm, setError, profileId, displayType, transition, setTransition}){
 
   const [profileRecipeList, setProfileRecipeList] = React.useState([])
 
@@ -208,10 +217,10 @@ function RecipeDisplay({showLoginForm, setError, profileId, displayType}){
     }
 
     run()
-  }, [displayType])
+  }, [displayType, profileId])
 
   //Number of items per page
-  const itemsPerPage = 15;
+  const itemsPerPage = 3;
 
   const [currentItems, setCurrentItems] = React.useState([]);
   const [pageCount, setPageCount] = React.useState(0);
@@ -246,9 +255,17 @@ function RecipeDisplay({showLoginForm, setError, profileId, displayType}){
         </div>
         :
         <div className='results-grid'>
-          {profileRecipeList.map((recipe, idx) => {
-            return <ProfileRecipeCard recipe={recipe} key={idx}/>
-          })}
+          {
+            currentItems.map((recipe, idx) => {
+              return (
+                <ProfileRecipeCard recipe={recipe} 
+                key={idx} 
+                displayType={displayType} 
+                profileId={profileId} 
+                even={(idx+1+transition)  % 2 === 0}/>
+              )
+            })
+          }
 
           {/* pagination component in react */}
           <ReactPaginate

@@ -36,6 +36,9 @@ export default function UserSearchCard({people, even}) {
         if (userCheck.id === -1){
             //display the login form
             showLoginForm()
+
+            setError((e) => ({ ...e, form: "You need to be logged in!" }))
+            return
         }
 
         // call the appropriate api

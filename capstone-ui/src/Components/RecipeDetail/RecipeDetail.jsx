@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { useParams } from 'react-router-dom'
+import { useParams, Link } from 'react-router-dom'
 import {useAuthNavContext} from "../../Contexts/authNav"
 import apiClient from "../../Services/ApiClient"
 import './RecipeDetail.css'
@@ -45,19 +45,32 @@ function RecipeMain(recipe){
   const [savedrecipe, setSavedRecipe] = React.useState([])
   const [isSaved, setIsSaved] = React.useState(false)
   const {recipeId} = useParams()
-  const {setError, user} = useAuthNavContext()
+  const {setError, user, showLoginForm} = useAuthNavContext()
 
     const saveRecipe = async () => {
+      if(!user?.email){
+        showLoginForm();
+        setError((e) => ({ ...e, form:"You need to be logged in!" }))}
+      
+      if(user?.email){
         const {data, error} = await apiClient.savedRecipe({
           user_id:user.id,
           recipe_id:recipeId
         })
         if (error) setError((e) => ({ ...e, recommended: error }))
 
-        if(data.savedrecipe==='Successfully Unsaved Recipe!'){
+        if(data?.savedrecipe==='Successfully Unsaved Recipe!'){
           setIsSaved(false);
-        }
+        }}
     }
+    
+    const deleteRecipe = async () => {
+      const {data, error} = await apiClient.recipeDelete(recipeId)
+      if (error) setError((e) => ({ ...e, recommended: error }))
+      
+      
+      
+  }
 
 
     React.useEffect(()=>{
@@ -73,7 +86,9 @@ function RecipeMain(recipe){
                 }
               })
       }
-      getSavedRecipes()
+
+      if(user?.email){
+      getSavedRecipes()}
     }, [isSaved, setError,recipeId])
 
   const date= new Date(recipe?.recipe?.recipeadd_date?.split("T")[0]).toDateString().split(" ")
@@ -111,10 +126,12 @@ function RecipeMain(recipe){
         {/* Recipe Edit buttons */}
         <div className="recipe-edit-buttons">
           <button> Add Plan </button>
-          {isSaved ? <button onClick={()=>{saveRecipe(); setIsSaved(false)}}> Unsave </button> :<button onClick={()=>{saveRecipe();setIsSaved(true)}}> Save </button>}
+          {isSaved && user?.email ? <button onClick={()=>{saveRecipe(); setIsSaved(false)}}> Unsave </button> :<button onClick={()=>{saveRecipe();setIsSaved(true)}}> Save </button>}
           <button> Review </button>
-          {recipe.recipe.user_id===user.id && <button> Delete </button>}
-          
+          {/* Recipe Delete button */}
+          <Link style={{textDecoration: 'none'}} to="/">
+          {recipe.recipe.user_id===user.id && <button onClick={()=>{deleteRecipe();}}> Delete </button>}
+          </Link>          
         </div>
         <Overlay />
       </div>
