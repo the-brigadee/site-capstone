@@ -48,6 +48,53 @@ router.get("/owned/:profileId", async (req, res, next) => {
   }
 });
 
+
+/**
+ * Route to get all the users being followed by a specific profile
+ */
+router.get("/following/:profileId", async (req, res, next) => {
+  try{
+    //extract the profile Id from the url 
+    const {profileId} = req.params
+    //get the user id from res.locals if they are logged in if not set user_id to null 
+    const user_id = res.locals?.user ? res.locals?.user.user_id : null
+
+    
+    //call the required function
+    const result = await Profile.getProfileFollowing(profileId, user_id)
+
+    //  return the answer
+    res.status(200).json({result})
+  }
+  catch(err){
+    next(err)
+  }
+  
+})
+
+/**
+ * Route to get all the users following a specific profile
+ */
+ router.get("/followed/:profileId", async (req, res, next) => {
+  try{
+    //extract the profile Id from the url 
+    const {profileId} = req.params
+    //get the user id from res.locals if they are logged in if not set user_id to null 
+    const user_id = res.locals?.user ? res.locals?.user.user_id : null
+
+    
+    //call the required function
+    const result = await Profile.getProfileFollowed(profileId, user_id)
+
+    //  return the answer
+    res.status(200).json({result})
+  }
+  catch(err){
+    next(err)
+  }
+  
+})
+
 /**
  *  Get the profile basic information
  */
@@ -70,5 +117,7 @@ router.get("/:profileId", async (req, res, next) => {
   }
   
 })
+
+
 
 module.exports=router

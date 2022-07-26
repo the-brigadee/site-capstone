@@ -102,52 +102,40 @@
     height: 15px;
 }
 
-.num-following{
-    background-color: var(--primary-color);
-    border-radius: 12px;
-    display: flex;
-    align-items: center;
-    padding: 3px 5px;
-    max-height: 36px;
-    min-height: 36px;
-    height: 36px;
-    color: white;
-}
-
-.num-following p img{
+.num-following button img{
     width: 15px;
     height: 15px;
     transform: rotateZ(0deg);
     filter: invert(1);
 }
-.num-following p{
-    display: flex;
-    align-items: center;
-    gap: 3px;
-    margin: 0px;
-}
-
-.num-followers{
+.num-following button{
     background-color: var(--primary-color);
+    padding: 12px;
     border-radius: 12px;
+    color: aliceblue;
+    outline: none;
+    border: 0px;
+    cursor: pointer;
     display: flex;
     align-items: center;
-    padding: 3px 5px;
-    max-height: 36px;
-    min-height: 36px;
-    height: 36px;
-    color: white;
+    gap: 10px;
 }
 
-.num-followers p img{
+.num-followers button img{
     width: 15px;
     height: 15px;
     transform: rotateZ(180deg);
     filter: invert(1);
 }
-.num-followers p{
+.num-followers button{
+    background-color: var(--primary-color);
+    padding: 12px;
+    border-radius: 12px;
+    color: aliceblue;
+    outline: none;
+    border: 0px;
+    cursor: pointer;
     display: flex;
     align-items: center;
-    gap: 3px;
-    margin: 0px;
+    gap: 10px;
 }

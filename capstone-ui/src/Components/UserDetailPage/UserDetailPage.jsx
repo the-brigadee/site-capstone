@@ -1,7 +1,7 @@
 import * as React from 'react'
 import './UserDetailPage.css'
 import Overlay from '../Overlay/Overlay'
-import { useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import { useAuthNavContext } from '../../Contexts/authNav'
 import ReactPaginate from 'react-paginate'
 import ApiClient from '../../Services/ApiClient'
@@ -57,6 +57,9 @@ function ProfileMain({user, showLoginForm, setError, profileId, displayType, han
    // const useableUser
    var userCheck = user.id ? user : {id : -1}
 
+   // const navigate
+   var navigate = useNavigate()
+
   // profile state variable
   const [profile, setProfile] = React.useState({})
 
@@ -87,6 +90,18 @@ function ProfileMain({user, showLoginForm, setError, profileId, displayType, han
         setError((e) => ({ ...e, form: error }))
     }
 }
+
+  // function to the following/follower page
+  const toFollowOrFollowing = (size, followingType) => {
+    // if size is less than 1, do nothing
+    if(size < 1){
+      return
+    }
+    // navigate to the correct page
+    else{
+      navigate(`/profile/${profileId}/${followingType}`)
+    }
+  }
 
     // React useEffect to get the profile's details
     React.useEffect(() => {
@@ -144,11 +159,12 @@ function ProfileMain({user, showLoginForm, setError, profileId, displayType, han
           {/*  the following and follow total */}
           <div className="follow-to-following">
             <div className="num-following">
-              <p> <img src="https://cdn.icon-icons.com/icons2/1304/PNG/512/arrow_86002.png" alt="following" /> {profile.num_following} following</p>
+            <button onClick={ () => {toFollowOrFollowing(profile.num_following, "following")}
+              } ><img src="https://cdn.icon-icons.com/icons2/1304/PNG/512/arrow_86002.png" alt="following" /> {profile.num_following} following</button>
             </div>
 
             <div className="num-followers">
-              <p> <img src="https://cdn.icon-icons.com/icons2/1304/PNG/512/arrow_86002.png" alt="followers " /> {profile.num_followers} followers</p>
+              <button onClick={ () => {toFollowOrFollowing(profile.num_followers, "followers")}}> <img src="https://cdn.icon-icons.com/icons2/1304/PNG/512/arrow_86002.png" alt="followers " /> {profile.num_followers} followers </button>
             </div>
           </div>
 
