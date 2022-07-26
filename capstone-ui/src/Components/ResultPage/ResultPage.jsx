@@ -4,9 +4,11 @@ import SearchResultGrid from '../SearchResultGrid/SearchResultGrid'
 import { useAuthNavContext } from '../../Contexts/authNav'
 import ApiClient from '../../Services/ApiClient'
 import Overlay from '../Overlay/Overlay'
+import { useLocation } from 'react-router-dom'
 
 
 export default function ResultPage() {
+
 
   /** Get the resultsType,
    *  searchWord

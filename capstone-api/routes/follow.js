@@ -8,7 +8,6 @@ const Follow = require("../models/follow")
 router.post("/create",security.requireAuthenticatedUser, async (req, res, next) => {
   try {
     const follow = await Follow.createFollow(req.body);
-    console.log(follow);
     return res.status(201).json({ follow });
   } catch (err) {
     next(err);
@@ -18,7 +17,6 @@ router.post("/create",security.requireAuthenticatedUser, async (req, res, next) 
 router.get("/",security.requireAuthenticatedUser, async (req, res, next) => {
   try {
     const {user_id}=res.locals?.user
-    console.log(user_id);
     const follow = await Follow.fetchAllFollowsByUserId(user_id);
     return res.status(200).json({ follow });
   } catch (err) {
