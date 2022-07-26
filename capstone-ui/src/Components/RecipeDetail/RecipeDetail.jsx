@@ -45,18 +45,23 @@ function RecipeMain(recipe){
   const [savedrecipe, setSavedRecipe] = React.useState([])
   const [isSaved, setIsSaved] = React.useState(false)
   const {recipeId} = useParams()
-  const {setError, user} = useAuthNavContext()
+  const {setError, user, showLoginForm} = useAuthNavContext()
 
     const saveRecipe = async () => {
+      if(!user?.email){
+        showLoginForm();
+        setError((e) => ({ ...e, form:"You need to be logged in!" }))}
+      
+      if(user?.email){
         const {data, error} = await apiClient.savedRecipe({
           user_id:user.id,
           recipe_id:recipeId
         })
         if (error) setError((e) => ({ ...e, recommended: error }))
 
-        if(data.savedrecipe==='Successfully Unsaved Recipe!'){
+        if(data?.savedrecipe==='Successfully Unsaved Recipe!'){
           setIsSaved(false);
-        }
+        }}
     }
     
     const deleteRecipe = async () => {
@@ -81,7 +86,9 @@ function RecipeMain(recipe){
                 }
               })
       }
-      getSavedRecipes()
+
+      if(user?.email){
+      getSavedRecipes()}
     }, [isSaved, setError,recipeId])
 
   const date= new Date(recipe?.recipe?.recipeadd_date?.split("T")[0]).toDateString().split(" ")
@@ -119,7 +126,7 @@ function RecipeMain(recipe){
         {/* Recipe Edit buttons */}
         <div className="recipe-edit-buttons">
           <button> Add Plan </button>
-          {isSaved ? <button onClick={()=>{saveRecipe(); setIsSaved(false)}}> Unsave </button> :<button onClick={()=>{saveRecipe();setIsSaved(true)}}> Save </button>}
+          {isSaved && user?.email ? <button onClick={()=>{saveRecipe(); setIsSaved(false)}}> Unsave </button> :<button onClick={()=>{saveRecipe();setIsSaved(true)}}> Save </button>}
           <button> Review </button>
           {/* Recipe Delete button */}
           <Link style={{textDecoration: 'none'}} to="/">
