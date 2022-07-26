@@ -1,7 +1,4 @@
 const db= require("../db")
-const {BadRequestError,UnauthorizedError } = require("../utils/errors");
-const User=require("./user");
-
 /**
  * A utility class for searching both Recipes and User's from the database
  */

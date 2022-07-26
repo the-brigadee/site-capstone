@@ -95,6 +95,55 @@ class Recipe{
         return results.rows
     }
 
+    static async fetchAllSavedRecipesByUserId(user_id) {
+        if (!user_id) {
+            throw new BadRequestError("No user_id provided")
+        }
+
+        const query = `SELECT name,
+                            reci.id, 
+                            reci.description,
+                            reci.created_at, 
+                            reci.updated_at, 
+                            reci.image_url as recipe_url, 
+                            username as owner, 
+                            users.image_url as user_url,
+                            users.id as user_id
+                        FROM recipe reci 
+                        JOIN users ON reci.user_id=users.id 
+                        WHERE reci.id IN (
+                            SELECT recipe_id 
+                            FROM saved_recipes 
+                            WHERE user_id=$1);
+        `
+
+        const results = await db.query(query, [user_id])
+        return results.rows
+    }
+
+    static async fetchAllOwnedRecipesByUserId(user_id) {
+        if (!user_id) {
+            throw new BadRequestError("No user_id provided")
+        }
+
+        const query = `SELECT name,
+                            reci.id, 
+                            reci.description,
+                            reci.created_at, 
+                            reci.updated_at, 
+                            reci.image_url as recipe_url, 
+                            username as owner, 
+                            users.image_url as user_url,
+                            users.id as user_id
+                        FROM recipe reci 
+                        JOIN users ON reci.user_id=users.id 
+                        WHERE user_id = $1;
+        `
+
+        const results = await db.query(query, [user_id])
+        return results.rows
+    }
+
     static async getRecommendedRecipes() {
         // get recipe array
 

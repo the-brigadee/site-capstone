@@ -8,6 +8,7 @@ const savedrecipeRoutes = require("./routes/savedrecipe")
 const mealplannerRoutes = require("./routes/mealplanner")
 const followRoutes = require("./routes/follow")
 const searchRoutes = require("./routes/search")
+const profileRoutes = require("./routes/profile")
 
 const morgan = require("morgan")
 const cors = require("cors")
@@ -23,6 +24,7 @@ app.use(security.extractUserFromJwt)
 
 
 app.use("/search", searchRoutes)
+app.use("/profile", profileRoutes)
 app.use("/recipe", recipeRoutes)
 app.use("/auth", authRoutes)
 app.use("/review", reviewRoutes)

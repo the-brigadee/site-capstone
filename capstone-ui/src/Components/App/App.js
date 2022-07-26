@@ -75,7 +75,7 @@ function App() {
               <Route path='/recipe/:recipeId' element={<RecipeDetail />}/>
               <Route path='/recipe/create' element={<RecipeAdd />}/>
               <Route path='/user/:userId' element={<UserProfilePage />}/>
-              <Route path='/profile/:userId' element={<UserDetailPage />}/>
+              <Route path='/profile/:profileId' element={<UserDetailPage />}/>
               <Route path='/mealplanner' element={<MealPlanner />}/>
               <Route path='*' element={<NotFound />}/>
             </Routes>

@@ -7,7 +7,7 @@ import UserSearchCard from '../UserSearchCard/UserSearchCard'
 export default function UserSearchGrid({usersList}) {
 
     //get searchWord from the authNavContext
-    const {searchWord} = useAuthNavContext()
+    const {searchWord, transition, setTransition} = useAuthNavContext()
 
   //Number of items per page
   const itemsPerPage = 4;
@@ -26,12 +26,15 @@ export default function UserSearchGrid({usersList}) {
     setCurrentItems(usersList.slice(itemOffset, endOffset));
     setPageCount(Math.ceil(usersList.length / itemsPerPage));
     // window.scrollTo({top: 0});
+    setTransition(transition+1)
   }, [itemOffset, itemsPerPage,usersList]);
 
   // Invoke when user click to request another page.
   const handlePageClick = (event) => {
     const newOffset = (event.selected * itemsPerPage) % usersList.length;
     setItemOffset(newOffset);
+
+    setTransition(transition+1)
   };
   
   const [selected, setSelected] = React.useState("none")
@@ -48,7 +51,7 @@ export default function UserSearchGrid({usersList}) {
         <div className="results-grid">
             {currentItems.map((people, idx) => {
                 return(
-                    <UserSearchCard even={(idx+1)  % 2 === 0} people={people} key={idx}/>
+                    <UserSearchCard even={(idx+1+transition)  % 2 === 0} people={people} key={idx}/>
                 )
             })}
 

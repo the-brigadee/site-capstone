@@ -21,6 +21,7 @@ export default function UserSearchCard({people, even}) {
 
         if(people.description > 30){
             word = word.substring(0, 27) + "..."
+            return word
         }
     }
 
@@ -35,6 +36,9 @@ export default function UserSearchCard({people, even}) {
         if (userCheck.id === -1){
             //display the login form
             showLoginForm()
+
+            setError((e) => ({ ...e, form: "You need to be logged in!" }))
+            return
         }
 
         // call the appropriate api
@@ -48,7 +52,7 @@ export default function UserSearchCard({people, even}) {
         }
     }
 
-  // rerender card when follow or following button is clicke
+  // rerender card when follow or following button is clicked
   React.useEffect(() => {
     // useableUser
     userCheck = user.id ? user : {id : -1}
@@ -65,7 +69,7 @@ return (
         {/* displays the result card */}
         <div className="result-user-image">
                     {/* Load the main image here */}
-                    <img src={people.image_url ? people.image_url : "https://cdn.icon-icons.com/icons2/933/PNG/512/round-account-button-with-user-inside_icon-icons.com_72596.png"} alt="user profile picture" className={people.image_url ? "" : "default"}/>
+                    <img src={people.image_url ? people.image_url : "https://cdn.icon-icons.com/icons2/933/PNG/512/round-account-button-with-user-inside_icon-icons.com_72596.png"} alt="user profile" className={people.image_url ? "" : "default"}/>
                 
             </div>
 
