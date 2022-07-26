@@ -24,7 +24,7 @@ class ApiClient {
             const res = await axios({url, method, data, headers})
             return {data: res.data, error: null}
         } catch (err) {
-            console.error({errorResponse: err.response})
+            
             const message = err?.response?.data?.error?.message
             return {data: null, error: message || String(err)}
         }
@@ -66,11 +66,17 @@ class ApiClient {
         return await this.request({endpoint: `recipe/create`, method: `POST`, data:recipe})
     }
 
+    async recipeDelete(recipe){
+        return await this.request({endpoint: `recipe/delete/${recipe}`, method: `DELETE`})
+    }
+
     async recipeById(recipeId){
-        return await this.request({endpoint: `recipe/${recipeId}`, method: `GET`, data:recipeId})}
+        return await this.request({endpoint: `recipe/${recipeId}`, method: `GET`, data:recipeId})
+    }
 
     async savedRecipe(recipeId){
-        return await this.request({endpoint: `savedrecipe/create`, method: `POST`, data:recipeId})}  
+        return await this.request({endpoint: `savedrecipe/create`, method: `POST`, data:recipeId})
+    }  
     
     async getUsersSavedRecipes(){
         return await this.request({endpoint: `savedrecipe`, method: `GET`})

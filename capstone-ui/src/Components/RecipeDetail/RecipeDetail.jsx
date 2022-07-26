@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { useParams } from 'react-router-dom'
+import { useParams, Link } from 'react-router-dom'
 import {useAuthNavContext} from "../../Contexts/authNav"
 import apiClient from "../../Services/ApiClient"
 import './RecipeDetail.css'
@@ -58,6 +58,14 @@ function RecipeMain(recipe){
           setIsSaved(false);
         }
     }
+    
+    const deleteRecipe = async () => {
+      const {data, error} = await apiClient.recipeDelete(recipeId)
+      if (error) setError((e) => ({ ...e, recommended: error }))
+      console.log(error);
+      
+      
+  }
 
 
     React.useEffect(()=>{
@@ -113,8 +121,10 @@ function RecipeMain(recipe){
           <button> Add Plan </button>
           {isSaved ? <button onClick={()=>{saveRecipe(); setIsSaved(false)}}> Unsave </button> :<button onClick={()=>{saveRecipe();setIsSaved(true)}}> Save </button>}
           <button> Review </button>
-          {recipe.recipe.user_id===user.id && <button> Delete </button>}
-          
+          {/* Recipe Delete button */}
+          <Link style={{textDecoration: 'none'}} to="/">
+          {recipe.recipe.user_id===user.id && <button onClick={()=>{deleteRecipe();}}> Delete </button>}
+          </Link>          
         </div>
         <Overlay />
       </div>
