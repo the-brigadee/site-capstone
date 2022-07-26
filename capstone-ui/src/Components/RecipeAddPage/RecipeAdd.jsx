@@ -16,7 +16,7 @@ export default function RecipeAdd({imageUrl}) {
     description: '',
     instructions: '',
     ingredients: '',
-    calories: 0,
+    calories: '',
     image_url: '',
 
 })

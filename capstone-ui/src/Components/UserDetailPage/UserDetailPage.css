@@ -57,7 +57,7 @@
 .follow-to-following{
     display: flex;
     flex-direction: row;
-    gap: 70px;
+    gap: 10px;
 }
 
 .profile-detail-page-interaction button {
@@ -94,4 +94,59 @@
     padding: 30px;
     border: 1px solid var(--border-color);
     border-radius: 12px;
+}
+
+.profile-detail-page-interaction button img {
+    width: 15px;
+    height: 15px;
+}
+
+.num-following{
+    background-color: var(--primary-color);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    padding: 3px 5px;
+    max-height: 36px;
+    min-height: 36px;
+    height: 36px;
+    color: white;
+}
+
+.num-following p img{
+    width: 15px;
+    height: 15px;
+    transform: rotateZ(0deg);
+    filter: invert(1);
+}
+.num-following p{
+    display: flex;
+    align-items: center;
+    gap: 3px;
+    margin: 0px;
+}
+
+.num-followers{
+    background-color: var(--primary-color);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    padding: 3px 5px;
+    max-height: 36px;
+    min-height: 36px;
+    height: 36px;
+    color: white;
+}
+
+.num-followers p img{
+    width: 15px;
+    height: 15px;
+    transform: rotateZ(180deg);
+    filter: invert(1);
+}
+.num-followers p{
+    display: flex;
+    align-items: center;
+    gap: 3px;
+    margin: 0px;
 }

@@ -74,12 +74,32 @@ class ApiClient {
         return await this.request({endpoint: `recipe/${recipeId}`, method: `GET`, data:recipeId})
     }
 
+    async createMealPlan(mealplan){
+        return await this.request({endpoint: `mealplanner/create`, method: `POST`, data:mealplan}) 
+    }
+
+    async getMealPlan(){
+        return await this.request({endpoint: `mealplanner/`, method: `GET`})
+    }
+
+    async deleteMealPlan(mealplan){
+        return await this.request({endpoint: `mealplanner/delete/${mealplan}`, method: `DELETE`})
+    }
+
+    async deleteAllMealPlan(){
+        return await this.request({endpoint: `mealplanner/deleteall`, method: `DELETE`})
+    }
+
     async savedRecipe(recipeId){
         return await this.request({endpoint: `savedrecipe/create`, method: `POST`, data:recipeId})
     }  
     
     async getUsersSavedRecipes(){
         return await this.request({endpoint: `savedrecipe`, method: `GET`})
+    }
+
+    async getUserCreatedRecipes(){
+        return await this.request({endpoint: `recipe`, method: `GET`})
     }
 
     async handleFollow(user_id, followed_id){

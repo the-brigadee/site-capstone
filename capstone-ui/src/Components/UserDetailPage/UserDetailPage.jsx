@@ -144,11 +144,11 @@ function ProfileMain({user, showLoginForm, setError, profileId, displayType, han
           {/*  the following and follow total */}
           <div className="follow-to-following">
             <div className="num-following">
-              <p>{profile.num_following} following</p>
+              <p> <img src="https://cdn.icon-icons.com/icons2/1304/PNG/512/arrow_86002.png" alt="following" /> {profile.num_following} following</p>
             </div>
 
             <div className="num-followers">
-              <p>{profile.num_followers} followers</p>
+              <p> <img src="https://cdn.icon-icons.com/icons2/1304/PNG/512/arrow_86002.png" alt="followers " /> {profile.num_followers} followers</p>
             </div>
           </div>
 
@@ -157,7 +157,7 @@ function ProfileMain({user, showLoginForm, setError, profileId, displayType, han
           <div className="profile-detail-page-interaction">
             {displayType === "Saved" 
             ? 
-            <button className='detail-saved-recipes' onClick={handleSavedOwnedRecipes}> saved recipes </button>
+            <button className='detail-saved-recipes' onClick={handleSavedOwnedRecipes}> <img src="https://cdn.icon-icons.com/icons2/3544/PNG/512/saved_icon_224568.png" alt="" /> saved recipes </button>
             :
             <button className="detail-owned-recipes" onClick={handleSavedOwnedRecipes}> owned recipes </button>
             }
@@ -167,9 +167,9 @@ function ProfileMain({user, showLoginForm, setError, profileId, displayType, han
             :
             followingOrNot
             ? 
-            <button className="detail-following-button" onClick={handleOnClickFollowingBtn}> Following </button>
+            <button className="detail-following-button" onClick={handleOnClickFollowingBtn}> <img src="https://cdn.icon-icons.com/icons2/3256/PNG/512/user_follow_icon_205819.png" alt="" /> Following </button>
             :
-            <button className="detail-follow-button" onClick={handleOnClickFollowingBtn}> Follow </button>
+            <button className="detail-follow-button" onClick={handleOnClickFollowingBtn}> <img src="https://cdn.icon-icons.com/icons2/2367/PNG/512/user_follow_icon_143485.png" alt="" /> Follow </button>
             }
           </div>
 

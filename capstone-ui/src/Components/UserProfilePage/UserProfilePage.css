@@ -44,6 +44,12 @@ Entire Container
     margin: 0;
 }
 
+.left-profile .profile-img {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
 /*-------------------------------
 Right profile sides (user facts) 
 -------------------------------*/
@@ -53,11 +59,10 @@ Right profile sides (user facts)
     flex-direction: column;
     border-radius: 14px;
     background-color: white;
-    /* margin-left: 10rem;
-    margin-right: 10rem; */
     margin-left: 10px;
     padding: 10px;
     width: 100%;
+    justify-content: space-between;
 }
 
 /*-------------------------------
@@ -130,6 +135,16 @@ Styling for user's profile facts
 }
 
 /*-------------------------------
+Dropdown title
+--------------------------------*/
+.display-dropdown {
+    border: none;
+    font-weight: bolder;
+    font-size: 20px;
+    margin: 5px;
+}
+
+/*-------------------------------
 Slider styling
 --------------------------------*/
 .carousel h3{
@@ -142,7 +157,7 @@ Slider styling
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 0 20px;
+    padding: 0px 20px;
     max-width: 1620px;
 }
 
@@ -156,21 +171,9 @@ Slider styling
     
 }
 
-/* .slick-next {
-    right: -45px;
+.slick-list {
+    padding: 20px 0 0 0!important;
 }
-
-.slick-prev {
-    left: 25px !important;
-}
-
-.slick-next {
-    right: -35px !important;
-}
-
-.slick-slide .recipe-card {
-    height: 185px;
-} */
 
 .slick-slide .recipe-img-text {
     z-index: 1000000;
