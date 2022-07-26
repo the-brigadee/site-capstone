@@ -76,6 +76,10 @@ class ApiClient {
         return await this.request({endpoint: `savedrecipe`, method: `GET`})
     }
 
+    async getUserCreatedRecipes(){
+        return await this.request({endpoint: `recipe`, method: `GET`})
+    }
+
     async handleFollow(user_id, followed_id){
         return await this.request({endpoint: `follow/create`, method: `POST`, data: {"followed_id" : followed_id, "following_id" : user_id}})
     }

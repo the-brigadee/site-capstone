@@ -58,11 +58,16 @@ export default function UserProfilePage() {
   const navigate = useNavigate()
 
   const {user, setError, setUser, setIsLoading, isLoading, error, userDetails} = useAuthNavContext()
-  const [recipes, setRecipes] = React.useState([])
+  const [createdRecipes, setCreatedRecipes] = React.useState([])
+  const [savedRecipes, setSavedRecipes] = React.useState([])
   // useState for showing the buttons
   const [isEditing, setIsEditing] = React.useState(false)
   // useState for each display type
   const [infoDisplay, setInfoDisplay] = React.useState("profile")
+
+  //useState for displaying saved or created recipe
+  const [recipesDisplay, setRecipesDisplay] = React.useState("Created")
+
   const [form, setForm] = React.useState({
     first_name: "",
     last_name: "",
@@ -80,11 +85,21 @@ export default function UserProfilePage() {
       const {data, error} = await apiClient.getUsersSavedRecipes()
             if (error) setError((e) => ({ ...e, savedRecipe: error }))
             if (data?.savedrecipe) {
-                setRecipes(data.savedrecipe)
+                setSavedRecipes(data.savedrecipe)
             }
     }
+
+    const getCreatedRecipes = async () => {
+      const {data, error} = await apiClient.getUserCreatedRecipes()
+            if (error) setError((e) => ({ ...e, createdRecipe: error }))
+            if (data?.recipe) {
+                setCreatedRecipes(data.recipe)
+            }
+    }
+
     getSavedRecipes()
-  }, [setRecipes])
+    getCreatedRecipes()
+  }, [setSavedRecipes, setCreatedRecipes])
 
     //Function that handles the value of form for updating user profile
     const handleOnFormInputChange = (event) => {
@@ -94,21 +109,22 @@ export default function UserProfilePage() {
       //error checking
       if (event.target.name === "new_password") {
           if (event.target.value !== form.confirm_password) {
-              setError((e) => ({ ...e, confirm_password: "Password do not match." }))
+              setError((e) => ({ ...e, pwChange_confirm: "Password do not match." }))
           } else {
-              setError((e) => ({ ...e, confirm_password: null }))
+              setError((e) => ({ ...e, pwChange_confirm: null }))
           }
       }
       if (event.target.name === "confirm_password") {
-          if (event.target.value !== form.password) {
-              setError((e) => ({ ...e, confirm_password: "Password do not match." }))
+          if (event.target.value !== form.new_password) {
+              setError((e) => ({ ...e, pwChange_confirm: "Password do not match." }))
           } else {
-              setError((e) => ({ ...e, confirm_password: null }))
+              setError((e) => ({ ...e, pwChange_confirm: null }))
           }
       }
       //set the value of the form
   
       setForm((f) => ({ ...f, [event.target.name]: event.target.value }))
+      
   }
 
   // logout function
@@ -121,6 +137,9 @@ export default function UserProfilePage() {
 
   // function and make call to the backend to update user profile
   const handleOnSave = async () => {
+        setError((e) => ({ ...e, profile: null }))
+        setError((e) => ({ ...e, passwordUpdate: null }))
+
         if (infoDisplay === "form") {
           const {data, error} = await apiClient.updateProfile({
               first_name: form.first_name,
@@ -139,10 +158,14 @@ export default function UserProfilePage() {
               setUser(data?.user)
           }
         } else if (infoDisplay === "password") {
+          if (form.old_password === "" || form.new_password === "") {
+            setError((e) => ({ ...e, passwordUpdate: "Please fill in all of the fields!" }))
+            return
+          }
           const {data, error} = await apiClient.updatePassword({
               old_password: form.old_password,
               new_password: form.new_password,
-              user_id: 1
+              user_id: user.id
           })
           if (error) {
             setError((e) => ({ ...e, passwordUpdate: error }))
@@ -188,9 +211,9 @@ export default function UserProfilePage() {
   const userProfile = (<div className="user-display">
                         <div className="user-facts">
                           <h1>{`${user.first_name} ${user.last_name}`}</h1>
-                          <h4>Joined on {user.created_at.split("T")[0]}</h4>
+                          <h4>Joined on {user.created_at?.split("T")[0]}</h4>
                           <span>{user.bio}</span>
-                          <span>Birthday: {user.dob.split("T")[0]}</span>
+                          <span>Birthday: {user.dob?.split("T")[0]}</span>
                         </div>
                       </div>)
   
@@ -199,7 +222,6 @@ export default function UserProfilePage() {
                             <div className="input-row">
                               <label htmlFor="old_password">Old Password</label>
                               <input type="password" name="old_password" placeholder="old password" onChange={handleOnFormInputChange}/>
-                              {error?.passwordUpdate ? <span className="error">Incorrect current password!</span> : null}
                             </div>
                             <div className="input-row">
                                 <label htmlFor="New Password">New Password</label>
@@ -208,7 +230,11 @@ export default function UserProfilePage() {
                             <div className="input-row">
                                 <label htmlFor="Confirm Password">Confirm Password</label>
                                 <input type="password" name="confirm_password" placeholder="new password" onChange={handleOnFormInputChange}/>
+                              {error?.pwChange_confirm ? <span className="error">{error.pwChange_confirm}</span> : null}
+
                             </div>
+                              {error?.passwordUpdate ? <span className="error">{error.passwordUpdate}</span> : null}
+                              {error?.profile ? <span className="error">{error.profile}</span> : null}
                           </div>)
 
   var elToDisplay
@@ -231,14 +257,48 @@ export default function UserProfilePage() {
       setInfoDisplay("form")
     } else if (e.target.id === "save") {
       handleOnSave()
-      if (!error?.passwordUpdate) {
-        setIsEditing(false)
-        setInfoDisplay("profile")
-      }
     }
   }
 
+  var myFiles
+  const handleOnFileChange = (e) => {
+    // clean up earliest files
+    myFiles = {}
+    // set state of files to false until each of them is processed
 
+    const files = e.target.files;
+
+    const filePromises = Object.entries(files).map(item => {
+      return new Promise((resolve, reject) => {
+        const [index, file] = item
+        const reader = new FileReader();
+        reader.readAsBinaryString(file);
+
+        reader.onload = function(event) {
+          // Convert file to Base64 string
+      // btoa is built int javascript function for base64 encoding
+          myFiles['picture'] = `data:${file.type};base64,${btoa(event.target.result)}`
+
+          resolve()
+        };
+        reader.onerror = function() {
+          
+          reject()
+        };
+      })
+    })
+
+    Promise.all(filePromises)
+      .then(() => {
+        
+        
+      })
+      .catch((error) => {
+        
+        
+      })
+  }
+  
   return (
     <div className='user-profile-container'>
         <div className="user-profile">
@@ -246,6 +306,7 @@ export default function UserProfilePage() {
             <div className="profile-img">
               {user.imageUrl ? <img src={user.imageUrl} alt='profile img' /> : <img src="https://i.pinimg.com/originals/18/28/f4/1828f4bb6ac67ac60e7ce82d1ed2eb72.jpg" alt='profile img' />}
             </div>
+            <input type="file" id="pictureInput" accept='image/*' onChange={handleOnFileChange}/>
             <button className="change-img">
               Update Picture
             </button>
@@ -266,11 +327,16 @@ export default function UserProfilePage() {
           </div>
         </div>
         <div className="saved-carousel carousel">
-          <h3>Saved Recipes</h3>
+        <select className="display-dropdown" onChange={(e) => {setRecipesDisplay(e.target.value?.split(" ")[0]);}}>
+          <option name="Created">Created Recipes</option>
+          <option name="Saved">Saved Recipes</option>
+        </select>
           <Slider {...settings}>
-                {recipes?.map((recipe) => (
+                {recipesDisplay === "Saved" ? (savedRecipes?.map((recipe) => (
                     <RecipeCard recipe_url={recipe.image_url} title={recipe.name} calories={recipe.calories} category={recipe.category} recipe_id={recipe.recipe_id} key={recipe.recipe_id} ownername={recipe.ownername} owner_url={recipe.owner_url ? recipe.owner_url : "https://i.pinimg.com/originals/18/28/f4/1828f4bb6ac67ac60e7ce82d1ed2eb72.jpg"} owner_id={recipe.ownder_id}/>
-                ))}
+                ))) : (createdRecipes?.map((recipe) => (
+                  <RecipeCard recipe_url={recipe.image_url} title={recipe.name} calories={recipe.calories} category={recipe.category} recipe_id={recipe.id} key={recipe.id} ownername={user.username} owner_url={user.imageUrl ? user.imageUrl : "https://i.pinimg.com/originals/18/28/f4/1828f4bb6ac67ac60e7ce82d1ed2eb72.jpg"} owner_id={recipe.ownder_id}/>
+              )))}
           </Slider>
         </div>
         <Overlay />
