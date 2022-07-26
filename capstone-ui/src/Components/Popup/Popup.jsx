@@ -69,6 +69,8 @@ export default function Popup(){
     const handleOnSubmit = async () => {
         setIsLoading(true)
         setError((e) => ({ ...e, form: null }))
+        setError((e) => ({ ...e, email: null }))
+        setError((e) => ({ ...e, confirm_password: null }))
         
         if (form.password_confirm === "") {
             return

@@ -102,14 +102,10 @@ class User{
     }
 
     static async updatePassword(credentials){
-        //user should submit their email and password
-        //if any of these fields are missing, throw an error
-        const requiredFields=["old_password","new_password"]
-        requiredFields.forEach(field =>{
-            if(!credentials.hasOwnProperty(field)){
-                throw new BadRequestError(`Missing ${field} in request body.`)
-            }
-        })
+
+        if(credentials.old_password == credentials.new_password) {
+            throw new BadRequestError("New password cannot be the same as current password!")
+        }
 
         //lookup the user in the db by id
         const user= await User.fetchUserByID(credentials.user_id) 
@@ -123,7 +119,7 @@ class User{
                 const result= await db.query(query, [hashedPassword, credentials.user_id])
                 return User.makePublicUser(result.rows[0])
             } else {
-                throw new BadRequestError(`Old password is incorrect!`)
+                throw new BadRequestError(`Current password is incorrect!`)
             }
         }
         
