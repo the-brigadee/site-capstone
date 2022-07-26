@@ -189,10 +189,10 @@ export default function UserProfilePage() {
   // user's profile details, this is what the user see when they go to the user profile page
   const userProfile = (<div className="user-display">
                         <div className="user-facts">
-                          <h1>{`${user.first_name} ${user.last_name}`}</h1>
-                          <h4>Joined on {user.created_at.split("T")[0]}</h4>
+                          <h1>{`${user?.first_name} ${user?.last_name}`}</h1>
+                          <h4>Joined on {user?.created_at?.split("T")[0]}</h4>
                           <span>{user.bio}</span>
-                          <span>Birthday: {user.dob.split("T")[0]}</span>
+                          <span>Birthday: {user?.dob?.split("T")[0]}</span>
                         </div>
                       </div>)
   
