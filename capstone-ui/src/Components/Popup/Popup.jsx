@@ -61,7 +61,7 @@ export default function Popup(){
     const handleOnFormInputChangeMealPlanner = (event) => {
         //prevent the events default behaviour  
         event.preventDefault()
-        console.log(event);
+        
         setFormPlan((f) => ({ ...f, [event.target.name]: event.target.value }))
     }
 
@@ -101,8 +101,8 @@ export default function Popup(){
             })
             dataUse = data
             errorUse = error
-            console.log(data);
-            console.log(error);
+            
+            
         }
                 
         if (errorUse) {
