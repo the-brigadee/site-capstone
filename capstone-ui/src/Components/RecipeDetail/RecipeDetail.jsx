@@ -62,7 +62,7 @@ function RecipeMain(recipe){
     const deleteRecipe = async () => {
       const {data, error} = await apiClient.recipeDelete(recipeId)
       if (error) setError((e) => ({ ...e, recommended: error }))
-      console.log(error);
+      
       
       
   }
