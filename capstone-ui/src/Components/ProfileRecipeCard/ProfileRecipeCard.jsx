@@ -56,7 +56,7 @@ export default function ProfileRecipeCard({recipe, displayType, profileId, even}
                     ? 
                     <img src={recipe.user_url} /> 
                     : 
-                    <img src="https://cdn.icon-icons.com/icons2/933/PNG/512/round-account-button-with-user-inside_icon-icons.com_72596.png" alt="" className='default'/>
+                    <img src="https://toppng.com/uploads/preview/circled-user-icon-user-pro-icon-11553397069rpnu1bqqup.png" alt="" className='default'/>
                     }
                     </Link>
                 </div>
