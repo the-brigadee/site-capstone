@@ -1,21 +1,16 @@
 import * as React from 'react'
 import './MealPlanner.css'
-import { Link, Navigate, useNavigate } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import {useAuthNavContext} from "../../Contexts/authNav"
-import apiClient from "../../Services/ApiClient"
-import items from '../../Data/categoryItem.json'
 import Overlay from '../Overlay/Overlay'
 
 
 export default function MealPlanner({imageUrl}) {
   const {error, setError, isLoading, setIsLoading, user, showMealPlannerForm, mealPlan, setMealPlan, getMealPlan} = useAuthNavContext()
-  const navigate = useNavigate()
 
+  //Imported getMealPlan from authNav to get Meal Plan for the current user
   React.useEffect(()=>{
-   if(user?.email){
       getMealPlan();
-   }
-    
  }, [])
 
 

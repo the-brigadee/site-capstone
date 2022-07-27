@@ -120,6 +120,7 @@ export default function Popup(){
         if(popupType!=="MealPlanner"){
             navigate("/")
         }else if(popupType==="MealPlanner"){
+            //Going to be used for the Meal Planner Page to close the popup and update the mealplanner
             closePopup();
             getMealPlan();
         }
