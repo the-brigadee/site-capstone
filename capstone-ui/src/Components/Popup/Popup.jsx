@@ -72,7 +72,7 @@ export default function Popup(){
         setError((e) => ({ ...e, email: null }))
         setError((e) => ({ ...e, confirm_password: null }))
         
-        if (form.password_confirm === "") {
+        if ((form.password_confirm === "" || form.password !== form.confirm_password) && popupType === "Register") {
             return
         }
 

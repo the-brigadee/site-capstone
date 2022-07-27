@@ -142,9 +142,12 @@ export default function UserProfilePage() {
 
   // function and make call to the backend to update user profile
   const handleOnSave = async () => {
+        if ((form.password_confirm === "" || form.new_password !== form.confirm_password) && infoDisplay === "password") {
+          return
+        }
         setError((e) => ({ ...e, profile: null }))
         setError((e) => ({ ...e, passwordUpdate: null }))
-
+        
         if (infoDisplay === "form") {
           
           const {data, error} = await apiClient.updateProfile({
@@ -161,6 +164,7 @@ export default function UserProfilePage() {
             return
             }
           if (data?.user) {
+            console.log(data?.user)
               setUser(data?.user)
               setIsEditing(false)
               setInfoDisplay("profile")
@@ -184,6 +188,13 @@ export default function UserProfilePage() {
             handleLogout()
           }
         }
+  }
+
+  const handleOnCancel = async () => {
+        setError((e) => ({ ...e, profile: null }))
+        setError((e) => ({ ...e, passwordUpdate: null }))
+        setIsEditing(false)
+        setInfoDisplay("profile")
   }
 
   // the editing profile form, show when user click on edit profile button
@@ -210,7 +221,7 @@ export default function UserProfilePage() {
   </div>
   <div className="input-row">
     <label htmlFor="bio">Bio</label>
-    <textarea name="bio" rows="8" placeholder={user.description} onChange={handleOnFormInputChange}>
+    <textarea name="bio" rows="8" placeholder={user.bio} onChange={handleOnFormInputChange}>
     </textarea>
   </div>
                 </div>)
@@ -220,7 +231,7 @@ export default function UserProfilePage() {
                         <div className="user-facts">
                           <h1>{`${user?.first_name} ${user?.last_name}`}</h1>
                           <h4>Joined on {user?.created_at?.split("T")[0]}</h4>
-                          <span>{user?.description}</span>
+                          <span>{user?.bio}</span>
                           <span>Birthday: {user?.dob?.split("T")[0]}</span>
                         </div>
                       </div>)
@@ -313,6 +324,7 @@ export default function UserProfilePage() {
                 {isEditing ? null :<button id="password" onClick={handleOnBtnClick}>Change Password</button>}
                 {isEditing ? null : <button id="form" onClick={handleOnBtnClick}>Edit Profile</button>}
                 {isEditing ? <button id="save" onClick={handleOnBtnClick}>Save</button> : null}
+                {isEditing ? <button id="cancel" onClick={handleOnCancel}>Cancel</button> : null}
             </div>
           </div>
         </div>

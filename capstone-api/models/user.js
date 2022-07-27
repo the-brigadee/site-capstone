@@ -79,18 +79,17 @@ class User{
     }
 
     static async updateProfile(credentials){
-
+        console.log(credentials)
         // updating user's profile image with an image file
-        
         if (credentials?.image_file) {
             const results = await db.query(`
-                UPDATE users SET image_url = $1 WHERE id = $2 RETURNING *;
-                `,[credentials.image_file, credentials.user_id])
-                return User.makePublicUser(results.rows[0])
+            UPDATE users SET image_url = $1 WHERE id = $2 RETURNING *;
+            `,[credentials.image_file, credentials.user_id])
+            return User.makePublicUser(results.rows[0])
         }
         //make sure the username is not already taken
         //if one does, throw an error
-        if (credentials.username !== "") {
+        if (credentials?.username && credentials.username !== "") {
             const existingUserName= await User.fetchUserByUserName(credentials.username)
             if(existingUserName){
                 throw new BadRequestError(`Username taken: ${credentials.username}`)
@@ -107,7 +106,7 @@ class User{
             }
         }
         
-        return result
+        return User.makePublicUser(result)
     }
 
     static async updatePassword(credentials){
