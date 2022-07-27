@@ -40,6 +40,8 @@ export const AuthNavContextProvider = ({children}) =>{
     //state variable for user's stats about followers
     const [userDetails, setUserDetails] = React.useState({})
 
+    //state variable to get user's uploaded file 
+    const [file, setFile] = React.useState([])
     //state variable for user's meal planner
     const [mealPlan, setMealPlan] = React.useState([]);
     
@@ -118,6 +120,7 @@ export const AuthNavContextProvider = ({children}) =>{
         transition, setTransition,
         isPwChanged, setIsPwChanged,
         userDetails, setUserDetails,
+        file, setFile,
         mealPlan, setMealPlan, getMealPlan
     }
 

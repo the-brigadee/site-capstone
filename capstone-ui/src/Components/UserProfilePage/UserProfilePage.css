@@ -23,6 +23,8 @@ Entire Container
 .left-profile {
     display: flex;
     flex-direction: column;
+    align-items: center;
+    justify-content: center;
 }
 
 .left-profile img {
@@ -38,6 +40,7 @@ Entire Container
     border-radius: 14px;
     padding: 5px;
     margin-top: 8px;
+    width: 95%;
 }
 
 .left-profile .user-data h3 {
@@ -48,6 +51,12 @@ Entire Container
     display: flex;
     align-items: center;
     justify-content: center;
+}
+
+.change-img {
+    margin-top: 10px;
+    width: 70%;
+    border-radius: 3px;
 }
 
 /*-------------------------------
@@ -173,6 +182,10 @@ Slider styling
 
 .slick-list {
     padding: 20px 0 0 0!important;
+}
+
+.slick-dots {
+    display: none !important;
 }
 
 .slick-slide .recipe-img-text {
