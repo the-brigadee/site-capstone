@@ -38,6 +38,9 @@ export const AuthNavContextProvider = ({children}) =>{
 
     //state variable for user's stats about followers
     const [userDetails, setUserDetails] = React.useState({})
+
+    //state variable to get user's uploaded file 
+    const [file, setFile] = React.useState([])
     
     //function for login button
     const showLoginForm = () => {
@@ -103,7 +106,8 @@ export const AuthNavContextProvider = ({children}) =>{
         searchWord, setSearchWord,
         transition, setTransition,
         isPwChanged, setIsPwChanged,
-        userDetails, setUserDetails
+        userDetails, setUserDetails,
+        file, setFile
     }
 
 

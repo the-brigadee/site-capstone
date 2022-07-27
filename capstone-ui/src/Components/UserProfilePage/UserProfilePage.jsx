@@ -8,6 +8,8 @@ import {useAuthNavContext} from "../../Contexts/authNav"
 import apiClient from "../../Services/ApiClient"
 import Overlay from '../Overlay/Overlay'
 import { useNavigate } from 'react-router-dom';
+import DragDropFile from '../DragDrop/DragDrop';
+
 
 export default function UserProfilePage() {
   // setting for npm react slick library
@@ -57,7 +59,7 @@ export default function UserProfilePage() {
 
   const navigate = useNavigate()
 
-  const {user, setError, setUser, setIsLoading, isLoading, error, userDetails} = useAuthNavContext()
+  const {user, setError, setIsLoading, isLoading, error, userDetails, file, setUser, setFile} = useAuthNavContext()
   const [createdRecipes, setCreatedRecipes] = React.useState([])
   const [savedRecipes, setSavedRecipes] = React.useState([])
   // useState for showing the buttons
@@ -69,15 +71,18 @@ export default function UserProfilePage() {
   const [recipesDisplay, setRecipesDisplay] = React.useState("Created")
 
   const [form, setForm] = React.useState({
-    first_name: "",
-    last_name: "",
-    username: "",
-    dob: "",
-    bio: "",
+    first_name: user.first_name,
+    last_name: user.last_name,
+    username: user.username,
+    dob: user.dob,
+    bio: user.description,
     old_password: "",
     new_password: "",
     confirm_password: "",
   })
+
+  // useState for when the user is updating their profile img
+  const [isChangingImg, setIsChangingImg] = React.useState(false)
 
   React.useEffect(()=>{
     
@@ -141,6 +146,7 @@ export default function UserProfilePage() {
         setError((e) => ({ ...e, passwordUpdate: null }))
 
         if (infoDisplay === "form") {
+          
           const {data, error} = await apiClient.updateProfile({
               first_name: form.first_name,
               last_name: form.last_name,
@@ -156,6 +162,8 @@ export default function UserProfilePage() {
             }
           if (data?.user) {
               setUser(data?.user)
+              setIsEditing(false)
+              setInfoDisplay("profile")
           }
         } else if (infoDisplay === "password") {
           if (form.old_password === "" || form.new_password === "") {
@@ -202,7 +210,7 @@ export default function UserProfilePage() {
   </div>
   <div className="input-row">
     <label htmlFor="bio">Bio</label>
-    <textarea name="message" rows="8" placeholder={user.bio} onChange={handleOnFormInputChange}>
+    <textarea name="bio" rows="8" placeholder={user.description} onChange={handleOnFormInputChange}>
     </textarea>
   </div>
                 </div>)
@@ -212,7 +220,7 @@ export default function UserProfilePage() {
                         <div className="user-facts">
                           <h1>{`${user?.first_name} ${user?.last_name}`}</h1>
                           <h4>Joined on {user?.created_at?.split("T")[0]}</h4>
-                          <span>{user.bio}</span>
+                          <span>{user?.description}</span>
                           <span>Birthday: {user?.dob?.split("T")[0]}</span>
                         </div>
                       </div>)
@@ -260,55 +268,37 @@ export default function UserProfilePage() {
     }
   }
 
-  var myFiles
-  const handleOnFileChange = (e) => {
-    // clean up earliest files
-    myFiles = {}
-    // set state of files to false until each of them is processed
 
-    const files = e.target.files;
 
-    const filePromises = Object.entries(files).map(item => {
-      return new Promise((resolve, reject) => {
-        const [index, file] = item
-        const reader = new FileReader();
-        reader.readAsBinaryString(file);
-
-        reader.onload = function(event) {
-          // Convert file to Base64 string
-      // btoa is built int javascript function for base64 encoding
-          myFiles['picture'] = `data:${file.type};base64,${btoa(event.target.result)}`
-
-          resolve()
-        };
-        reader.onerror = function() {
-          
-          reject()
-        };
+  //function for update picture button onclick 
+  const handleUpdateImg = async () => {
+    if (isChangingImg && file?.file && file?.fileByteA) {
+      const {data, error} = await apiClient.updateProfile({
+          image_file: file?.fileByteA,
+          user_id: user.id,
       })
-    })
-
-    Promise.all(filePromises)
-      .then(() => {
-        
-        
-      })
-      .catch((error) => {
-        
-        
-      })
+      if (error) {
+        setError((e) => ({ ...e, profile: error }))
+        setIsLoading(false)
+        return
+        }
+      if (data?.user) {
+        setUser(data.user)
+      }
+      setFile({})
+    }
+    setIsChangingImg((e) => !e)
   }
-  
   return (
     <div className='user-profile-container'>
         <div className="user-profile">
           <div className="left-profile">
             <div className="profile-img">
-              {user.imageUrl ? <img src={user.imageUrl} alt='profile img' /> : <img src="https://i.pinimg.com/originals/18/28/f4/1828f4bb6ac67ac60e7ce82d1ed2eb72.jpg" alt='profile img' />}
+              {user?.imageUrl ? <img src={user.imageUrl} alt='profile img' /> : <img src="https://cdn.icon-icons.com/icons2/933/PNG/512/round-account-button-with-user-inside_icon-icons.com_72596.png" alt='profile img' /> }
             </div>
-            <input type="file" id="pictureInput" accept='image/*' onChange={handleOnFileChange}/>
-            <button className="change-img">
-              Update Picture
+            { isChangingImg ? <DragDropFile /> : null }
+            <button className="change-img" onClick={handleUpdateImg}>
+              {isChangingImg ? "Save": "Update Picture"}
             </button>
             <div className="user-data">
               <h3>{user.username}</h3>
@@ -333,10 +323,11 @@ export default function UserProfilePage() {
         </select>
           <Slider {...settings}>
                 {recipesDisplay === "Saved" ? (savedRecipes?.map((recipe) => (
-                    <RecipeCard recipe_url={recipe.image_url} title={recipe.name} calories={recipe.calories} category={recipe.category} recipe_id={recipe.recipe_id} key={recipe.recipe_id} ownername={recipe.ownername} owner_url={recipe.owner_url ? recipe.owner_url : "https://i.pinimg.com/originals/18/28/f4/1828f4bb6ac67ac60e7ce82d1ed2eb72.jpg"} owner_id={recipe.ownder_id}/>
+                    <RecipeCard recipe_url={recipe.image_url} title={recipe.name} calories={recipe.calories} category={recipe.category} recipe_id={recipe.recipe_id} key={recipe.recipe_id} ownername={recipe.ownername} owner_url={recipe.owner_url ? recipe.owner_url : "https://cdn.icon-icons.com/icons2/933/PNG/512/round-account-button-with-user-inside_icon-icons.com_72596.png"} owner_id={recipe.ownder_id}/>
                 ))) : (createdRecipes?.map((recipe) => (
-                  <RecipeCard recipe_url={recipe.image_url} title={recipe.name} calories={recipe.calories} category={recipe.category} recipe_id={recipe.id} key={recipe.id} ownername={user.username} owner_url={user.imageUrl ? user.imageUrl : "https://i.pinimg.com/originals/18/28/f4/1828f4bb6ac67ac60e7ce82d1ed2eb72.jpg"} owner_id={recipe.ownder_id}/>
+                  <RecipeCard recipe_url={recipe.image_url} title={recipe.name} calories={recipe.calories} category={recipe.category} recipe_id={recipe.id} key={recipe.id} ownername={user.username} owner_url={user.imageUrl ? user.imageUrl : "https://cdn.icon-icons.com/icons2/933/PNG/512/round-account-button-with-user-inside_icon-icons.com_72596.png"} owner_id={recipe.ownder_id}/>
               )))}
+                {(recipesDisplay === "Saved" && !savedRecipes.length) || (recipesDisplay === "Created" && !createdRecipes.length) ? <h2>No Recipes {recipesDisplay} Yet!</h2> : null}
           </Slider>
         </div>
         <Overlay />

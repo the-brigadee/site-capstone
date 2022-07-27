@@ -14,6 +14,7 @@ class User{
             dob:user.dob,
             bio: user.description,
             imageUrl: user.image_url,
+            imageFile: user.image_file,
             created_at:user.created_at
 
         }
@@ -79,18 +80,26 @@ class User{
 
     static async updateProfile(credentials){
 
-        //make sure no user already exists in the system with that username
+        // updating user's profile image with an image file
+        
+        if (credentials?.image_file) {
+            const results = await db.query(`
+                UPDATE users SET image_url = $1 WHERE id = $2 RETURNING *;
+                `,[credentials.image_file, credentials.user_id])
+                return User.makePublicUser(results.rows[0])
+        }
+        //make sure the username is not already taken
         //if one does, throw an error
         if (credentials.username !== "") {
             const existingUserName= await User.fetchUserByUserName(credentials.username)
             if(existingUserName){
-                throw new BadRequestError(`Duplicate username: ${credentials.username}`)
+                throw new BadRequestError(`Username taken: ${credentials.username}`)
             }
         }
 
         var result
         for (var prop in credentials) {
-            if (prop != "user_id" && credentials[prop] !== "") {
+            if (prop != "user_id") {
                 const results = await db.query(`
                 UPDATE users SET ${prop} = $1 WHERE id = $2 RETURNING *;
                 `,[credentials[prop], credentials.user_id])

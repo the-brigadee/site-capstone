@@ -7,6 +7,7 @@ CREATE TABLE users (
     username TEXT NOT NULL,
     dob TIMESTAMP NOT NULL,
     image_url TEXT,
+    image_file BYTEA,
     description VARCHAR(350),
     created_at TIMESTAMP NOT NULL DEFAULT NOW(),
     updated_at TIMESTAMP NOT NULL DEFAULT NOW()
