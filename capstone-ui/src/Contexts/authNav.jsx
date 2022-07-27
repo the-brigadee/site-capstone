@@ -8,6 +8,7 @@
 
 //handle all imports here
 import * as React from 'react'
+import ApiClient from '../Services/ApiClient'
 
 
 //create the context using createcontext
@@ -41,6 +42,8 @@ export const AuthNavContextProvider = ({children}) =>{
 
     //state variable to get user's uploaded file 
     const [file, setFile] = React.useState([])
+    //state variable for user's meal planner
+    const [mealPlan, setMealPlan] = React.useState([]);
     
     //function for login button
     const showLoginForm = () => {
@@ -82,6 +85,16 @@ export const AuthNavContextProvider = ({children}) =>{
         }
     }
 
+    //Function to get meal plan for meal plan page
+    const getMealPlan = async () => {
+        const {data, error} = await ApiClient.getMealPlan()
+              if (error) setError((e) => ({ ...e, mealplanner: error }))
+              if (data?.mealplanner) {
+              setMealPlan(data.mealplanner)
+              }
+              
+     }
+
     /**  This state variable helps the conditional rendering of the ResultsFeed page 
      * 
      *  it should have one of two values ("sidebar") or ("searchbar")
@@ -107,7 +120,8 @@ export const AuthNavContextProvider = ({children}) =>{
         transition, setTransition,
         isPwChanged, setIsPwChanged,
         userDetails, setUserDetails,
-        file, setFile
+        file, setFile,
+        mealPlan, setMealPlan, getMealPlan
     }
 
 

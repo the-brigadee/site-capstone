@@ -90,7 +90,8 @@ class MealPlanner{
         FROM meal_planner
         INNER JOIN recipe 
         ON meal_planner.recipe_id=recipe.id
-        WHERE meal_planner.user_id = $1`, [user_id])
+        WHERE meal_planner.user_id = $1
+        ORDER BY meal_planner.id ASC`, [user_id])
         console.log(results.rows)
         return results.rows
     }
