@@ -95,6 +95,24 @@ export const AuthNavContextProvider = ({children}) =>{
               
      }
 
+    //Function to delete all recipes from meal plan page
+    const deleteallgetMealPlan = async () => {
+        const {error} = await ApiClient.deleteAllMealPlan()
+              if (error) setError((e) => ({ ...e, mealplanner: error }))
+              if(!error){
+                getMealPlan();
+              }
+     }
+
+     //Function to delete one recipe from meal plan page
+     const deleteMealPlan = async (mealplan) => {
+        const {error} = await ApiClient.deleteMealPlan(mealplan)
+              if (error) setError((e) => ({ ...e, mealplanner: error }))
+              if(!error){
+                getMealPlan();
+              }
+     }
+
     /**  This state variable helps the conditional rendering of the ResultsFeed page 
      * 
      *  it should have one of two values ("sidebar") or ("searchbar")
@@ -121,7 +139,7 @@ export const AuthNavContextProvider = ({children}) =>{
         isPwChanged, setIsPwChanged,
         userDetails, setUserDetails,
         file, setFile,
-        mealPlan, setMealPlan, getMealPlan
+        mealPlan, setMealPlan, getMealPlan, deleteallgetMealPlan, deleteMealPlan
     }
 
 
