@@ -164,7 +164,7 @@ export default function UserProfilePage() {
             return
             }
           if (data?.user) {
-            console.log(data?.user)
+            
               setUser(data?.user)
               setIsEditing(false)
               setInfoDisplay("profile")
