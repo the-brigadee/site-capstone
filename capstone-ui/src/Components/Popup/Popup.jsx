@@ -6,7 +6,7 @@ import { useNavigate } from 'react-router-dom'
 
 export default function Popup(){
     //needed functions from useAuthNavContext
-    const {popupType, closePopup, showRegisterForm, showLoginForm, error, setError, setUser, isLoading, setIsLoading, user, isPwChanged, setIsPwChanged} = useAuthNavContext()
+    const {popupType, closePopup, showRegisterForm, showLoginForm, error, setError, setUser, isLoading, setIsLoading, user, isPwChanged, setIsPwChanged, setMealPlan, getMealPlan} = useAuthNavContext()
     const [form, setForm] = React.useState({
         email: "",
         password: "",
@@ -104,7 +104,6 @@ export default function Popup(){
             dataUse = data
             errorUse = error
             
-            
         }
                 
         if (errorUse) {
@@ -121,7 +120,9 @@ export default function Popup(){
         if(popupType!=="MealPlanner"){
             navigate("/")
         }else if(popupType==="MealPlanner"){
-            closePopup()
+            //Going to be used for the Meal Planner Page to close the popup and update the mealplanner
+            closePopup();
+            getMealPlan();
         }
         
     }
