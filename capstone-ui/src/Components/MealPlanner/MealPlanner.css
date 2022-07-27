@@ -38,29 +38,36 @@
 
 }
 
-.MealPlannerPage .recipes{
-    border: 5px solid var(--border-color);
-    border-radius: 20px;
-    min-width:164px;
+.MealPlannerPage .recipes {
+    border: 1px solid var(--border-color);
+    box-shadow: 0px 0px 6px lightgrey;
+    border-radius: 12px;
+    min-width: 164px;
     min-height: 200px;
     padding: 5%;
-    margin:2%;
-
+    margin: 2%;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
 }
 
-.MealPlannerPage .recipes .recipe{
+.MealPlannerPage .recipes .recipe {
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
-    border: none;
     height: 27px;
     font-size: 15px;
-    background: var(--primary-color);
-    border-radius: 15px;
+    border-radius: 12px;
     padding: 8px;
-    color: white;
+    border: 1px solid var(--border-color);
+    box-shadow: 0px 0px 3px lightgray;
 
+    overflow: hidden;
+    background: linear-gradient(to right, rgba(12, 12, 12, 0.932), rgba(12, 12, 12, 0.932) 50%, white 50%);
+    background-size: 201% 100%;
+    background-position: 100%;
+    transition: background-position 275ms ease;
 }
 
 .MealPlannerPage .recipes .recipe button{
@@ -94,4 +101,41 @@
     background: var(--primary-color);
     color: white;
     width: auto;
+}
+
+.MealPlannerPage .recipes .recipe button:hover {
+    background-color: var(--primary-color);
+    color: white;
+    border-radius: 6px;
+}
+
+.MealPlannerPage .recipes .recipe:hover button{
+    background-color: var(--primary-color);
+    color: white;
+    border-radius: 6px;
+}
+
+.MealPlannerPage .recipes .recipe:hover {
+    box-shadow: 0px 0px 3px lightgray;
+    background-position: 0 100%;
+    animation: planhovered .10s ease-out;
+    transform: translateX(4px);
+    border-radius: 15px;
+    border: 1px solid black;
+}
+
+.MealPlannerPage .recipes .recipe:hover *{
+    color: white;
+}
+
+@keyframes planhovered {
+    0%{
+        transform: translateY(0);
+    }
+    89%{
+        transform: translateX(8px);
+    }
+    100%{
+        transform: translateX(4px);
+    }
 }
