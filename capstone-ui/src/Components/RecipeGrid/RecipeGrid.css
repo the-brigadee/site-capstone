@@ -11,9 +11,10 @@
     display: flex;
     flex-direction: column;
     border-radius: 14px;
+}
+
+.recipe-over .recipe-container{
     width: inherit;
-    /* height: 65.5% */
-    /*  Change this if you don't don't like the look, this is the gray portion on the recommended section */
 }
 
 .recipe-over{
