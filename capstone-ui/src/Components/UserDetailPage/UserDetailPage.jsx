@@ -135,7 +135,7 @@ function ProfileMain({user, showLoginForm, setError, profileId, displayType, han
 
         {/* profile image */}
         <div className="profile-detail-image">
-          <img src={profile.image_url ? profile.image_url : "https://cdn.icon-icons.com/icons2/933/PNG/512/round-account-button-with-user-inside_icon-icons.com_72596.png"} alt="profile " className={profile.image_url ? "" : "default"}/>
+          <img src={profile.image_url ? profile.image_url : "https://toppng.com/uploads/preview/circled-user-icon-user-pro-icon-11553397069rpnu1bqqup.png"} alt="profile " className={profile.image_url ? "" : "default"}/>
         </div>
 
         {/* profile text info */}
@@ -160,22 +160,22 @@ function ProfileMain({user, showLoginForm, setError, profileId, displayType, han
           <div className="follow-to-following">
             <div className="num-following">
             <button onClick={ () => {toFollowOrFollowing(profile.num_following, "following")}
-              } ><img src="https://cdn.icon-icons.com/icons2/1304/PNG/512/arrow_86002.png" alt="following" /> {profile.num_following} following</button>
+              } ><img src="https://img.icons8.com/external-simple-line-edt.graphics/344/external-Arrow-arrows-simple-line-edt.graphics.png" alt="following" /> {profile.num_following} following</button>
             </div>
 
             <div className="num-followers">
-              <button onClick={ () => {toFollowOrFollowing(profile.num_followers, "followers")}}> <img src="https://cdn.icon-icons.com/icons2/1304/PNG/512/arrow_86002.png" alt="followers " /> {profile.num_followers} followers </button>
+              <button onClick={ () => {toFollowOrFollowing(profile.num_followers, "followers")}}> <img src="https://img.icons8.com/external-simple-line-edt.graphics/344/external-Arrow-arrows-simple-line-edt.graphics.png" alt="followers " /> {profile.num_followers} followers </button>
             </div>
           </div>
 
           {/*  the saved recipes, owned recipes, follow  & following buttonw */}
 
           <div className="profile-detail-page-interaction">
-            {displayType === "Saved" 
+            {displayType === "Owned" 
             ? 
-            <button className='detail-saved-recipes' onClick={handleSavedOwnedRecipes}> <img src="https://cdn.icon-icons.com/icons2/3544/PNG/512/saved_icon_224568.png" alt="" /> saved recipes </button>
+            <button className='detail-saved-recipes' onClick={handleSavedOwnedRecipes}> <img src="https://cdn.iconscout.com/icon/free/png-256/save-3244517-2701888.png" alt="" /> saved recipes </button>
             :
-            <button className="detail-owned-recipes" onClick={handleSavedOwnedRecipes}> owned recipes </button>
+            <button className="detail-owned-recipes" onClick={handleSavedOwnedRecipes}>  <img src="https://www.iconpacks.net/icons/1/free-wrench-icon-951-thumb.png" alt="" /> owned recipes </button>
             }
             {profile.profile_id === userCheck.id 
             ?
@@ -183,12 +183,11 @@ function ProfileMain({user, showLoginForm, setError, profileId, displayType, han
             :
             followingOrNot
             ? 
-            <button className="detail-following-button" onClick={handleOnClickFollowingBtn}> <img src="https://cdn.icon-icons.com/icons2/3256/PNG/512/user_follow_icon_205819.png" alt="" /> Following </button>
+            <button className="detail-following-button" onClick={handleOnClickFollowingBtn}> <img src="https://cdn.icon-icons.com/icons2/2367/PNG/512/user_unfollow_icon_143481.png" alt="unfollow button" /> unfollow </button>
             :
-            <button className="detail-follow-button" onClick={handleOnClickFollowingBtn}> <img src="https://cdn.icon-icons.com/icons2/2367/PNG/512/user_follow_icon_143485.png" alt="" /> Follow </button>
+            <button className="detail-follow-button" onClick={handleOnClickFollowingBtn}> <img src="https://cdn.icon-icons.com/icons2/2367/PNG/512/user_follow_icon_143485.png" alt="follow button" /> follow </button>
             }
           </div>
-
 
         </div>
       </div>

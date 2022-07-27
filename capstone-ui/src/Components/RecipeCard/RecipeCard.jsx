@@ -47,7 +47,7 @@ export default function RecipeCard({title, recipe_url, recipe_id, ownername, own
             </Link> 
             : 
             <Link to={`/profile/${owner_id}`}>
-              <img src="https://cdn.icon-icons.com/icons2/933/PNG/512/round-account-button-with-user-inside_icon-icons.com_72596.png" alt="Recipe owner image" className='default'/>
+              <img src="https://toppng.com/uploads/preview/circled-user-icon-user-pro-icon-11553397069rpnu1bqqup.png" alt="Recipe owner image" className='default'/>
             </Link>
               }
         </div>

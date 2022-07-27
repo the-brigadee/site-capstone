@@ -105,7 +105,7 @@
 .num-following button img{
     width: 15px;
     height: 15px;
-    transform: rotateZ(0deg);
+    transform: rotateZ(45deg);
     filter: invert(1);
 }
 .num-following button{
@@ -124,7 +124,7 @@
 .num-followers button img{
     width: 15px;
     height: 15px;
-    transform: rotateZ(180deg);
+    transform: rotateZ(225deg);
     filter: invert(1);
 }
 .num-followers button{
@@ -138,4 +138,8 @@
     display: flex;
     align-items: center;
     gap: 10px;
+}
+
+.profile-detail-page-interaction button img{
+    filter: invert(1);
 }
