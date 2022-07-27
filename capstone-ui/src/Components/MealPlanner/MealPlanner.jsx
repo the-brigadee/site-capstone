@@ -6,7 +6,7 @@ import Overlay from '../Overlay/Overlay'
 
 
 export default function MealPlanner({imageUrl}) {
-  const {error, setError, isLoading, setIsLoading, user, showMealPlannerForm, mealPlan, setMealPlan, getMealPlan} = useAuthNavContext()
+  const {error, setError, isLoading, setIsLoading, user, showMealPlannerForm, mealPlan, setMealPlan, getMealPlan, deleteallgetMealPlan, deleteMealPlan} = useAuthNavContext()
 
   //Imported getMealPlan from authNav to get Meal Plan for the current user
   React.useEffect(()=>{
@@ -22,9 +22,9 @@ return (
                <div className="background">
                   <p><b>Sunday</b></p>
                   <div className="recipes">
-                     {mealPlan?.map((idx) =>{
+                        {mealPlan?.map((idx) =>{
                         if(idx?.weekday==="Sunday"){
-                           return <li key={idx?.id}>{idx?.name}</li>
+                           return <div className="recipe" key={idx?.id}><Link style={{textDecoration: 'none'}} to={`/recipe/${idx.recipe_id}`}><p>{idx?.name}</p></Link><button onClick={()=>{deleteMealPlan(idx.id);}}><b>X</b></button></div>
                         }
                      })}
                   </div>
@@ -36,7 +36,7 @@ return (
                   <div className="recipes">
                   {mealPlan?.map((idx) =>{
                         if(idx?.weekday==="Monday"){
-                           return <li key={idx?.id}>{idx?.name}</li>
+                           return <div className="recipe" key={idx?.id}><Link style={{textDecoration: 'none'}} to={`/recipe/${idx.recipe_id}`}><p>{idx?.name}</p></Link><button onClick={()=>{deleteMealPlan(idx.id);}}><b>X</b></button></div>
                         }
                      })}
                   </div>
@@ -48,7 +48,7 @@ return (
                   <div className="recipes">
                   {mealPlan?.map((idx) =>{
                         if(idx?.weekday==="Tuesday"){
-                           return <li key={idx?.id}>{idx?.name}</li>
+                           return <div className="recipe" key={idx?.id}><Link style={{textDecoration: 'none'}} to={`/recipe/${idx.recipe_id}`}><p>{idx?.name}</p></Link><button onClick={()=>{deleteMealPlan(idx.id);}}><b>X</b></button></div>
                         }
                      })}
                   </div>
@@ -60,7 +60,7 @@ return (
                   <div className="recipes">
                   {mealPlan?.map((idx) =>{
                         if(idx?.weekday==="Wednesday"){
-                           return <li key={idx?.id}>{idx?.name}</li>
+                           return <div className="recipe" key={idx?.id}><Link style={{textDecoration: 'none'}} to={`/recipe/${idx.recipe_id}`}><p>{idx?.name}</p></Link><button onClick={()=>{deleteMealPlan(idx.id);}}><b>X</b></button></div>
                         }
                      })}
                   </div>
@@ -72,7 +72,7 @@ return (
                   <div className="recipes">
                   {mealPlan?.map((idx) =>{
                         if(idx?.weekday==="Thursday"){
-                           return <li key={idx?.id}>{idx?.name}</li>
+                           return <div className="recipe" key={idx?.id}><Link style={{textDecoration: 'none'}} to={`/recipe/${idx.recipe_id}`}><p>{idx?.name}</p></Link><button onClick={()=>{deleteMealPlan(idx.id);}}><b>X</b></button></div>
                         }
                      })}
                   </div>
@@ -84,7 +84,7 @@ return (
                   <div className="recipes">
                   {mealPlan?.map((idx) =>{
                         if(idx?.weekday==="Friday"){
-                           return <li key={idx?.id}>{idx?.name}</li>
+                           return <div className="recipe" key={idx?.id}><Link style={{textDecoration: 'none'}} to={`/recipe/${idx.recipe_id}`}><p>{idx?.name}</p></Link><button onClick={()=>{deleteMealPlan(idx.id);}}><b>X</b></button></div>
                         }
                      })}
                   </div>
@@ -96,7 +96,7 @@ return (
                   <div className="recipes">
                   {mealPlan?.map((idx) =>{
                         if(idx?.weekday==="Saturday"){
-                           return <li key={idx?.id}>{idx?.name}</li>
+                           return <div className="recipe" key={idx?.id}><Link style={{textDecoration: 'none'}} to={`/recipe/${idx.recipe_id}`}><p>{idx?.name}</p></Link><button onClick={()=>{deleteMealPlan(idx.id);}}><b>X</b></button></div>
                         }
                      })}
                   </div>
@@ -104,8 +104,11 @@ return (
             </div>
          </div>
          <div className="button">
-               <button className="footer-btn recipeadd" disabled={isLoading} onClick={()=>{showMealPlannerForm();getMealPlan();}}>
+               <button className="footer-btn recipeadd" disabled={isLoading} onClick={()=>{showMealPlannerForm();}}>
                   {isLoading ? "Loading..." : "Add Recipe"}
+               </button>
+               <button className="footer-btn deletemealplan" disabled={isLoading} onClick={()=>{deleteallgetMealPlan();}}>
+                  {isLoading ? "Loading..." : "Reset Mealplan"}
                </button>
             <Overlay />
          </div>
