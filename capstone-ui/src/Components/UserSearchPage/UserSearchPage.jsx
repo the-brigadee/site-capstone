@@ -12,11 +12,20 @@ export default function UserSearchPage() {
   const [usersList, setUsersList] = React.useState([])
 
   //get searchWord from the authNavContext
-  const {searchWord} = useAuthNavContext()
+  const {searchWord, resultsType} = useAuthNavContext()
 
   React.useEffect(() => {
     async function run(){
+      if(resultsType === "randomuser"){
 
+        //Call the corresponding api request
+        const {data, error} = await ApiClient.getRandomUser()
+        // If there is an error send it to the console
+        if(error) console.error(error)
+
+        //If there is data, set recipe list to it
+        if(data) setUsersList(data.result)
+        }
       //Call the corresponding api request
       const {data, error} = await ApiClient.userSearch(searchWord.replace(/ /g, '%20'))
 

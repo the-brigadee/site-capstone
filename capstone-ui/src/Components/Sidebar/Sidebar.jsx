@@ -1,9 +1,11 @@
 import * as React from 'react'
-import {Link} from 'react-router-dom'
+import {Link, useNavigate} from 'react-router-dom'
 import CategoryDropdown from '../CategoryDropdown/CategoryDropdown'
 import './Sidebar.css'
+import { useAuthNavContext } from '../../Contexts/authNav'
 
 export default function Sidebar(){
+    const navigate = useNavigate()
     
     // Variable to control the expanding and collapsing of the sidebar
     const [isExpand, setIsExpanded] = React.useState(false) 
@@ -11,6 +13,8 @@ export default function Sidebar(){
     // Variable to control the dropdown of the category button on the sidebar
     const [isDropped, setIsDropped] = React.useState(false) 
 
+    // setResultsType from the auth context 
+    const {setResultsType} = useAuthNavContext()
 
     // Function that handles sidebar expansion and collapse
     const handleSidebarExpansion = (event) => {
@@ -53,6 +57,25 @@ export default function Sidebar(){
         setIsDropped(false)
     }
 
+    const handleSidebarOnClick = (name) => {
+
+       if( name.includes("user")){
+        // set the resultstype to name
+        setResultsType(name)
+
+        // navigate to the search link
+        navigate('/usersearch')
+        console.log(5)
+        return
+       }
+
+        // set the resultstype to name
+        setResultsType(name)
+
+        // navigate to the search link
+        navigate('/search')
+    }
+
     return(
 
         // The container for all the sidebar components
@@ -80,28 +103,30 @@ export default function Sidebar(){
 
 
                 {/* Recent button */}
-                <Link to='/'>
-                    <img src="https://www.shareicon.net/data/512x512/2015/09/28/108596_clock_512x512.png" alt="recent" />
-                    {isExpand ? <p> Recents </p> : <></>}   
-                </Link>
+                    <div className='toppy' onClick={() => {handleSidebarOnClick('recents')}}>
+                        <img src="https://www.shareicon.net/data/512x512/2015/09/28/108596_clock_512x512.png" alt="recent" />
+                        {isExpand ? <p> Recents </p> : <></>}   
+                    </div>
 
-                {/* Top Rated button */}
-                <Link to='/'>
+                {/* Top Rated button
+                <div className='toppy' onClick={() => {handleSidebarOnClick('recents')}}>
+
                     <img src="https://cdn-icons-png.flaticon.com/512/3629/3629632.png" alt="top rated" />  
                     {isExpand ? <p> Top Rated </p> : <></>} 
-                </Link>
+                </div> */}
                 
                 {/* Search Users button */}
                 
-                <Link to='/'>
+                <div className='toppy' onClick={() => {handleSidebarOnClick('randomuser')}}>
+
                     <img src="https://icons-for-free.com/iconfiles/png/512/person+user+icon-1320166085409390336.png" alt="search users" />
                     {isExpand ? <p> Users </p> : <></>}    
-                </Link>
+                </div>
                 
                 {/* Liked Recipe button */}
-                <Link to='/'>
-                    <img src="https://cdn-icons-png.flaticon.com/512/1077/1077035.png" alt="liked recipes" /> 
-                    {isExpand ? <p> Like </p> : <></>} 
+                <Link to='/about'>
+                    <img src="https://w7.pngwing.com/pngs/69/977/png-transparent-retail-shop-fitting-metal-about-us-icon-cdr-retail-eps-thumbnail.png" alt="liked recipes" /> 
+                    {isExpand ? <p> About us </p> : <></>} 
                 </Link>
                 
             </div>

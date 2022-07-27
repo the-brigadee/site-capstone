@@ -84,4 +84,30 @@ router.get("/recipes", async function (req, res, next) {
   }
 })
 
+router.get("/recent", async function (req, res, next) {
+  try {
+    const result = await Search.getRecentRecipes()
+
+    console.log(result)
+    res.status(200).json({result})
+  } catch (err) {
+      next(err)
+  }
+})
+
+router.get("/user", async function (req, res, next) {
+  try {
+
+    //get the user id from res.locals if they are logged in if not set user_id to null 
+    const user_id = res.locals?.user ? res.locals?.user.user_id : null
+    // call the search function here
+    const result = await Search.randomUser(user_id)
+
+    console.log(result)
+    res.status(200).json({result})
+  } catch (err) {
+      next(err)
+  }
+})
+
 module.exports=router;

@@ -15,6 +15,7 @@ import UserDetailPage from '../UserDetailPage/UserDetailPage';
 import MealPlanner from '../MealPlanner/MealPlanner';
 import apiClient from '../../Services/ApiClient';
 import FollowPage from '../FollowPage/FollowPage';
+import AboutUs from '../AboutUs/AboutUs';
 
 
 export default function AppContainer(){
@@ -79,6 +80,7 @@ function App() {
               <Route path='/profile/:profileId' element={<UserDetailPage />}/>
               <Route path='/mealplanner' element={<MealPlanner />}/>
               <Route path='/profile/:profileId/:followType' element={<FollowPage />} />
+              <Route path='/about' element={<AboutUs />} />
               <Route path='*' element={<NotFound />}/>
             </Routes>
 

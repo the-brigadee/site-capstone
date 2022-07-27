@@ -129,7 +129,18 @@ class ApiClient {
         return await this.request({endpoint: `auth/update`, method: `PUT`, data:creds})}
 
     async updatePassword(creds){
-        return await this.request({endpoint: `auth/update/password`, method: `PUT`, data:creds})}
+        return await this.request({endpoint: `auth/update/password`, method: `PUT`, data:creds})
+    }
+
+    // the function that retrieves recipes with a specific filter
+    async recipeRecent(){
+        return await this.request({ endpoint: `search/recent`, method: `GET`, data:{} })
+    }
+
+    // the function that retrieves recipes with a specific filter
+    async getRandomUser(){
+        return await this.request({ endpoint: `search/user`, method: `GET`, data:{} })
+    }
 }
 
 export default new ApiClient("http://localhost:3001")

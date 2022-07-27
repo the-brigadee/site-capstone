@@ -65,6 +65,20 @@
     gap: 8px;
 }
 
+.sidebar-closed-contents .toppy{
+    background-color: transparent;
+    display: flex;
+    justify-content: center;
+    outline: none;
+    border: 0px;
+    flex-direction: row;
+    cursor: pointer;
+    text-decoration: none;
+    color: black;
+    align-items: flex-end;
+    gap: 8px;
+}
+
 .sidebar-closed-contents button img{
     width: 35px;
     height: 35px;
@@ -72,6 +86,12 @@
 }
 
 .sidebar-closed-contents a img{
+    width: 35px;
+    height: 35px;
+    cursor: pointer;
+}
+
+.sidebar-closed-contents .toppy img{
     width: 35px;
     height: 35px;
     cursor: pointer;
@@ -130,6 +150,22 @@
     gap: 8px;
 }
 
+.sidebar-open-contents .toppy{
+    /* max-width: 62px; */
+    /* height: 48px; */
+    background-color: transparent;
+    display: flex;
+    justify-content: flex-start;
+    outline: none;
+    border: 0px;
+    flex-direction: row;
+    cursor: pointer;
+    text-decoration: none;
+    color: black;
+    align-items: flex-end;
+    gap: 8px;
+}
+
 .sidebar-open-contents button p{
     margin: 0px;
     font-size: 1.2rem
@@ -137,6 +173,11 @@
 
 
 .sidebar-open-contents a p{
+    margin: 0px;
+    font-size: 1.2rem
+}
+
+.sidebar-open-contents .toppy p{
     margin: 0px;
     font-size: 1.2rem
 }
@@ -153,6 +194,12 @@
     cursor: pointer;
 }
 
+.sidebar-open-contents .toppy img{
+    width: 35px;
+    height: 35px;
+    cursor: pointer;
+}
+
 #category-dropdown{
     width: 20px;
     height: 20px;
@@ -161,4 +208,19 @@
 
 .drop{
     transform: rotateZ(90deg);
+}
+
+.toppy {
+    display: flex;
+    justify-content: flex-start;
+    color: black;
+    align-items: center;
+    gap: 8px;
+    border: 0px;
+    flex-direction: row;
+    cursor: pointer;
+    text-decoration: none;
+    color: black;
+    align-items: flex-end;
+    gap: 8px;
 }

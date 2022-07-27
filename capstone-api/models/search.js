@@ -115,6 +115,61 @@ class Search{
          //return the result
          return result.rows
     }
+
+    static async getRecentRecipes(){
+
+         const result = await db.query(`
+         SELECT name,
+            reci.id, 
+            reci.description,
+            reci.created_at, 
+            reci.updated_at, 
+            reci.image_url as recipe_url, 
+            username as owner, 
+            users.image_url as user_url,
+            users.id as user_id
+        FROM recipe reci 
+        JOIN users ON reci.user_id=users.id
+        ORDER BY reci.updated_at
+        LIMIT 25
+        ;
+         `)
+ 
+         //return the result
+         return result.rows
+    }
+
+    static async randomUser(my_id){
+       
+         const result = await db.query(`
+            SELECT users.id as user_id, 
+                users.username as username,
+                users.image_url as image_url,
+                users.description as description,
+                (SELECT count(*) 
+                    FROM recipe r 
+                    WHERE r.user_id = users.id
+                    ) as total_recipe,
+                ( SELECT count(*) 
+                    FROM follower_to_following ftf  
+                    WHERE ftf.following_id = users.id
+                    ) as num_following, 
+                (SELECT following_id 
+                    FROM 
+                    (SELECT ftf.following_id, 
+                            ftf.followed_id 
+                            FROM follower_to_following ftf 
+                            WHERE ftf.followed_id=users.id
+                    ) as user_follow WHERE following_id=$1
+                ) as is_following
+            FROM users 
+            WHERE random() > 0.27
+            LIMIT 25
+         `,[my_id])
+ 
+         //return the result    
+         return result.rows
+    }
 }
 
 module.exports=Search

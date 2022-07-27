@@ -73,20 +73,38 @@ export default function ResultPage() {
     }
     else {
       
-      //  Make filter options invisible when coming from sidebar
-      setDisplayFilter(false)
+      if(resultsType === "sidebar"){
+        //  Make filter options invisible when coming from sidebar
+        setDisplayFilter(false)
 
-      //Call the corresponding api request
-      const {data, error} = await ApiClient.recipeCategory(currCategory.replace(/ /g, '%20'))
-      // If there is an error send it to the console
-      if(error) console.error(error)
+        //Call the corresponding api request
+        const {data, error} = await ApiClient.recipeCategory(currCategory.replace(/ /g, '%20'))
+        // If there is an error send it to the console
+        if(error) console.error(error)
 
-      //If there is data, set recipe list to it
-      if(data) setRecipeList(data.result)
+        //If there is data, set recipe list to it
+        if(data) setRecipeList(data.result)
 
-      // Create the banner content
-      setBannerContent(`Available ${currCategory} Dishes`)
-    }
+        // Create the banner content
+        setBannerContent(`Available ${currCategory} Dishes`)
+      }
+
+      if(resultsType === "recents"){
+        //  Make filter options invisible when coming from sidebar
+        setDisplayFilter(true)
+
+        //Call the corresponding api request
+        const {data, error} = await ApiClient.recipeRecent()
+        // If there is an error send it to the console
+        if(error) console.error(error)
+
+        //If there is data, set recipe list to it
+        if(data) setRecipeList(data.result)
+        }
+
+        
+      }
+    
   }
     
   // run the above function
