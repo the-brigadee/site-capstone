@@ -79,7 +79,7 @@ class User{
     }
 
     static async updateProfile(credentials){
-        console.log(credentials)
+        
         // updating user's profile image with an image file
         if (credentials?.image_file) {
             const results = await db.query(`
