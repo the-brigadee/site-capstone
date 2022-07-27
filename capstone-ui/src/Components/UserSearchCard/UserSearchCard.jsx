@@ -69,7 +69,7 @@ return (
         {/* displays the result card */}
         <div className="result-user-image">
                     {/* Load the main image here */}
-                    <img src={people.image_url ? people.image_url : "https://cdn.icon-icons.com/icons2/933/PNG/512/round-account-button-with-user-inside_icon-icons.com_72596.png"} alt="user profile" className={people.image_url ? "" : "default"}/>
+                    <img src={people.image_url ? people.image_url : "https://toppng.com/uploads/preview/circled-user-icon-user-pro-icon-11553397069rpnu1bqqup.png"} alt="user profile" className={people.image_url ? "" : "default"}/>
                 
             </div>
 
@@ -113,8 +113,8 @@ return (
                         // {/* conditionally render the following or followers button */}
                         <div className="result-followbtn">
                             {followingOrNot ? 
-                            <button onClick={handleOnClickFollowingBtn}> Following </button> :
-                            <button onClick={handleOnClickFollowingBtn}> Follow </button>}
+                            <button onClick={handleOnClickFollowingBtn}> <img src="https://cdn.icon-icons.com/icons2/2367/PNG/512/user_unfollow_icon_143481.png" alt="unfollow button" /> unfollow </button> :
+                            <button onClick={handleOnClickFollowingBtn}> <img src="https://cdn.icon-icons.com/icons2/2367/PNG/512/user_follow_icon_143485.png" alt="follow button" />  follow </button>}
                         </div>
                     }
                     
