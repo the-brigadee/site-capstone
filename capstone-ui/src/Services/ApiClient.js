@@ -143,10 +143,10 @@ class ApiClient {
     }
 
     // the function that retrieves recipes with a specific filter
-<<<<<<< Updated upstream
     async deleteUser(creds){
         return await this.request({ endpoint: `auth/delete`, method: `DELETE`, data:{creds}})
-=======
+    }
+    
     async getSuggestion(word){
         return await this.request({ endpoint: `mealplanner/suggestion/${word}`, method: `GET`, data:{} })
     }
@@ -154,7 +154,6 @@ class ApiClient {
     // the function that retrieves recipes with a specific filter
     async getRecipeIdByName(name){
         return await this.request({ endpoint: `mealplanner/getid/${name}`, method: `GET`, data:{} })
->>>>>>> Stashed changes
     }
 }
 
