@@ -104,7 +104,7 @@ export const AuthNavContextProvider = ({children}) =>{
      }
 
     //Function to delete all recipes from meal plan page
-    const deleteallgetMealPlan = async () => {
+    const deleteAllGetMealPlan = async () => {
         const {error} = await ApiClient.deleteAllMealPlan()
               if (error) setError((e) => ({ ...e, mealplanner: error }))
               if(!error){
@@ -146,7 +146,7 @@ export const AuthNavContextProvider = ({children}) =>{
         transition, setTransition,
         userDetails, setUserDetails,
         file, setFile,
-        mealPlan, setMealPlan, getMealPlan, deleteallgetMealPlan, deleteMealPlan, showMealPlannerAddForm,
+        mealPlan, setMealPlan, getMealPlan, deleteAllGetMealPlan, deleteMealPlan, showMealPlannerAddForm,
         deleteAction, setDeleteAction
     }
 

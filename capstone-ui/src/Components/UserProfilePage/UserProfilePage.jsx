@@ -71,11 +71,11 @@ export default function UserProfilePage() {
   const [recipesDisplay, setRecipesDisplay] = React.useState("Created")
 
   const [form, setForm] = React.useState({
-    first_name: user.first_name,
-    last_name: user.last_name,
-    username: user.username,
-    dob: user.dob,
-    bio: user.description,
+    first_name: "",
+    last_name: "",
+    username: "",
+    dob: "",
+    bio: "",
     old_password: "",
     new_password: "",
     confirm_password: "",
@@ -153,6 +153,7 @@ export default function UserProfilePage() {
           })
           if (error) {
             setError((e) => ({ ...e, profile: error }))
+            
             setIsLoading(false)
             return
             }

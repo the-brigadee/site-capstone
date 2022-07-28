@@ -6,7 +6,7 @@ import { useNavigate, useParams } from 'react-router-dom'
 
 export default function Popup(){
     //needed functions from useAuthNavContext
-    const {popupType, closePopup, showRegisterForm, showLoginForm, error, setError, setUser, isLoading, setIsLoading, user, setMealPlan, getMealPlan, deleteAction, setDeleteAction} = useAuthNavContext()
+    const {popupType, closePopup, showRegisterForm, showLoginForm, error, setError, setUser, isLoading, setIsLoading, user, setMealPlan, getMealPlan, deleteAction, setDeleteAction, deleteAllGetMealPlan} = useAuthNavContext()
     const [form, setForm] = React.useState({
         email: "",
         password: "",
@@ -169,10 +169,24 @@ export default function Popup(){
             const {data, error} = await apiClient.deleteUser({
                 user_id: user.id
             })
+            if (error) { 
+                setError((e) => ({ ...e, userDelete: error }))
+                return
+            }
+            handleLogout()
+        } else if (deleteAction === "mealPlan") {
+            deleteAllGetMealPlan()
+        } else if (deleteAction === "recipe") {
+            const {data, error} = await apiClient.recipeDelete(recipeId)
+            if (error) {
+                setError((e) => ({ ...e, recipeDelete: error }))
+                return
+            }
+            navigate("/")
         }
         setDeleteAction("")
         closePopup()
-        handleLogout()
+        
         setIsLoading(false)
     }
 
@@ -305,12 +319,18 @@ export default function Popup(){
     } else if (popupType === "Confirm") {
         formHTML = <div className="delete-confirm">
         <div className="delete-header">
-            <h3>Delete Account</h3>
-            <span>Are you sure you want to delete your account? [Caution:] This action is irreversible! </span>
+            {deleteAction === "account" ? <h3>Delete Account</h3> : null}
+            {deleteAction === "mealPlan" ? <h3>Reset Meal Plan</h3> : null}
+            {deleteAction === "recipe" ? <h3>Delete Recipe</h3> : null}
+            {deleteAction === "account" ? <span>Are you sure you want to delete your account? [Caution:] This action is irreversible! </span> : null}
+            {deleteAction === "mealPlan" ? <span>Are you sure you want to reset your meal plan? [Caution:] This action is irreversible! </span> : null}
+            {deleteAction === "recipe" ? <span>Are you sure you want to delete this recipe? [Caution:] This action is irreversible! </span> : null}
         </div>
         <div className="delete-footer">
             <button onClick={closePopup}>Cancel</button>
-            <button onClick={handleOnConfirm}>Delete Account</button>
+            {deleteAction === "account" ? <button onClick={handleOnConfirm}>Delete Account</button> : null}
+            {deleteAction === "mealPlan" ? <button onClick={handleOnConfirm}>Reset Meal Plan </button> : null}
+            {deleteAction === "recipe" ? <button onClick={handleOnConfirm}>Delete Recipe</button> : null}
         </div>
     </div>
     }
@@ -319,7 +339,8 @@ export default function Popup(){
         <div className="popup-container" >
             <div className={`popup-card ${popupType.toLowerCase()}`} onClick={(e) => e.stopPropagation()}>
                 <button className="close-btn" onClick={(e) => {e.stopPropagation();closePopup();}}>&times;</button>
-                <h1>{popupType}</h1>
+                {popupType === "Login" || popupType === "Register" || popupType === "Confirm" ? <h1>{popupType}</h1> : null}
+                {popupType === "MealPlanner" || popupType === "MealPlannerAdd" ? <h1>Add to Meal Plan</h1> : null}
                 {(error?.form) ? <span className="error">{error?.form}</span> : null}
                 {(error?.email !== null && form.email !== "") ? <span className="error">Please enter a valid email.</span> : null}
                 {formHTML}
