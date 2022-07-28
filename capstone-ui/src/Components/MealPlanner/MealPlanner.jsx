@@ -6,7 +6,7 @@ import Overlay from '../Overlay/Overlay'
 
 
 export default function MealPlanner({imageUrl}) {
-  const {error, setError, isLoading, setIsLoading, user, showMealPlannerForm, mealPlan, setMealPlan, getMealPlan, deleteallgetMealPlan, deleteMealPlan} = useAuthNavContext()
+  const {isLoading, showMealPlannerForm, mealPlan, getMealPlan, deleteallgetMealPlan, deleteMealPlan} = useAuthNavContext()
 
   //Imported getMealPlan from authNav to get Meal Plan for the current user
   React.useEffect(()=>{
@@ -26,7 +26,7 @@ return (
                         if(idx?.weekday==="Sunday"){
                            return <div className="recipe" key={idx?.id}><Link style={{textDecoration: 'none'}} to={`/recipe/${idx.recipe_id}`}><p>{idx?.name}</p></Link><button onClick={()=>{deleteMealPlan(idx.id);}}><b>X</b></button></div>
                         }
-                     })}
+                        })}
                   </div>
                </div>
             </div>

@@ -15,7 +15,7 @@ export default function RecipeDetail() {
    * Use React useEffect to get more details of the recipe from the API backend.
    */
    const [recipe, setRecipe] = React.useState([])
-   const {setError, user} = useAuthNavContext()
+   const {setError, user, showMealPlannerAddForm} = useAuthNavContext()
    React.useEffect(() => {
        const getRecipeById = async () => {
            const {data, error} = await apiClient.recipeById(recipeId)
@@ -45,7 +45,7 @@ function RecipeMain(recipe){
   const [savedrecipe, setSavedRecipe] = React.useState([])
   const [isSaved, setIsSaved] = React.useState(false)
   const {recipeId} = useParams()
-  const {setError, user, showLoginForm} = useAuthNavContext()
+  const {setError, user, showLoginForm, showMealPlannerAddForm} = useAuthNavContext()
 
     const saveRecipe = async () => {
       if(!user?.email){
@@ -125,7 +125,7 @@ function RecipeMain(recipe){
 
         {/* Recipe Edit buttons */}
         <div className="recipe-edit-buttons">
-          <button> Add Plan </button>
+          <button onClick={()=>{showMealPlannerAddForm();}}> Add Plan </button>
           {isSaved && user?.email ? <button onClick={()=>{saveRecipe(); setIsSaved(false)}}> Unsave </button> :<button onClick={()=>{saveRecipe();setIsSaved(true)}}> Save </button>}
           <button> Review </button>
           {/* Recipe Delete button */}
