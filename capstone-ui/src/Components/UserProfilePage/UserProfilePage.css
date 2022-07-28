@@ -12,19 +12,25 @@ Entire Container
 .user-profile {
     display: flex;
     flex-direction: row;
-    background-color:lightgray;
+    background-color: transparent;
     border-radius: 14px;
-    padding: 10px;
+    border: 1px solid var(--border-color);
+    padding: 28px;
+    box-shadow: 0px 0px 10px lightgray;
 }
 
 /*-------------------------------
  Left profile side (img and facts)
  ------------------------------- */
-.left-profile {
+ .left-profile {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    flex: 0.5;
+    border: 3px solid var(--border-color);
+    /* box-shadow: 0px 0px 10px lightgray; */
+    border-radius: 14px;
 }
 
 .left-profile img {
@@ -39,9 +45,11 @@ Entire Container
     flex-direction: column;
     background-color: white;
     border-radius: 14px;
-    padding: 5px;
+    padding: 5px 15px;
     margin-top: 8px;
-    width: 95%;
+    justify-content: flex-start;
+    width: 80%;
+    gap: 7px;
 }
 
 .left-profile .user-data h3 {
@@ -55,9 +63,15 @@ Entire Container
 }
 
 .change-img {
-    margin-top: 10px;
-    width: 70%;
-    border-radius: 3px;
+    outline: none;
+    height: 30px;
+    border: 1px solid white;
+    background-color: var(--primary-color);
+    color: white;
+    border-radius: 5px;
+    margin: 10px 5px;
+    box-shadow: 0px 0px 2px lightgray;
+    cursor: pointer;
 }
 
 /*-------------------------------
@@ -73,6 +87,10 @@ Right profile sides (user facts)
     padding: 10px;
     width: 100%;
     justify-content: space-between;
+    flex: 2;
+    border: 3px solid var(--border-color);
+    /* box-shadow: 0px 0px 10px lightgray; */
+    border-radius: 14px;
 }
 
 /*-------------------------------
@@ -210,4 +228,12 @@ Slider styling
     .slick-slider {
         max-width: 1050px !important;
     }
+}
+
+.user-profile button:hover{
+    background-color: gray;
+}
+
+.user-facts span {
+    margin: 5px 0px;
 }

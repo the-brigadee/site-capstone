@@ -21,6 +21,15 @@ export default function MealPlanner({imageUrl}) {
    showPopup()
  }
 
+ const presentableName = (name) => {
+
+   if(!name)
+   return ""
+   if(name.length > 20){
+      return name.substring(0,17) + "..."
+   }
+   return name
+ }
 
 return (
 <div className="MealPlannerPage">
@@ -32,7 +41,7 @@ return (
                   <div className="recipes">
                         {mealPlan?.map((idx) =>{
                         if(idx?.weekday==="Sunday"){
-                           return <div className="recipe" key={idx?.id}><Link style={{textDecoration: 'none'}} to={`/recipe/${idx.recipe_id}`}><p>{idx?.name}</p></Link><button onClick={()=>{deleteMealPlan(idx.id);}}><b>X</b></button></div>
+                           return <div className="recipe" key={idx?.id}><Link style={{textDecoration: 'none'}} to={`/recipe/${idx.recipe_id}`}><p>{presentableName(idx?.name)}</p></Link><button onClick={()=>{deleteMealPlan(idx.id);}}><b>X</b></button></div>
                         }
                         })}
                   </div>
@@ -44,7 +53,7 @@ return (
                   <div className="recipes">
                   {mealPlan?.map((idx) =>{
                         if(idx?.weekday==="Monday"){
-                           return <div className="recipe" key={idx?.id}><Link style={{textDecoration: 'none'}} to={`/recipe/${idx.recipe_id}`}><p>{idx?.name}</p></Link><button onClick={()=>{deleteMealPlan(idx.id);}}><b>X</b></button></div>
+                           return <div className="recipe" key={idx?.id}><Link style={{textDecoration: 'none'}} to={`/recipe/${idx.recipe_id}`}><p>{presentableName(idx?.name)}</p></Link><button onClick={()=>{deleteMealPlan(idx.id);}}><b>X</b></button></div>
                         }
                      })}
                   </div>
@@ -56,7 +65,7 @@ return (
                   <div className="recipes">
                   {mealPlan?.map((idx) =>{
                         if(idx?.weekday==="Tuesday"){
-                           return <div className="recipe" key={idx?.id}><Link style={{textDecoration: 'none'}} to={`/recipe/${idx.recipe_id}`}><p>{idx?.name}</p></Link><button onClick={()=>{deleteMealPlan(idx.id);}}><b>X</b></button></div>
+                           return <div className="recipe" key={idx?.id}><Link style={{textDecoration: 'none'}} to={`/recipe/${idx.recipe_id}`}><p>{presentableName(idx?.name)}</p></Link><button onClick={()=>{deleteMealPlan(idx.id);}}><b>X</b></button></div>
                         }
                      })}
                   </div>
@@ -68,7 +77,7 @@ return (
                   <div className="recipes">
                   {mealPlan?.map((idx) =>{
                         if(idx?.weekday==="Wednesday"){
-                           return <div className="recipe" key={idx?.id}><Link style={{textDecoration: 'none'}} to={`/recipe/${idx.recipe_id}`}><p>{idx?.name}</p></Link><button onClick={()=>{deleteMealPlan(idx.id);}}><b>X</b></button></div>
+                           return <div className="recipe" key={idx?.id}><Link style={{textDecoration: 'none'}} to={`/recipe/${idx.recipe_id}`}><p>{presentableName(idx?.name)}</p></Link><button onClick={()=>{deleteMealPlan(idx.id);}}><b>X</b></button></div>
                         }
                      })}
                   </div>
@@ -80,7 +89,7 @@ return (
                   <div className="recipes">
                   {mealPlan?.map((idx) =>{
                         if(idx?.weekday==="Thursday"){
-                           return <div className="recipe" key={idx?.id}><Link style={{textDecoration: 'none'}} to={`/recipe/${idx.recipe_id}`}><p>{idx?.name}</p></Link><button onClick={()=>{deleteMealPlan(idx.id);}}><b>X</b></button></div>
+                           return <div className="recipe" key={idx?.id}><Link style={{textDecoration: 'none'}} to={`/recipe/${idx.recipe_id}`}><p>{presentableName(idx?.name)}</p></Link><button onClick={()=>{deleteMealPlan(idx.id);}}><b>X</b></button></div>
                         }
                      })}
                   </div>
@@ -92,7 +101,7 @@ return (
                   <div className="recipes">
                   {mealPlan?.map((idx) =>{
                         if(idx?.weekday==="Friday"){
-                           return <div className="recipe" key={idx?.id}><Link style={{textDecoration: 'none'}} to={`/recipe/${idx.recipe_id}`}><p>{idx?.name}</p></Link><button onClick={()=>{deleteMealPlan(idx.id);}}><b>X</b></button></div>
+                           return <div className="recipe" key={idx?.id}><Link style={{textDecoration: 'none'}} to={`/recipe/${idx.recipe_id}`}><p>{presentableName(idx?.name)}</p></Link><button onClick={()=>{deleteMealPlan(idx.id);}}><b>X</b></button></div>
                         }
                      })}
                   </div>
@@ -104,7 +113,7 @@ return (
                   <div className="recipes">
                   {mealPlan?.map((idx) =>{
                         if(idx?.weekday==="Saturday"){
-                           return <div className="recipe" key={idx?.id}><Link style={{textDecoration: 'none'}} to={`/recipe/${idx.recipe_id}`}><p>{idx?.name}</p></Link><button onClick={()=>{deleteMealPlan(idx.id);}}><b>X</b></button></div>
+                           return <div className="recipe" key={idx?.id}><Link style={{textDecoration: 'none'}} to={`/recipe/${idx.recipe_id}`}><p>{presentableName(idx?.name)}</p></Link><button onClick={()=>{deleteMealPlan(idx.id);}}><b>X</b></button></div>
                         }
                      })}
                   </div>
