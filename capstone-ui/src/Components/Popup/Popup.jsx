@@ -142,9 +142,8 @@ export default function Popup(){
             setUser(dataUse?.user)
         }
         setIsLoading(false)
-        if(popupType!=="MealPlanner" && popupType!=="MealPlannerAdd"){
-            navigate("/")
-        }else if(popupType==="MealPlanner"){
+
+        if(popupType==="MealPlanner"){
             //Going to be used for the Meal Planner Page to close the popup and update the mealplanner
             closePopup();
             getMealPlan();
