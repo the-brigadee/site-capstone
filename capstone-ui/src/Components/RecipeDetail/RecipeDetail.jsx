@@ -160,7 +160,11 @@ function RecipeStep(recipe){
         <hr />
         <ul className='ingredients-list'>
           {recipe?.recipe?.ingredients?.split(',').map((element,idx) => {
-              return <li key={idx}>{element}</li>;})}
+            if (element !== "" && element !== " ") {
+              return <li key={idx}>{element}</li>;
+            }
+              
+              })}
         </ul>
       </div>
 
