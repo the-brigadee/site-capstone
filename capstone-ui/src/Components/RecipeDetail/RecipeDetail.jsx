@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { useParams } from 'react-router-dom'
+import { useParams, Link } from 'react-router-dom'
 import {useAuthNavContext} from "../../Contexts/authNav"
 import apiClient from "../../Services/ApiClient"
 import './RecipeDetail.css'
@@ -130,7 +130,7 @@ function RecipeMain(recipe){
           <div className="recipe-detail-text">
             <h1> {recipe.recipe.name} </h1>
             <h3> Created on {date[1]} {parseInt(date[2])}<sup>{nth(parseInt(date[2]))}</sup> {date[3]}</h3>
-            <h3> Recipe by {recipe.recipe.username} </h3>
+            <h3> Recipe by <Link style={{textDecoration: 'none'}} to={`/profile/${recipe?.recipe?.user_id}`}>{recipe.recipe.username}</Link></h3>
             <h4> Categories : {recipe.recipe.category?.charAt(0).toUpperCase()+ recipe.recipe.category?.slice(1)} </h4>
             <h4> Calories: {recipe.recipe.calories} kcal</h4>
           </div>
