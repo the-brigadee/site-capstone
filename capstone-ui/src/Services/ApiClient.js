@@ -142,11 +142,12 @@ class ApiClient {
         return await this.request({ endpoint: `search/user`, method: `GET`, data:{} })
     }
 
-    // the function that retrieves recipes with a specific filter
+   
     async deleteUser(creds){
         return await this.request({ endpoint: `auth/delete`, method: `DELETE`, data:{creds}})
     }
-    
+
+     // the function that retrieves recipes with a specific filter
     async getSuggestion(word){
         return await this.request({ endpoint: `mealplanner/suggestion/${word}`, method: `GET`, data:{} })
     }
