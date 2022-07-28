@@ -88,7 +88,7 @@ router.get("/recent", async function (req, res, next) {
   try {
     const result = await Search.getRecentRecipes()
 
-    console.log(result)
+    
     res.status(200).json({result})
   } catch (err) {
       next(err)
@@ -103,7 +103,7 @@ router.get("/user", async function (req, res, next) {
     // call the search function here
     const result = await Search.randomUser(user_id)
 
-    console.log(result)
+    
     res.status(200).json({result})
   } catch (err) {
       next(err)

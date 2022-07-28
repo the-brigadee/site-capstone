@@ -1,0 +1,9 @@
+.suggestion-grid button{
+    background: white;
+    outline: none;
+    border: 1px solid white;
+    border-radius: 12px;
+    color: black;
+    font-size: 1em;
+    cursor: pointer;
+}

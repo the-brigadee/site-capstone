@@ -44,7 +44,7 @@ class Recipe{
         VALUES ($1, $2, $3, $4, $5, $6, $7, $8)
         RETURNING id, name, category,description, instructions, ingredients, calories, image_url, user_id,created_at, updated_at;
     `,
-    [recipefact.name, recipefact.category, recipefact.description, recipefact.instructions,recipefact.ingredients, recipefact.calories,recipefact.image_url, recipefact.user_id]
+    [recipefact.name.trim(), recipefact.category, recipefact.description.trim(), recipefact.instructions.trim(),recipefact.ingredients.trim(), recipefact.calories,recipefact.image_url, recipefact.user_id]
     )
         return result.rows[0]
     }

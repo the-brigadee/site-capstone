@@ -45,7 +45,7 @@ const handleOnInputChange = (event) => {
     if (errorUse) setError((e) => ({ ...e, form: errorUse }))
 
     if(data){
-        navigate("/")
+        navigate(`/recipe/${data?.recipe?.id}`)
     }
 
     setIsLoading(false)
