@@ -118,3 +118,7 @@
 .directions-list li::marker {
     color: var(--primary-color);
 }
+
+.recipe-detail-text h3 a {
+    color: var(--primary-color);
+}
