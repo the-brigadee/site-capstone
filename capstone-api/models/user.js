@@ -87,7 +87,7 @@ class User{
 
         var result
         for (var prop in credentials) {
-            if (prop != "user_id") {
+            if (prop != "user_id" && credentials[prop] !== "") {
                 const results = await db.query(`
                 UPDATE users SET ${prop} = $1 WHERE id = $2 RETURNING *;
                 `,[credentials[prop], credentials.user_id])
