@@ -30,7 +30,7 @@ const getDataFromApi = async () => {
     // duy's api key 2a77b9d5eecd482eab7f38f99c11a789 //147 points today
     // anthony's api key 82535f96b27445859009f285f540d76d
     try {
-        const results = await axios.get(`https://api.spoonacular.com/recipes/complexSearch?apiKey=82535f96b27445859009f285f540d76d&number=30&type=dessert&instructionsRequired=true&addRecipeInformation=true`)
+        const results = await axios.get(`https://api.spoonacular.com/recipes/complexSearch?apiKey=82535f96b27445859009f285f540d76d&number=30&type=maincourse&instructionsRequired=true&addRecipeInformation=true`)
         results.data.results.map(async (res) => {
             var ingredientsString = ""
             const stepsArr = res.analyzedInstructions[0]?.steps
