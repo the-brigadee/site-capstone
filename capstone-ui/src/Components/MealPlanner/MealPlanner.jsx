@@ -6,12 +6,18 @@ import Overlay from '../Overlay/Overlay'
 
 
 export default function MealPlanner({imageUrl}) {
-  const {isLoading, showMealPlannerForm, mealPlan, getMealPlan, deleteallgetMealPlan, deleteMealPlan} = useAuthNavContext()
+  const {isLoading, showMealPlannerForm, mealPlan, getMealPlan, deleteMealPlan, setPopupType, setDeleteAction, showPopup} = useAuthNavContext()
 
   //Imported getMealPlan from authNav to get Meal Plan for the current user
   React.useEffect(()=>{
       getMealPlan();
  }, [])
+
+ const handleOnDelete = () => {
+   setPopupType("Confirm")
+   setDeleteAction("mealPlan")
+   showPopup()
+ }
 
 
 return (
@@ -107,7 +113,7 @@ return (
                <button className="footer-btn recipeadd" disabled={isLoading} onClick={()=>{showMealPlannerForm();}}>
                   {isLoading ? "Loading..." : "Add Recipe"}
                </button>
-               <button className="footer-btn deletemealplan" disabled={isLoading} onClick={()=>{deleteallgetMealPlan();}}>
+               <button className="footer-btn deletemealplan" disabled={isLoading} onClick={handleOnDelete}>
                   {isLoading ? "Loading..." : "Reset Mealplan"}
                </button>
             <Overlay />

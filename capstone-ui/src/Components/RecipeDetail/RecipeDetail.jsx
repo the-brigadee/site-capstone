@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { useParams, Link } from 'react-router-dom'
+import { useParams } from 'react-router-dom'
 import {useAuthNavContext} from "../../Contexts/authNav"
 import apiClient from "../../Services/ApiClient"
 import './RecipeDetail.css'
@@ -14,18 +14,20 @@ export default function RecipeDetail() {
   /**
    * Use React useEffect to get more details of the recipe from the API backend.
    */
-   const [recipe, setRecipe] = React.useState([])
-   const {setError, user, showMealPlannerAddForm} = useAuthNavContext()
-   React.useEffect(() => {
-       const getRecipeById = async () => {
-           const {data, error} = await apiClient.recipeById(recipeId)
-           if (error) setError((e) => ({ ...e, recommended: error }))
-           if (data?.recipe) {
-            setRecipe(data.recipe);
-           }
-       }
-       getRecipeById()
-   }, [setRecipe, setError, recipeId])
+  const {setError} = useAuthNavContext()
+
+  const [recipe, setRecipe] = React.useState([])
+  
+  React.useEffect(() => {
+      const getRecipeById = async () => {
+          const {data, error} = await apiClient.recipeById(recipeId)
+          if (error) setError((e) => ({ ...e, recommended: error }))
+          if (data?.recipe) {
+          setRecipe(data.recipe);
+          }
+      }
+      getRecipeById()
+  }, [setRecipe, setError, recipeId])
 
   return (
     <div className='recipe-detail-container'>
@@ -45,7 +47,7 @@ function RecipeMain(recipe){
   const [savedrecipe, setSavedRecipe] = React.useState([])
   const [isSaved, setIsSaved] = React.useState(false)
   const {recipeId} = useParams()
-  const {setError, user, showLoginForm, showMealPlannerAddForm} = useAuthNavContext()
+  const {setError, user, showLoginForm, showMealPlannerAddForm, setPopupType, setDeleteAction, showPopup} = useAuthNavContext()
 
     const saveRecipe = async () => {
       if(!user?.email){
@@ -64,13 +66,11 @@ function RecipeMain(recipe){
         }}
     }
     
-    const deleteRecipe = async () => {
-      const {data, error} = await apiClient.recipeDelete(recipeId)
-      if (error) setError((e) => ({ ...e, recommended: error }))
-      
-      
-      
-  }
+    const deleteRecipe = () => { 
+      setPopupType("Confirm")
+      setDeleteAction("recipe")
+      showPopup()
+    }
 
 
     React.useEffect(()=>{
@@ -129,9 +129,7 @@ function RecipeMain(recipe){
           {isSaved && user?.email ? <button onClick={()=>{saveRecipe(); setIsSaved(false)}}> Unsave </button> :<button onClick={()=>{saveRecipe();setIsSaved(true)}}> Save </button>}
           <button> Review </button>
           {/* Recipe Delete button */}
-          <Link style={{textDecoration: 'none'}} to="/">
-          {recipe.recipe.user_id===user.id && <button onClick={()=>{deleteRecipe();}}> Delete </button>}
-          </Link>          
+          {recipe.recipe.user_id===user.id && <button onClick={deleteRecipe}> Delete </button>}      
         </div>
         <Overlay />
       </div>
