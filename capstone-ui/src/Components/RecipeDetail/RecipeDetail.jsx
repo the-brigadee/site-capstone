@@ -67,9 +67,16 @@ function RecipeMain(recipe){
     const deleteRecipe = async () => {
       const {data, error} = await apiClient.recipeDelete(recipeId)
       if (error) setError((e) => ({ ...e, recommended: error }))
-      
-      
-      
+  }
+
+  const addPlan = async () => {
+    if(!user?.email){
+      showLoginForm();
+      setError((e) => ({ ...e, form:"You need to be logged in!" }))}
+    
+    if(user?.email){
+      showMealPlannerAddForm();
+    }
   }
 
 
@@ -125,7 +132,7 @@ function RecipeMain(recipe){
 
         {/* Recipe Edit buttons */}
         <div className="recipe-edit-buttons">
-          <button onClick={()=>{showMealPlannerAddForm();}}> Add Plan </button>
+          <button onClick={()=>{addPlan();}}> Add Plan </button>
           {isSaved && user?.email ? <button onClick={()=>{saveRecipe(); setIsSaved(false)}}> Unsave </button> :<button onClick={()=>{saveRecipe();setIsSaved(true)}}> Save </button>}
           <button> Review </button>
           {/* Recipe Delete button */}
