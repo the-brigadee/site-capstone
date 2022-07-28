@@ -156,6 +156,7 @@ export default function Popup(){
         
     }
 
+    // handle logging out the user when they delete their account
     const handleLogout = async () => {
         await apiClient.logoutUser()
         setUser({})
@@ -163,6 +164,7 @@ export default function Popup(){
         navigate("/")
     }
 
+    // handle the functionality when the user confirm their action
     const handleOnConfirm = async () => {
         setIsLoading(true)
         if (deleteAction === "account") {
@@ -189,8 +191,6 @@ export default function Popup(){
         
         setIsLoading(false)
     }
-
-    // handle the cancel button when the user change their mind
 
     //useEffect to close the popup form when user are logged in
     React.useEffect(() => {
@@ -317,6 +317,7 @@ export default function Popup(){
             </div>
         </div>
     } else if (popupType === "Confirm") {
+        // the confirm popup 
         formHTML = <div className="delete-confirm">
         <div className="delete-header">
             {deleteAction === "account" ? <h3>Delete Account</h3> : null}
