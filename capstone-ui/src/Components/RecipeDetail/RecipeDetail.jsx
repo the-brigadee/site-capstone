@@ -66,12 +66,16 @@ function RecipeMain(recipe){
         }}
     }
     
+
+    // handle when user wants to delete a recipe
     const deleteRecipe = () => { 
       setPopupType("Confirm")
       setDeleteAction("recipe")
       showPopup()
     }
 
+
+// handle when user want to add a recipe to their mealplan, logged in or not logged in
   const addPlan = async () => {
     if(!user?.email){
       showLoginForm();
@@ -82,7 +86,7 @@ function RecipeMain(recipe){
     }
   }
 
-
+  // useEffect to fetch the user's saved recipes
     React.useEffect(()=>{
       const getSavedRecipes = async () => {
         const {data, error} = await apiClient.getUsersSavedRecipes()

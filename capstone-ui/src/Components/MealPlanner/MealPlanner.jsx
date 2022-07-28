@@ -13,6 +13,8 @@ export default function MealPlanner({imageUrl}) {
       getMealPlan();
  }, [])
 
+
+ // handle when the user wants to reset their meal planner, should show the popup and confirmation messages
  const handleOnDelete = () => {
    setPopupType("Confirm")
    setDeleteAction("mealPlan")
