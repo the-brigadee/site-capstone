@@ -141,6 +141,11 @@ class ApiClient {
     async getRandomUser(){
         return await this.request({ endpoint: `search/user`, method: `GET`, data:{} })
     }
+
+    // the function that retrieves recipes with a specific filter
+    async deleteUser(creds){
+        return await this.request({ endpoint: `auth/delete`, method: `DELETE`, data:{creds}})
+    }
 }
 
 export default new ApiClient("http://localhost:3001")

@@ -59,7 +59,7 @@ export default function UserProfilePage() {
 
   const navigate = useNavigate()
 
-  const {user, setError, setIsLoading, isLoading, error, userDetails, file, setUser, setFile} = useAuthNavContext()
+  const {user, setError, setIsLoading, isLoading, error, userDetails, file, setUser, setFile, setPopupType, showPopup, setDeleteAction} = useAuthNavContext()
   const [createdRecipes, setCreatedRecipes] = React.useState([])
   const [savedRecipes, setSavedRecipes] = React.useState([])
   // useState for showing the buttons
@@ -132,13 +132,6 @@ export default function UserProfilePage() {
       
   }
 
-  // logout function
-  const handleLogout = async () => {
-    await apiClient.logoutUser()
-    setUser({})
-    setError(null)
-    navigate("/", {state: true})
-}
 
   // function and make call to the backend to update user profile
   const handleOnSave = async () => {
@@ -185,7 +178,8 @@ export default function UserProfilePage() {
             return
             }
           if (data?.user) {
-            handleLogout()
+            setIsEditing(false)
+            setInfoDisplay("profile")
           }
         }
   }
@@ -265,7 +259,6 @@ export default function UserProfilePage() {
     elToDisplay = changePassword
   }
 
-
   //function that handles when the setting buttons are clicked
   const handleOnBtnClick = (e) => {
     if (e.target.id === "password") {
@@ -278,8 +271,6 @@ export default function UserProfilePage() {
       handleOnSave()
     }
   }
-
-
 
   //function for update picture button onclick 
   const handleUpdateImg = async () => {
@@ -300,6 +291,13 @@ export default function UserProfilePage() {
     }
     setIsChangingImg((e) => !e)
   }
+
+  const handleOnDelete = () => {
+    setPopupType("Confirm")
+    setDeleteAction("account")
+    showPopup()
+  }
+
   return (
     <div className='user-profile-container'>
         <div className="user-profile">
@@ -325,6 +323,7 @@ export default function UserProfilePage() {
                 {isEditing ? null : <button id="form" onClick={handleOnBtnClick}>Edit Profile</button>}
                 {isEditing ? <button id="save" onClick={handleOnBtnClick}>Save</button> : null}
                 {isEditing ? <button id="cancel" onClick={handleOnCancel}>Cancel</button> : null}
+                <button id="delete" onClick={handleOnDelete}>Delete Account</button>
             </div>
           </div>
         </div>
