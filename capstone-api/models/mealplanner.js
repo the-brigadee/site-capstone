@@ -22,7 +22,7 @@ class MealPlanner{
         })
 
         const existingRecipe= await Recipe.fetchRecipeById(mealplannerfact.recipe_id)
-        console.log(existingRecipe);
+        
         if(!existingRecipe){
             throw new BadRequestError(`Recipe does not exist`)
         }
@@ -92,8 +92,43 @@ class MealPlanner{
         ON meal_planner.recipe_id=recipe.id
         WHERE meal_planner.user_id = $1
         ORDER BY meal_planner.id ASC`, [user_id])
-        console.log(results.rows)
+        
         return results.rows
+    }
+
+    // returns a list of meal names suggestions based on the word inputted.
+    static async suggestion(word){
+        
+        /**
+         *  Add (%) to the front and back of the string to make it searchable
+         */
+        const searchWord = `%${word.trim().toLowerCase()}%`
+        
+        const result = await db.query(`
+            SELECT name 
+            FROM recipe
+            WHERE LOWER(name)
+            LIKE $1
+            LIMIT 10;
+        `, [searchWord])
+
+        return result.rows
+    }
+
+    // returns the id of a recipe by name
+    static async getRecipeIdByName(word){
+        /**
+         *  Add (%) to the front and back of the string to make it searchable
+         */
+         const searchWord = word.toLowerCase()
+        
+         const result = await db.query(`
+             SELECT id 
+             FROM recipe
+             WHERE LOWER(name) = $1
+         `, [searchWord])
+ 
+         return result.rows[0]
     }
 }
 

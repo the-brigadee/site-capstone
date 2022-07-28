@@ -3,10 +3,18 @@ import './Popup.css'
 import {useAuthNavContext} from "../../Contexts/authNav"
 import apiClient from "../../Services/ApiClient"
 import { useNavigate, useParams } from 'react-router-dom'
+import MealPlannerSuggestion from '../MealPlannerSuggestion/MealPlannerSuggestion'
+
+
+
+
+
+
 
 export default function Popup(){
     //needed functions from useAuthNavContext
-    const {popupType, closePopup, showRegisterForm, showLoginForm, error, setError, setUser, isLoading, setIsLoading, user, setMealPlan, getMealPlan, deleteAction, setDeleteAction, deleteAllGetMealPlan} = useAuthNavContext()
+    const {popupType, closePopup, showRegisterForm, showLoginForm, error, setError, setUser, isLoading, setIsLoading, user, setMealPlan, getMealPlan, deleteAction, setDeleteAction, deleteAllGetMealPlan, isPwChanged, setIsPwChanged, displaySuggestion, setDisplaySuggestion} = useAuthNavContext()
+
     const [form, setForm] = React.useState({
         email: "",
         password: "",
@@ -20,12 +28,15 @@ export default function Popup(){
 
     //Recipe ID for Recipe Details page
     const {recipeId} = useParams()
+    // suggestion list state variable
+    const [suggestionList, setSuggestionList] = React.useState([])
 
     //Form made specifically for meal planner
     const [formPlan, setFormPlan] = React.useState({
         recipe_id: '',
         day: 'Sunday',
         user_id: '',
+        recipe_name: ""
     })
     //Form made specifically for meal planner add button
     const [formPlanAdd, setFormPlanAdd] = React.useState({
@@ -67,11 +78,68 @@ export default function Popup(){
         setForm((f) => ({ ...f, [event.target.name]: event.target.value }))
     }
     //Function that handles the value of form for mealplanner form
-    const handleOnFormInputChangeMealPlanner = (event) => {
+    const handleOnFormInputChangeMealPlanner = async (event) => {
         //prevent the events default behaviour  
         event.preventDefault()
         
         setFormPlan((f) => ({ ...f, [event.target.name]: event.target.value }))
+
+        // change the suggestion list if the input changed is the recipe name
+        if(event.target.name === "recipe_name"){
+
+            // get the value from the input field
+            var word = event.target.value
+
+            // if word is empty, replace it
+            if(word === ""){
+                word = "%20"
+            }
+            // call the api client
+            const {data} = await apiClient.getSuggestion(word)
+
+            if(data){
+                setSuggestionList(data.suggestions)
+        }
+        }
+    }
+
+    const inputRef = React.useRef(null);
+
+    // Function that runs when the input field is focused on
+    const handleOnFormInputFocusMealPlanner = async (event) => {
+        //prevent the events default behaviour  
+        event.preventDefault()
+
+        //display the suggestions
+        setDisplaySuggestion(true)
+
+        // get the text from the input field
+        var word = formPlan.recipe_name
+
+        // if word is empty, replace it
+        if(word === ""){
+            word = "%20"
+        }
+        // call the api client
+        const {data} = await apiClient.getSuggestion(word)
+
+        if(data){
+            setSuggestionList(data.suggestions)
+        }
+    }
+
+    // Function that runs when the input field is not focused on
+    const handleOnFormInputBlurMealPlanner = (event) => {
+        //prevent the events default behaviour  
+        event.preventDefault()
+
+        // if the input field is empty then do not disply suggestions
+        
+        if( formPlan.recipe_name === "" || formPlan.recipe_name === " "){
+            // do not display the suggestions
+            setDisplaySuggestion(false)
+        }
+
     }
     
     //Function that handles the value of form for mealplanner add button form
@@ -113,8 +181,26 @@ export default function Popup(){
             dataUse = data
             errorUse = error
         }else if (popupType === "MealPlanner") {
+
+            if(inputRef.current.value === "" || inputRef.current.value === " "){
+                setError((e) => ({ ...e, form: "Recipe does not exist" }))
+                setIsLoading(false)
+                return
+            }
+
+            // check if the recipe exists
+            const dataprior = await apiClient.getRecipeIdByName(formPlan.recipe_name)
+            
+            // check if datapriior has an error and set it 
+            if(dataprior.error){
+                errorUse = dataprior.error
+                setError((e) => ({ ...e, form: errorUse }))
+                setIsLoading(false)
+                return
+            }
+
             const {data, error} = await apiClient.createMealPlan({
-                recipe_id: formPlan.recipe_id,
+                recipe_id: dataprior.data.recipe_id.id,
                 weekday: formPlan.day,
                 user_id: user?.id
             })
@@ -271,8 +357,17 @@ export default function Popup(){
         formHTML = 
         <div className="form">
             <div className="input-field">
-                <label htmlFor="RecipeID">Recipe's ID</label>
-                <input type="number" name="recipe_id" onChange={handleOnFormInputChangeMealPlanner}/>
+                <label htmlFor="RecipeName">Recipe's Name</label>
+                <input type="name" name="recipe_name" onChange={handleOnFormInputChangeMealPlanner} onFocus={handleOnFormInputFocusMealPlanner} ref={inputRef} />
+                {/* <input type="name" name="recipe_name" onChange={handleOnFormInputChangeMealPlanner} onFocus={handleOnFormInputFocusMealPlanner} onBlur={handleOnFormInputBlurMealPlanner}/> */}
+            </div>
+            <div className="meal-suggestion">
+                {displaySuggestion 
+                ?
+                <MealPlannerSuggestion suggestionList={suggestionList} setFormPlan={setFormPlan} setDisplaySuggestion={setDisplaySuggestion} inputRef={inputRef}/>
+                :
+                <></>
+                }
             </div>
             <div className="input-field">
                 <label htmlFor="Password">Day of week</label>
