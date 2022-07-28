@@ -6,8 +6,7 @@ import { stripHtml } from "string-strip-html"
 
 export default function SearchResultCard({even, recipe}) {
     
-    // Displayed recipe description state variable
-    const [description, setDescription] = React.useState(null)
+    
     //run everytime the component is mounted
 
     const presentableDescription = () => {

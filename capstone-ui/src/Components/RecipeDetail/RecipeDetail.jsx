@@ -4,6 +4,7 @@ import {useAuthNavContext} from "../../Contexts/authNav"
 import apiClient from "../../Services/ApiClient"
 import './RecipeDetail.css'
 import Overlay from '../Overlay/Overlay'
+import { stripHtml } from "string-strip-html"
 
 
 export default function RecipeDetail() {
@@ -34,7 +35,6 @@ export default function RecipeDetail() {
 
       {/* Main Information */}
       <RecipeMain recipe={recipe} />
-
       {/* Detailed Step Information */}
       <RecipeStep recipe={recipe}/>
         
@@ -86,6 +86,19 @@ function RecipeMain(recipe){
     }
   }
 
+    //run everytime the component is mounted
+
+    const presentableDescription = () => {
+        // function to cut description string
+        if(!recipe?.recipe?.description?.length){
+            return "This recipe has no description"
+        }
+        else{
+            return stripHtml(recipe.recipe.description).result
+        }
+
+    }
+
   // useEffect to fetch the user's saved recipes
     React.useEffect(()=>{
       const getSavedRecipes = async () => {
@@ -133,6 +146,7 @@ function RecipeMain(recipe){
             <h3> Recipe by <Link style={{textDecoration: 'none'}} to={`/profile/${recipe?.recipe?.user_id}`}>{recipe.recipe.username}</Link></h3>
             <h4> Categories : {recipe.recipe.category?.charAt(0).toUpperCase()+ recipe.recipe.category?.slice(1)} </h4>
             <h4> Calories: {recipe.recipe.calories} kcal</h4>
+            <h4> {presentableDescription()} </h4>
           </div>
         </div>
           

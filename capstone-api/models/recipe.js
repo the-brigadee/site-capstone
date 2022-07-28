@@ -74,6 +74,7 @@ class Recipe{
         recipe.created_at as recipeadd_date,
         recipe.ingredients,
         recipe.instructions,
+        recipe.description,
         users.id as user_id, 
         users.username
         FROM recipe 

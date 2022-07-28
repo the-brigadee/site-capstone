@@ -13,7 +13,7 @@ export default function ResultPage() {
   /** Get the resultsType,
    *  searchWord
    *  state from the authcontext*/  
-  const {resultsType, searchWord, currCategory, setResultsType} = useAuthNavContext()
+  const {resultsType, searchWord, currCategory, setResultsType, setSearchWord} = useAuthNavContext()
 
   // display filter state variable
   const [displayFilter, setDisplayFilter] = React.useState(false)
@@ -72,7 +72,7 @@ export default function ResultPage() {
       
     }
     else {
-      
+      setSearchWord("")
       if(resultsType === "sidebar"){
         //  Make filter options invisible when coming from sidebar
         setDisplayFilter(false)
