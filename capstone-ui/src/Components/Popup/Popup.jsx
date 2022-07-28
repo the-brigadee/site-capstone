@@ -2,7 +2,7 @@ import * as React from 'react'
 import './Popup.css'
 import {useAuthNavContext} from "../../Contexts/authNav"
 import apiClient from "../../Services/ApiClient"
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 
 export default function Popup(){
     //needed functions from useAuthNavContext
@@ -17,8 +17,18 @@ export default function Popup(){
         first_name: "",
 
     })
+
+    //Recipe ID for Recipe Details page
+    const {recipeId} = useParams()
+
     //Form made specifically for meal planner
     const [formPlan, setFormPlan] = React.useState({
+        recipe_id: '',
+        day: 'Sunday',
+        user_id: '',
+    })
+    //Form made specifically for meal planner add button
+    const [formPlanAdd, setFormPlanAdd] = React.useState({
         recipe_id: '',
         day: 'Sunday',
         user_id: '',
@@ -64,6 +74,14 @@ export default function Popup(){
         
         setFormPlan((f) => ({ ...f, [event.target.name]: event.target.value }))
     }
+    
+    //Function that handles the value of form for mealplanner add button form
+    const handleOnFormInputChangeMealPlannerAdd = (event) => {
+        //prevent the events default behaviour  
+        event.preventDefault()
+        
+        setFormPlanAdd((f) => ({ ...f, [event.target.name]: event.target.value }))
+    }
 
     //signup/signin/mealplanner function
     const handleOnSubmit = async () => {
@@ -104,6 +122,15 @@ export default function Popup(){
             dataUse = data
             errorUse = error
             
+        }else if (popupType === "MealPlannerAdd") {
+            const {data, error} = await apiClient.createMealPlan({
+                recipe_id: recipeId,
+                weekday: formPlanAdd.day,
+                user_id: user?.id
+            })
+            dataUse = data
+            errorUse = error
+            
         }
                 
         if (errorUse) {
@@ -117,19 +144,23 @@ export default function Popup(){
             setIsPwChanged(false)
         }
         setIsLoading(false)
-        if(popupType!=="MealPlanner"){
+        if(popupType!=="MealPlanner" && popupType!=="MealPlannerAdd"){
             navigate("/")
         }else if(popupType==="MealPlanner"){
             //Going to be used for the Meal Planner Page to close the popup and update the mealplanner
             closePopup();
             getMealPlan();
+        }else if(popupType==="MealPlannerAdd"){
+            //Going to be used for the Meal Planner Page to close the popup and redirect the mealplanner
+            closePopup();
+            navigate("/mealplanner")
         }
         
     }
 
     //useEffect to close the popup form when user are logged in
     React.useEffect(() => {
-        if (user?.email && popupType!=="MealPlanner") {
+        if (user?.email && popupType!=="MealPlanner" && popupType!=="MealPlannerAdd") {
             closePopup()
         }
     })
@@ -212,6 +243,28 @@ export default function Popup(){
             <div className="input-field">
                 <label htmlFor="Password">Day of week</label>
                 <select id="day" name="day" onChange={handleOnFormInputChangeMealPlanner}>
+                    <option name="day" disabled={true}>--Select your option--</option>
+                    <option name="day">Sunday</option>
+                    <option name="day">Monday</option>
+                    <option name="day">Tuesday</option>
+                    <option name="day">Wednesday</option>
+                    <option name="day">Thursday</option>
+                    <option name="day">Friday</option>
+                    <option name="day">Saturday</option>
+                </select>
+            </div>
+            <div className="footer">
+                <button className="footer-btn" disabled={isLoading} onClick={handleOnSubmit}>
+                    {isLoading ? "Loading..." : "ADD"}
+                </button>
+            </div>
+        </div>
+    }else if(popupType==="MealPlannerAdd"){
+        formHTML = 
+        <div className="form">
+            <div className="input-field">
+                <label htmlFor="Password">Day of week</label>
+                <select id="day" name="day" onChange={handleOnFormInputChangeMealPlannerAdd}>
                     <option name="day" disabled={true}>--Select your option--</option>
                     <option name="day">Sunday</option>
                     <option name="day">Monday</option>

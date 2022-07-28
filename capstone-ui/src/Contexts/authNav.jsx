@@ -57,8 +57,15 @@ export const AuthNavContextProvider = ({children}) =>{
         showPopup()
     }
 
+    //Function for add recipe to mealplanner
     const showMealPlannerForm = () => {
         setPopupType("MealPlanner")
+        showPopup()
+    }
+
+    //Function for add recipe to mealplanner from recipe details
+    const showMealPlannerAddForm = () => {
+        setPopupType("MealPlannerAdd")
         showPopup()
     }
 
@@ -139,7 +146,7 @@ export const AuthNavContextProvider = ({children}) =>{
         isPwChanged, setIsPwChanged,
         userDetails, setUserDetails,
         file, setFile,
-        mealPlan, setMealPlan, getMealPlan, deleteallgetMealPlan, deleteMealPlan
+        mealPlan, setMealPlan, getMealPlan, deleteallgetMealPlan, deleteMealPlan, showMealPlannerAddForm
     }
 
 
