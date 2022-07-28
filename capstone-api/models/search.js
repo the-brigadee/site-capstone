@@ -165,7 +165,7 @@ class Search{
             FROM users 
             WHERE random() > 0.27
             LIMIT 25
-         `,[my_id, word])
+         `,[my_id])
  
          //return the result    
          return result.rows
