@@ -7,4 +7,3 @@ capstone-api/routes/mealplanner.js
 capstone-api/routes/recipe.js
 capstone-api/routes/review.js
 capstone-api/routes/savedrecipe.js
-capstone-api/load.js

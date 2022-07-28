@@ -149,13 +149,9 @@ export const AuthNavContextProvider = ({children}) =>{
         transition, setTransition,
         userDetails, setUserDetails,
         file, setFile,
-<<<<<<< Updated upstream
         mealPlan, setMealPlan, getMealPlan, deleteAllGetMealPlan, deleteMealPlan, showMealPlannerAddForm,
-        deleteAction, setDeleteAction
-=======
-        mealPlan, setMealPlan, getMealPlan, deleteallgetMealPlan, deleteMealPlan,
+        deleteAction, setDeleteAction,
         displaySuggestion, setDisplaySuggestion
->>>>>>> Stashed changes
     }
 
 
