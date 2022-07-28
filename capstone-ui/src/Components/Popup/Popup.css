@@ -212,3 +212,12 @@
     border-radius: 5px;
     cursor: pointer;
 }
+.meal-suggestion{
+    position: relative;
+    background-color: transparent;
+}
+
+.suggestion-grid{
+    color: black;
+    z-index: 300;
+}

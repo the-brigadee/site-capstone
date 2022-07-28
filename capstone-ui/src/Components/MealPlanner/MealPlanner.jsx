@@ -6,7 +6,7 @@ import Overlay from '../Overlay/Overlay'
 
 
 export default function MealPlanner({imageUrl}) {
-  const {isLoading, showMealPlannerForm, mealPlan, getMealPlan, deleteMealPlan, setPopupType, setDeleteAction, showPopup} = useAuthNavContext()
+  const {isLoading, showMealPlannerForm, mealPlan, getMealPlan, deleteMealPlan, setPopupType, setDeleteAction, showPopup, setDisplaySuggestion, deleteallgetMealPlan} = useAuthNavContext()
 
   //Imported getMealPlan from authNav to get Meal Plan for the current user
   React.useEffect(()=>{

@@ -60,6 +60,7 @@ export const AuthNavContextProvider = ({children}) =>{
 
     //Function for add recipe to mealplanner
     const showMealPlannerForm = () => {
+        setDisplaySuggestion(false)
         setPopupType("MealPlanner")
         showPopup()
     }
@@ -133,6 +134,8 @@ export const AuthNavContextProvider = ({children}) =>{
     // search card transition state variable. Used to make search css transition continuous
     const [transition, setTransition] = React.useState(1)
 
+    // display suggestion state variable
+    const [displaySuggestion, setDisplaySuggestion] = React.useState(false)
 
     // Add all state variables to be passed to this object 
     const authNavvalue = {
@@ -146,8 +149,13 @@ export const AuthNavContextProvider = ({children}) =>{
         transition, setTransition,
         userDetails, setUserDetails,
         file, setFile,
+<<<<<<< Updated upstream
         mealPlan, setMealPlan, getMealPlan, deleteAllGetMealPlan, deleteMealPlan, showMealPlannerAddForm,
         deleteAction, setDeleteAction
+=======
+        mealPlan, setMealPlan, getMealPlan, deleteallgetMealPlan, deleteMealPlan,
+        displaySuggestion, setDisplaySuggestion
+>>>>>>> Stashed changes
     }
 
 

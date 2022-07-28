@@ -25,6 +25,8 @@ export default function UserSearchPage() {
 
         //If there is data, set recipe list to it
         if(data) setUsersList(data.result)
+
+        return
         }
       //Call the corresponding api request
       const {data, error} = await ApiClient.userSearch(searchWord.replace(/ /g, '%20'))
@@ -39,7 +41,7 @@ export default function UserSearchPage() {
     // run the above function
     run()
     
-}, [searchWord])
+}, [searchWord, resultsType])
 
 
   return (
