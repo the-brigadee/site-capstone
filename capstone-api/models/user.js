@@ -51,27 +51,16 @@ class User{
     }
 
     static async delete(credentials){
-        //user should submit their email and password
-        //if any of these fields are missing, throw an error
-        const requiredFields=["email","password"]
-        requiredFields.forEach(field =>{
-            if(!credentials.hasOwnProperty(field)){
-                throw new BadRequestError(`Missing ${field} in request body.`)
-            }
-        })
-
+        
         //lookup the user in the db by email
-        const user= await User.fetchUserByEmail(credentials.email)
+        const user= await User.fetchUserByID(credentials.creds.user_id)
         //if a user is found, compare the submitted password
         //with the password in the db
         //if there is a match, return the user
         if(user){
-            const isValid= await bcrypt.compare(credentials.password,user.password)
-            if(isValid){
-                const query=`DELETE FROM users WHERE email=$1`
-                const result= await db.query(query, [credentials.email.toLowerCase()])
-                return "Successfully deleted account"
-            }
+            const query=`DELETE FROM users WHERE id=$1`
+            const result= await db.query(query, [credentials.creds.user_id])
+            return "Successfully deleted account"
         }
 
         //if any of this goes wrong, throw an error

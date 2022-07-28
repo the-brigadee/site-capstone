@@ -6,7 +6,7 @@ import { useNavigate, useParams } from 'react-router-dom'
 
 export default function Popup(){
     //needed functions from useAuthNavContext
-    const {popupType, closePopup, showRegisterForm, showLoginForm, error, setError, setUser, isLoading, setIsLoading, user, isPwChanged, setIsPwChanged, setMealPlan, getMealPlan} = useAuthNavContext()
+    const {popupType, closePopup, showRegisterForm, showLoginForm, error, setError, setUser, isLoading, setIsLoading, user, setMealPlan, getMealPlan, deleteAction, setDeleteAction, deleteAllGetMealPlan} = useAuthNavContext()
     const [form, setForm] = React.useState({
         email: "",
         password: "",
@@ -41,9 +41,8 @@ export default function Popup(){
         //prevent the events default behaviour  
         event.preventDefault()
 
-        //error checking
         if (event.target.name === "email") {
-            if (event.target.value.indexOf("@") < 1) {
+            if (!/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(event.target.value)) {
                 setError((e) => ({ ...e, email: "Please enter a valid email." }))
             } else {
                 setError((e) => ({ ...e, email: null }))
@@ -141,7 +140,6 @@ export default function Popup(){
         if (dataUse?.user) {
             apiClient.setToken(dataUse.token)
             setUser(dataUse?.user)
-            setIsPwChanged(false)
         }
         setIsLoading(false)
         if(popupType!=="MealPlanner" && popupType!=="MealPlannerAdd"){
@@ -158,6 +156,42 @@ export default function Popup(){
         
     }
 
+    // handle logging out the user when they delete their account
+    const handleLogout = async () => {
+        await apiClient.logoutUser()
+        setUser({})
+        setError(null)
+        navigate("/")
+    }
+
+    // handle the functionality when the user confirm their action
+    const handleOnConfirm = async () => {
+        setIsLoading(true)
+        if (deleteAction === "account") {
+            const {data, error} = await apiClient.deleteUser({
+                user_id: user.id
+            })
+            if (error) { 
+                setError((e) => ({ ...e, userDelete: error }))
+                return
+            }
+            handleLogout()
+        } else if (deleteAction === "mealPlan") {
+            deleteAllGetMealPlan()
+        } else if (deleteAction === "recipe") {
+            const {data, error} = await apiClient.recipeDelete(recipeId)
+            if (error) {
+                setError((e) => ({ ...e, recipeDelete: error }))
+                return
+            }
+            navigate("/")
+        }
+        setDeleteAction("")
+        closePopup()
+        
+        setIsLoading(false)
+    }
+
     //useEffect to close the popup form when user are logged in
     React.useEffect(() => {
         if (user?.email && popupType!=="MealPlanner" && popupType!=="MealPlannerAdd") {
@@ -166,7 +200,8 @@ export default function Popup(){
     })
 
     var formHTML
-    //creating the popup form based on the type
+    
+    // creating different popup type
     if (popupType === "Login") {
         formHTML = 
         <div className="form">
@@ -281,14 +316,32 @@ export default function Popup(){
                 </button>
             </div>
         </div>
+    } else if (popupType === "Confirm") {
+        // the confirm popup 
+        formHTML = <div className="delete-confirm">
+        <div className="delete-header">
+            {deleteAction === "account" ? <h3>Delete Account</h3> : null}
+            {deleteAction === "mealPlan" ? <h3>Reset Meal Plan</h3> : null}
+            {deleteAction === "recipe" ? <h3>Delete Recipe</h3> : null}
+            {deleteAction === "account" ? <span>Are you sure you want to delete your account? [Caution:] This action is irreversible! </span> : null}
+            {deleteAction === "mealPlan" ? <span>Are you sure you want to reset your meal plan? [Caution:] This action is irreversible! </span> : null}
+            {deleteAction === "recipe" ? <span>Are you sure you want to delete this recipe? [Caution:] This action is irreversible! </span> : null}
+        </div>
+        <div className="delete-footer">
+            <button onClick={closePopup}>Cancel</button>
+            {deleteAction === "account" ? <button onClick={handleOnConfirm}>Delete Account</button> : null}
+            {deleteAction === "mealPlan" ? <button onClick={handleOnConfirm}>Reset Meal Plan </button> : null}
+            {deleteAction === "recipe" ? <button onClick={handleOnConfirm}>Delete Recipe</button> : null}
+        </div>
+    </div>
     }
 
     return(
         <div className="popup-container" >
             <div className={`popup-card ${popupType.toLowerCase()}`} onClick={(e) => e.stopPropagation()}>
                 <button className="close-btn" onClick={(e) => {e.stopPropagation();closePopup();}}>&times;</button>
-                <h1>{popupType}</h1>
-                {isPwChanged ? <span className="error">Please login with your new password.</span> : null}
+                {popupType === "Login" || popupType === "Register" || popupType === "Confirm" ? <h1>{popupType}</h1> : null}
+                {popupType === "MealPlanner" || popupType === "MealPlannerAdd" ? <h1>Add to Meal Plan</h1> : null}
                 {(error?.form) ? <span className="error">{error?.form}</span> : null}
                 {(error?.email !== null && form.email !== "") ? <span className="error">Please enter a valid email.</span> : null}
                 {formHTML}

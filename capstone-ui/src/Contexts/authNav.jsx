@@ -34,16 +34,17 @@ export const AuthNavContextProvider = ({children}) =>{
     // Pop up type state variable
     const [popupType, setPopupType] = React.useState("Login")
 
-    //state variable for when user is logged out from changing password
-    const [isPwChanged, setIsPwChanged] = React.useState(false)
-
     //state variable for user's stats about followers
     const [userDetails, setUserDetails] = React.useState({})
 
     //state variable to get user's uploaded file 
     const [file, setFile] = React.useState([])
+    
     //state variable for user's meal planner
     const [mealPlan, setMealPlan] = React.useState([]);
+
+    //state variable to do the delete action
+    const [deleteAction, setDeleteAction] = React.useState("") 
     
     //function for login button
     const showLoginForm = () => {
@@ -103,7 +104,7 @@ export const AuthNavContextProvider = ({children}) =>{
      }
 
     //Function to delete all recipes from meal plan page
-    const deleteallgetMealPlan = async () => {
+    const deleteAllGetMealPlan = async () => {
         const {error} = await ApiClient.deleteAllMealPlan()
               if (error) setError((e) => ({ ...e, mealplanner: error }))
               if(!error){
@@ -143,10 +144,10 @@ export const AuthNavContextProvider = ({children}) =>{
         isLoading, setIsLoading,
         searchWord, setSearchWord,
         transition, setTransition,
-        isPwChanged, setIsPwChanged,
         userDetails, setUserDetails,
         file, setFile,
-        mealPlan, setMealPlan, getMealPlan, deleteallgetMealPlan, deleteMealPlan, showMealPlannerAddForm
+        mealPlan, setMealPlan, getMealPlan, deleteAllGetMealPlan, deleteMealPlan, showMealPlannerAddForm,
+        deleteAction, setDeleteAction
     }
 
 

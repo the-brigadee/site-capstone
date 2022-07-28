@@ -184,3 +184,31 @@
     font-weight: bolder;
     text-align: center;
 }
+
+
+/*-------------------------------
+ Confirming delete popup
+ ------------------------------- */
+.confirm {
+    width: 22rem;
+}
+
+.delete-confirm {
+    display: flex;
+    flex-direction: column;
+}
+
+.delete-footer {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+}
+
+.delete-footer button {
+    border: none;
+    background-color: white;
+    margin: 10px;
+    height: 30px;
+    border-radius: 5px;
+    cursor: pointer;
+}
