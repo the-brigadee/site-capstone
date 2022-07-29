@@ -86,7 +86,7 @@ class MealPlanner{
         }
 
         const results = await db.query(`
-        SELECT meal_planner.id, meal_planner.user_id,meal_planner.weekday, recipe.id as recipe_id, recipe.name
+        SELECT meal_planner.id, meal_planner.user_id,meal_planner.weekday, recipe.id as recipe_id, recipe.name, recipe.ingredients
         FROM meal_planner
         INNER JOIN recipe 
         ON meal_planner.recipe_id=recipe.id
