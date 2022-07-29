@@ -7,12 +7,14 @@ import Overlay from '../Overlay/Overlay'
 
 export default function MealPlanner({imageUrl}) {
   const {isLoading, showMealPlannerForm, mealPlan, getMealPlan, deleteMealPlan, setPopupType, setDeleteAction, showPopup, setDisplaySuggestion, deleteallgetMealPlan} = useAuthNavContext()
+  
+  // ingredient array containing all of the ingredients needed
+  const ingredientList = []
 
   //Imported getMealPlan from authNav to get Meal Plan for the current user
   React.useEffect(()=>{
       getMealPlan();
  }, [])
-
 
  // handle when the user wants to reset their meal planner, should show the popup and confirmation messages
  const handleOnDelete = () => {
@@ -40,6 +42,12 @@ return (
                   <p><b>Sunday</b></p>
                   <div className="recipes">
                         {mealPlan?.map((idx) =>{
+                           const ingredientArr = idx?.ingredients.split(',')
+                           ingredientArr?.map((ingr) => {
+                              if (ingr !== "" && ingr !== " " && ingredientList.indexOf(ingr.trim()) === -1 ) {
+                                 ingredientList.push(ingr.trim())
+                              }
+                           })
                         if(idx?.weekday==="Sunday"){
                            return <div className="recipe" key={idx?.id}><Link style={{textDecoration: 'none'}} to={`/recipe/${idx.recipe_id}`}><p>{presentableName(idx?.name)}</p></Link><button onClick={()=>{deleteMealPlan(idx.id);}}><b>X</b></button></div>
                         }
@@ -129,7 +137,20 @@ return (
                </button>
             <Overlay />
          </div>
-
+   </div>
+   <div className="shopping-list">
+            <h2>Shopping List</h2>
+            <div className="list">
+               {ingredientList?.map((ingr, idx) => {
+                  return <div className="list-item">
+                        <input type="checkbox" id={`idx-${idx}`}key={idx} value={ingr} />
+                        <label for={`idx-${idx}`}> {ingr}</label><br></br>
+                  </div>
+               })}
+            </div>
+            <div className="shopping-list-footer">
+               <button>Send Shopping List</button>
+            </div>
    </div>
 </div>
   )
