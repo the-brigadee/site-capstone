@@ -206,7 +206,7 @@ export default function Popup(){
             })
             dataUse = data
             errorUse = error
-            
+            inputRef.current.value = ""
         }else if (popupType === "MealPlannerAdd") {
             const {data, error} = await apiClient.createMealPlan({
                 recipe_id: recipeId,
@@ -215,7 +215,6 @@ export default function Popup(){
             })
             dataUse = data
             errorUse = error
-            
         }
                 
         if (errorUse) {
