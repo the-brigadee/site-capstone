@@ -163,7 +163,7 @@ class Search{
                     ) as user_follow WHERE following_id=$1
                 ) as is_following
             FROM users 
-            WHERE random() > 0.27
+            WHERE random() > 0.01
             LIMIT 25
          `,[my_id])
  
