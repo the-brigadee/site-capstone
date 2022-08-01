@@ -165,6 +165,15 @@ function RecipeMain(recipe){
 }
 
 function RecipeStep(recipe){
+  const ingredients=[]
+
+  //Maps through recipe.ingredients and pushes them into ingredients array created above
+  recipe?.recipe?.ingredients?.split(',').map((element,idx) => {
+    ingredients.push(element)})
+  
+  //Remove all duplicate ingredients from the ingredients array
+  const uniqueIngredients = [...new Set(ingredients)];
+
   return(
     <div className="recipe-detail-step">
 
@@ -173,11 +182,10 @@ function RecipeStep(recipe){
         <p className="ingredients-header"> Ingredients </p>
         <hr />
         <ul className='ingredients-list'>
-          {recipe?.recipe?.ingredients?.split(',').map((element,idx) => {
+          {uniqueIngredients?.map((element,idx) => {
             if (element !== "" && element !== " ") {
               return <li key={idx}>{element}</li>;
             }
-              
               })}
         </ul>
       </div>
@@ -188,7 +196,7 @@ function RecipeStep(recipe){
         <p className="directions-header"> Directions </p>
         <hr />
         <ol className='directions-list'>
-        {recipe?.recipe?.instructions?.split('.'||'!').map((element,idx) => {
+        {recipe?.recipe?.instructions?.split('. '||'! ').map((element,idx) => {
           if(element!==""){
               return <li key={idx}>{element}</li>;
           }
