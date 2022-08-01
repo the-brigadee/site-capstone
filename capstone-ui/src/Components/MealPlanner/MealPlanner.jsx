@@ -3,7 +3,6 @@ import './MealPlanner.css'
 import { Link } from 'react-router-dom'
 import {useAuthNavContext} from "../../Contexts/authNav"
 import Overlay from '../Overlay/Overlay'
-import ApiClient from '../../Services/ApiClient'
 
 
 export default function MealPlanner({imageUrl}) {
@@ -13,7 +12,7 @@ export default function MealPlanner({imageUrl}) {
   const ingredientList = []
 
   //Array containingg selected ingredients from list
-  const shoppingList=[]
+  var shoppingList=[]
 
   //Used for formatting shopping cart message
   var shoppingListMessage=""
@@ -31,7 +30,6 @@ export default function MealPlanner({imageUrl}) {
  }
 
  const presentableName = (name) => {
-
    if(!name)
    return ""
    if(name.length > 20){
@@ -40,19 +38,25 @@ export default function MealPlanner({imageUrl}) {
    return name
  }
 
- //Function to push selected recipes from shopping list to shopping list array
- const shoppingListSms=(item,idx)=>{
-   shoppingList.push(item);
- }
-
  //Function that formats shopping list and sending it to the user
  const sendsms= async()=>{
    shoppingListMessage=`Hello ${user.first_name}!\nHere is your Shopping List: \n`
-   ingredientList.map((ingr, idx) =>{
+   shoppingList.map((ingr, idx) =>{
          shoppingListMessage+= "-" + ingr +"\n";
    })
    localStorage.setItem("shoppinglist",shoppingListMessage)
    showMealPlannerShoppingList();
+ }
+
+ //Function that checks if checkbox is checked, and erases ingredient if it is
+ const checkIfCheck=(ingr,idx)=>{
+   const cb = document.querySelector(`#${idx}`);
+   if(cb.checked===true){
+      shoppingList=shoppingList.filter(ingredient=> ingredient!==ingr);
+   }else{
+      shoppingList.push(ingr);
+   }
+   
  }
 return (
 <div className="MealPlannerPage">
@@ -163,9 +167,11 @@ return (
             <h2>Shopping List</h2>
             <div className="list">
                {ingredientList?.map((ingr, idx) => {
+                  shoppingList.push(ingr);
+                  const str=ingr.replace(/ /g, '')
                   return <div className="list-item" key={idx}>
-                           <input type="checkbox" id={`idx-${idx}`}key={idx} value={ingr} onChange={()=>{
-                              shoppingListSms(ingr, idx);
+                           <input type="checkbox" id={str} key={idx} value={ingr} onChange={()=>{
+                              checkIfCheck(ingr,str)
                            }
                            }/>
                            <label htmlFor={`idx-${idx}`}> {ingr}</label><br></br>
