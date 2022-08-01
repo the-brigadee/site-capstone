@@ -4,21 +4,20 @@ const security=require("../middleware/security")
 const router=express.Router();
 const Review = require("../models/review")
 
-
-router.post("/create",security.requireAuthenticatedUser, async (req, res, next) => {
+router.get("/", async (req, res, next) => {
   try {
-    const review = await Review.createReview(req.body);
-    console.log(review);
-    return res.status(200).json({ review });
+    const {recipe_id} = req.body
+    const reviews = await Review.fetchAllReviewsByRecipeId(recipe_id);
+    return res.status(200).json({ reviews });
   } catch (err) {
     next(err);
   }
 });
 
-router.get("/",security.requireAuthenticatedUser, async (req, res, next) => {
+router.post("/create",security.requireAuthenticatedUser, async (req, res, next) => {
   try {
-    const {user_id}=res.locals?.user
-    const review = await Review.fetchAllReviewsByUserId(user_id);
+    const review = await Review.createReview(req.body);
+    
     return res.status(200).json({ review });
   } catch (err) {
     next(err);
@@ -34,16 +33,5 @@ router.delete("/delete/:reviewId",security.requireAuthenticatedUser, async (req,
     next(err)
 }
 });
-
-
-router.get("/:reviewId", security.requireAuthenticatedUser, async function (req, res, next) {
-  try {
-      const reviewId = req.params.reviewId
-      const review = await Review.fetchReviewById(reviewId)
-      return res.status(201).json({ review })
-  } catch (err) {
-      next(err)
-  }
-})
 
 module.exports=router;
