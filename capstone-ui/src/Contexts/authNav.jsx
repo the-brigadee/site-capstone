@@ -71,6 +71,12 @@ export const AuthNavContextProvider = ({children}) =>{
         showPopup()
     }
 
+    //Function for send shopping list from meal planner
+    const showMealPlannerShoppingList = (message) => {
+        setPopupType("ShoppingList")
+        showPopup()
+    }
+
     // Show popup/modal function 
     const showPopup = () => {
         const overlay = document.querySelector('.overlay')
@@ -121,6 +127,7 @@ export const AuthNavContextProvider = ({children}) =>{
                 getMealPlan();
               }
      }
+     
 
     /**  This state variable helps the conditional rendering of the ResultsFeed page 
      * 
@@ -149,7 +156,7 @@ export const AuthNavContextProvider = ({children}) =>{
         transition, setTransition,
         userDetails, setUserDetails,
         file, setFile,
-        mealPlan, setMealPlan, getMealPlan, deleteAllGetMealPlan, deleteMealPlan, showMealPlannerAddForm,
+        mealPlan, setMealPlan, getMealPlan, deleteAllGetMealPlan, deleteMealPlan, showMealPlannerAddForm, showMealPlannerShoppingList,
         deleteAction, setDeleteAction,
         displaySuggestion, setDisplaySuggestion
     }

@@ -4,6 +4,7 @@ import {useAuthNavContext} from "../../Contexts/authNav"
 import apiClient from "../../Services/ApiClient"
 import { useNavigate, useParams } from 'react-router-dom'
 import MealPlannerSuggestion from '../MealPlannerSuggestion/MealPlannerSuggestion'
+import PhoneInput from 'react-phone-input-2'
 
 
 
@@ -43,6 +44,11 @@ export default function Popup(){
         recipe_id: '',
         day: 'Sunday',
         user_id: '',
+    })
+    //Form made specifically for meal planner shopping list button
+    const [formPlanShoppingList, setformPlanShoppingList] = React.useState({
+        phone_number: ``,
+        message:``
     })
 
     const navigate = useNavigate()
@@ -150,6 +156,10 @@ export default function Popup(){
         setFormPlanAdd((f) => ({ ...f, [event.target.name]: event.target.value }))
     }
 
+    const handleOnFormInputShoppingList = (event) => {
+        setformPlanShoppingList((f)=>({...f, phone_number: event}))
+    }
+
     //signup/signin/mealplanner function
     const handleOnSubmit = async () => {
         setIsLoading(true)
@@ -215,6 +225,15 @@ export default function Popup(){
             })
             dataUse = data
             errorUse = error
+        }else if (popupType === "ShoppingList") {
+            const message=localStorage.getItem("shoppinglist")
+            const {data, error} = await apiClient.sendsms({
+                to:formPlanShoppingList.phone_number,
+                body:message
+            })
+            localStorage.setItem("shoppinglist",null)
+            dataUse = data
+            errorUse = error
         }
                 
         if (errorUse) {
@@ -236,6 +255,9 @@ export default function Popup(){
             //Going to be used for the Meal Planner Page to close the popup and redirect the mealplanner
             closePopup();
             navigate("/mealplanner")
+        }
+        else if(popupType==="ShoppingList"){
+            closePopup();
         }
         
     }
@@ -278,7 +300,7 @@ export default function Popup(){
 
     //useEffect to close the popup form when user are logged in
     React.useEffect(() => {
-        if (user?.email && popupType!=="MealPlanner" && popupType!=="MealPlannerAdd") {
+        if (user?.email && popupType!=="MealPlanner" && popupType!=="MealPlannerAdd" && popupType!=="ShoppingList") {
             closePopup()
         }
     })
@@ -427,7 +449,20 @@ export default function Popup(){
             {deleteAction === "recipe" ? <button onClick={handleOnConfirm}>Delete Recipe</button> : null}
         </div>
     </div>
-    }
+    }else if(popupType==="ShoppingList"){
+        formHTML = 
+        <div className="form">
+            <div className="input-field">
+                <label htmlFor="Password">Enter Phone Number:</label>
+                <PhoneInput country="us" type="tel" value={formPlanShoppingList.phone_number} name="phone_number" onChange={handleOnFormInputShoppingList}/>
+            </div>
+            <div className="footer">
+                <button className="footer-btn" disabled={isLoading} onClick={handleOnSubmit}>
+                    {isLoading ? "Loading..." : "SEND"}
+                </button>
+            </div>
+        </div>
+    } 
 
     return(
         <div className="popup-container" >
