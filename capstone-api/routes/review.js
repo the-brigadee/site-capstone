@@ -17,7 +17,7 @@ router.get("/", async (req, res, next) => {
 router.post("/create",security.requireAuthenticatedUser, async (req, res, next) => {
   try {
     const review = await Review.createReview(req.body);
-    console.log(review);
+    
     return res.status(200).json({ review });
   } catch (err) {
     next(err);
