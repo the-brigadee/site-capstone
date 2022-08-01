@@ -214,10 +214,7 @@ function RecipeReview({recipeId}) {
   //use State for review form
   const [comment, setComment] = React.useState("")
 
-  // use state for list of reviews for the recipe
-  const [reviews, setReviews] = React.useState([])
-
-  const {user, isLoading, setIsLoading, setError, showLoginForm} = useAuthNavContext()
+  const {user, isLoading, setIsLoading, setError, showLoginForm, reviews, setReviews} = useAuthNavContext()
 
   //fetch all current review on render
   React.useEffect(()=> {
@@ -270,6 +267,7 @@ function RecipeReview({recipeId}) {
 
     setIsLoading(false)
   }
+
   return(
     <div className="recipe-review-main" id="review-scroll">
       <h3>Reviews</h3>
@@ -279,7 +277,7 @@ function RecipeReview({recipeId}) {
         <button onClick={handleOnPost}>{isLoading ? "Loading" : "Post"}</button>
       </div>
       {reviews.map((review) => (
-        <ReviewCard review={review}  key={review.id}/>
+        <ReviewCard review={review}  key={review.id} setReviews={setReviews}/>
       ))}
     </div>
 )
