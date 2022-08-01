@@ -14,7 +14,7 @@ import PhoneInput from 'react-phone-input-2'
 
 export default function Popup(){
     //needed functions from useAuthNavContext
-    const {popupType, closePopup, showRegisterForm, showLoginForm, error, setError, setUser, isLoading, setIsLoading, user, setMealPlan, getMealPlan, deleteAction, setDeleteAction, deleteAllGetMealPlan, isPwChanged, setIsPwChanged, displaySuggestion, setDisplaySuggestion} = useAuthNavContext()
+    const {popupType, closePopup, showRegisterForm, showLoginForm, error, setError, setUser, isLoading, setIsLoading, user, setMealPlan, getMealPlan, deleteAction, setDeleteAction, deleteAllGetMealPlan, isPwChanged, setIsPwChanged, displaySuggestion, setDisplaySuggestion, setReviews} = useAuthNavContext()
 
     const [form, setForm] = React.useState({
         email: "",
@@ -291,6 +291,23 @@ export default function Popup(){
                 return
             }
             navigate("/")
+        } else if (deleteAction === "review") {
+            const review_id = localStorage.getItem("review_id")
+            const {data, error} = await apiClient.deleteReview(review_id)
+            if (error) {
+                setError((e) => ({ ...e, reviewDelete: error }))
+                return
+            } else {
+                const {data, error} = await apiClient.fetchRecipeReviews(recipeId)
+                if (error) {
+                    setError((e) => ({ ...e, reviews:"Something went wrong fetching reviews!" }))
+                }
+
+                if(data?.reviews) {
+                    setReviews(data.reviews)
+                }
+            }
+            localStorage.setItem("review_id", null)
         }
         setDeleteAction("")
         closePopup()
@@ -441,12 +458,14 @@ export default function Popup(){
             {deleteAction === "account" ? <span>Are you sure you want to delete your account? [Caution:] This action is irreversible! </span> : null}
             {deleteAction === "mealPlan" ? <span>Are you sure you want to reset your meal plan? [Caution:] This action is irreversible! </span> : null}
             {deleteAction === "recipe" ? <span>Are you sure you want to delete this recipe? [Caution:] This action is irreversible! </span> : null}
+            {deleteAction === "review" ? <span>Are you sure you want to delete this review? [Caution:] This action is irreversible! </span> : null}
         </div>
         <div className="delete-footer">
             <button onClick={closePopup}>Cancel</button>
             {deleteAction === "account" ? <button onClick={handleOnConfirm}>Delete Account</button> : null}
             {deleteAction === "mealPlan" ? <button onClick={handleOnConfirm}>Reset Meal Plan </button> : null}
             {deleteAction === "recipe" ? <button onClick={handleOnConfirm}>Delete Recipe</button> : null}
+            {deleteAction === "review" ? <button onClick={handleOnConfirm}>Delete Review</button> : null}
         </div>
     </div>
     }else if(popupType==="ShoppingList"){

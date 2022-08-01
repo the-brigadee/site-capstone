@@ -144,6 +144,9 @@ export const AuthNavContextProvider = ({children}) =>{
     // display suggestion state variable
     const [displaySuggestion, setDisplaySuggestion] = React.useState(false)
 
+      // use state for list of reviews for the recipe
+    const [reviews, setReviews] = React.useState([])
+
     // Add all state variables to be passed to this object 
     const authNavvalue = {
         user, setUser, 
@@ -158,7 +161,8 @@ export const AuthNavContextProvider = ({children}) =>{
         file, setFile,
         mealPlan, setMealPlan, getMealPlan, deleteAllGetMealPlan, deleteMealPlan, showMealPlannerAddForm, showMealPlannerShoppingList,
         deleteAction, setDeleteAction,
-        displaySuggestion, setDisplaySuggestion
+        displaySuggestion, setDisplaySuggestion,
+        reviews, setReviews
     }
 
 
