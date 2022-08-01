@@ -168,9 +168,9 @@ function RecipeStep(recipe){
   const ingredients=[]
 
   //Maps through recipe.ingredients and pushes them into ingredients array created above
-  recipe?.recipe?.ingredients?.split(',').map((element,idx) => {
+  recipe?.recipe?.ingredients?.split(', '||',').map((element,idx) => {
     ingredients.push(element)})
-  
+    
   //Remove all duplicate ingredients from the ingredients array
   const uniqueIngredients = [...new Set(ingredients)];
 

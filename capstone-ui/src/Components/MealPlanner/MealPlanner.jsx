@@ -3,13 +3,19 @@ import './MealPlanner.css'
 import { Link } from 'react-router-dom'
 import {useAuthNavContext} from "../../Contexts/authNav"
 import Overlay from '../Overlay/Overlay'
+import ApiClient from '../../Services/ApiClient'
 
 
 export default function MealPlanner({imageUrl}) {
-  const {isLoading, showMealPlannerForm, mealPlan, getMealPlan, deleteMealPlan, setPopupType, setDeleteAction, showPopup, setDisplaySuggestion, deleteallgetMealPlan} = useAuthNavContext()
+  const {user, isLoading, showMealPlannerForm, mealPlan, getMealPlan, deleteMealPlan, setPopupType, setDeleteAction, showPopup, setDisplaySuggestion, deleteallgetMealPlan} = useAuthNavContext()
   
   // ingredient array containing all of the ingredients needed
   const ingredientList = []
+
+  const shoppingList=[]
+
+  //Used for formatting shopping cart message
+  var shoppingListMessage=""
 
   //Imported getMealPlan from authNav to get Meal Plan for the current user
   React.useEffect(()=>{
@@ -33,6 +39,30 @@ export default function MealPlanner({imageUrl}) {
    return name
  }
 
+ //Function to push selected recipes from shopping list to shopping list array
+ const shoppingListSms=(item,idx)=>{
+   shoppingList.push(item);
+   // shoppingList.map((id,index) =>{
+   //    console.log(ingredientList[idx]);
+   //    console.log(id);
+   //    if(ingredientList[idx]===item && index!==0){
+   //       shoppingList.pop(item);
+   //       shoppingList.pop(id);
+   //    }
+   // })
+   console.log(shoppingList);
+ }
+
+ //Function that formats shopping list and sending it to the user
+ const sendsms= async(message)=>{
+   shoppingListMessage=`Hello ${user.first_name}!\nHere is your Shopping List: \n`
+   ingredientList.map((ingr, idx) =>{
+         shoppingListMessage+= "-" + ingr +"\n";
+      
+   })
+   console.log(shoppingListMessage);
+   // await ApiClient.sendsms({to:`+17869717888`, body:shoppingListMessage})
+ }
 return (
 <div className="MealPlannerPage">
    <div className="content">
@@ -142,14 +172,17 @@ return (
             <h2>Shopping List</h2>
             <div className="list">
                {ingredientList?.map((ingr, idx) => {
-                  return <div className="list-item">
-                        <input type="checkbox" id={`idx-${idx}`}key={idx} value={ingr} />
-                        <label for={`idx-${idx}`}> {ingr}</label><br></br>
-                  </div>
+                  return <div className="list-item" key={idx}>
+                           <input type="checkbox" id={`idx-${idx}`}key={idx} value={ingr} onChange={()=>{
+                              shoppingListSms(ingr, idx);
+                           }
+                           }/>
+                           <label htmlFor={`idx-${idx}`}> {ingr}</label><br></br>
+                        </div>
                })}
             </div>
             <div className="shopping-list-footer">
-               <button>Send Shopping List</button>
+               <button onClick={sendsms}>Send Shopping List</button>
             </div>
    </div>
 </div>

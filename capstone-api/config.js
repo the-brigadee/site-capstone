@@ -4,6 +4,9 @@ require("colors")
 const PORT = process.env.PORT ? Number(process.env.PORT) : 3001;
 const BCRYPT_WORK_FACTOR = process.env.BCRYPT_WORK_FACTOR ? Number(process.env.BCRYPT_WORK_FACTOR) : 13;
 const SECRET_KEY = process.env.SECRET_KEY || "SKAJDFHJKAHSDFJHBHAJS";
+const TWILIO_ACCOUNT_SID = process.env.TWILIO_ACCOUNT_SID || "AC23120cdafbb69630be74dbe7202c0e91";
+const TWILIO_AUTH_TOKEN = process.env.TWILIO_AUTH_TOKEN || "a9d26f3de6a69c6c1a94d3b039e30205";
+const TWILIO_PHONE_NUMBER = process.env.TWILIO_PHONE_NUMBER || "+12058460221";
 
 function getDatabaseUri() {
   const dbUser = process.env.DATABASE_USER || "postgres";
@@ -29,5 +32,8 @@ module.exports={
     PORT,
     getDatabaseUri,
     BCRYPT_WORK_FACTOR,
-    SECRET_KEY
+    SECRET_KEY,
+    TWILIO_ACCOUNT_SID,
+    TWILIO_AUTH_TOKEN,
+    TWILIO_PHONE_NUMBER
 }

@@ -9,10 +9,18 @@ const mealplannerRoutes = require("./routes/mealplanner")
 const followRoutes = require("./routes/follow")
 const searchRoutes = require("./routes/search")
 const profileRoutes = require("./routes/profile")
+const bodyParser = require('body-parser');
+const {TWILIO_ACCOUNT_SID,TWILIO_AUTH_TOKEN,TWILIO_PHONE_NUMBER} = require("./config")
+const client = require('twilio')(
+  TWILIO_ACCOUNT_SID,
+  TWILIO_AUTH_TOKEN
+);
 
 const morgan = require("morgan")
 const cors = require("cors")
-const app = express()
+const app = express();
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
 
 app.use(cors())
 
@@ -36,6 +44,23 @@ app.use("/follow", followRoutes)
 app.get("/",(req, res, next) => {
     res.status(200).json({"ping":"pong"})
 })
+
+app.post('/api/messages', (req, res) => {
+    res.header('Content-Type', 'application/json');
+    client.messages
+      .create({
+        from: TWILIO_PHONE_NUMBER,
+        to: req.body.creds.to,
+        body: req.body.creds.body
+      })
+      .then(() => {
+        res.send(JSON.stringify({ success: true }));
+      })
+      .catch(err => {
+        console.log(err);
+        res.send(JSON.stringify({ success: false }));
+      });
+  });
 
 app.use((req, res, next) => {
     next(new NotFoundError())
