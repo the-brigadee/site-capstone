@@ -5,6 +5,7 @@ import apiClient from "../../Services/ApiClient"
 import './RecipeDetail.css'
 import Overlay from '../Overlay/Overlay'
 import { stripHtml } from "string-strip-html"
+import ReviewCard from '../ReviewCard/ReviewCard'
 
 
 export default function RecipeDetail() {
@@ -38,6 +39,7 @@ export default function RecipeDetail() {
       {/* Detailed Step Information */}
       <RecipeStep recipe={recipe}/>
         
+      <RecipeReview recipeId={recipeId}/>
     </div>
   )
 }
@@ -155,7 +157,7 @@ function RecipeMain(recipe){
         <div className="recipe-edit-buttons">
           <button onClick={()=>{addPlan();}}> Add Plan </button>
           {isSaved && user?.email ? <button onClick={()=>{saveRecipe(); setIsSaved(false)}}> Unsave </button> :<button onClick={()=>{saveRecipe();setIsSaved(true)}}> Save </button>}
-          <button> Review </button>
+          <a href="#review-scroll"><button> Reviews </button></a>
           {/* Recipe Delete button */}
           {recipe.recipe.user_id===user.id && <button onClick={deleteRecipe}> Delete </button>}      
         </div>
@@ -206,4 +208,77 @@ function RecipeStep(recipe){
       </div>
     </div>
   )
+}
+
+function RecipeReview({recipeId}) {
+  //use State for review form
+  const [comment, setComment] = React.useState("")
+
+  const {user, isLoading, setIsLoading, setError, showLoginForm, reviews, setReviews} = useAuthNavContext()
+
+  //fetch all current review on render
+  React.useEffect(()=> {
+    const fetchReviews = async () => {
+      setIsLoading(true)
+      const {data, error} = await apiClient.fetchRecipeReviews(recipeId)
+      if (error) {
+        setError((e) => ({ ...e, reviews:"Something went wrong fetching reviews!" }))
+      }
+
+      if(data?.reviews) {
+        setReviews(data.reviews)
+      }
+
+      setIsLoading(false)
+    }
+
+    fetchReviews()
+  }, [setError, setIsLoading, setReviews])
+
+  // handle user's comment on the recipe
+  const handleOnInputChange = (e) => {
+    setComment(e.target.value)
+  }
+
+  // handle when user want to post their comment
+  const handleOnPost = async () => {
+    if(!user?.email){
+      showLoginForm();
+      setError((e) => ({ ...e, form:"You need to be logged in!" }))
+      return
+    }
+    
+    setIsLoading(true)
+    const {data, error} = await apiClient.postReview(recipeId, user.id, comment)
+    setComment("")
+    if (error) {
+      setError((e) => ({ ...e, review:"Something went wrong posting review!" }))
+    }
+    if (data?.review) {
+      const {data, error} = await apiClient.fetchRecipeReviews(recipeId)
+      if (error) {
+        setError((e) => ({ ...e, reviews:"Something went wrong fetching reviews!" }))
+      }
+
+      if(data?.reviews) {
+        setReviews(data.reviews)
+      }
+    }
+
+    setIsLoading(false)
+  }
+
+  return(
+    <div className="recipe-review-main" id="review-scroll">
+      <h3>Reviews</h3>
+      {/* Add review form */}
+      <div className="add-review">
+        <input type="text" placeholder='Leave a review' onChange={handleOnInputChange} value={comment}/>
+        <button onClick={handleOnPost}>{isLoading ? "Loading" : "Post"}</button>
+      </div>
+      {reviews.map((review) => (
+        <ReviewCard review={review}  key={review.id} setReviews={setReviews}/>
+      ))}
+    </div>
+)
 }
