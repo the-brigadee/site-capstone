@@ -1,7 +1,5 @@
 const db= require("../db")
-const bcrypt = require("bcrypt")
-const {BCRYPT_WORK_FACTOR} = require("../config")
-const {BadRequestError,UnauthorizedError } = require("../utils/errors");
+const {BadRequestError } = require("../utils/errors");
 const Recipe=require("./recipe")
 
 class Review{
@@ -44,9 +42,20 @@ class Review{
             throw new BadRequestError(`Missing ${field} in request body.`)
         } 
         
-        const result = await db.query("DELETE FROM reviews WHERE id = $1;", [id])
+        await db.query("DELETE FROM reviews WHERE id = $1;", [id])
 
         return "Successfully deleted review"
+    }
+
+    static async editReview(creds) {
+        
+        if (!creds.review_id) {
+            throw new BadRequestError(`Missing review id in request body.`)
+        } 
+        
+        await db.query("UPDATE reviews SET comment = $1 WHERE id = $2;", [creds.comment, creds.review_id])
+
+        return "Successfully edit review"
     }
 
     static async fetchAllReviewsByRecipeId(recipe_id) {
@@ -54,21 +63,21 @@ class Review{
         if (!recipe_id) {
             throw new BadRequestError("No recipe_id provided")
         }
-
         //checking if the recipe exist
-        const existingRecipe= await Recipe.fetchRecipeById(reviewfact.recipe_id)
+        const existingRecipe= await Recipe.fetchRecipeById(recipe_id)
         
         if(!existingRecipe){
             throw new BadRequestError(`Recipe does not exist`)
         }
 
         //if the recipe exist fetch all of the reviews including the reviewer's information
-        const query = `SELECT users.username, users.image_url, reviews.user_id, reviews.recipe_id, reviews.comment, reviews.created_at 
-                        FROM reviews
-                        JOIN users
-                        ON reviews.user_id = users.id
-                        WHERE recipe_id = $1`
-
+        const query = `SELECT users.username, users.image_url, reviews.user_id, reviews.recipe_id, reviews.comment, reviews.created_at, reviews.id, reviews.updated_at 
+        FROM reviews
+        JOIN users
+        ON reviews.user_id = users.id
+        WHERE recipe_id = $1
+        ORDER BY reviews.created_at DESC;`
+        
         const results = await db.query(query, [recipe_id])
         
         return results.rows

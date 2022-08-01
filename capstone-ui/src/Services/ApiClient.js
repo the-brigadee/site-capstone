@@ -161,6 +161,15 @@ class ApiClient {
     async sendsms(creds){
         return await this.request({endpoint: `api/messages`, method: `POST`, data:{creds}})
     }
+    
+    async postReview(recipe_id, user_id, comment) {
+        return await this.request({endpoint: `review/create`, method: `POST`, data: {"recipe_id" : recipe_id, "user_id" : user_id, "comment": comment}})
+    }
+
+    async fetchRecipeReviews(recipe_id) {
+        return await this.request({ endpoint: `review/${recipe_id}`, method: `GET`})
+
+    }
 }
 
 export default new ApiClient("http://localhost:3001")

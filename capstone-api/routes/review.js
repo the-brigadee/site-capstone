@@ -4,9 +4,9 @@ const security=require("../middleware/security")
 const router=express.Router();
 const Review = require("../models/review")
 
-router.get("/", async (req, res, next) => {
+router.get("/:recipeId", async (req, res, next) => {
   try {
-    const {recipe_id} = req.body
+    const recipe_id = req.params.recipeId
     const reviews = await Review.fetchAllReviewsByRecipeId(recipe_id);
     return res.status(200).json({ reviews });
   } catch (err) {
@@ -17,6 +17,16 @@ router.get("/", async (req, res, next) => {
 router.post("/create",security.requireAuthenticatedUser, async (req, res, next) => {
   try {
     const review = await Review.createReview(req.body);
+    
+    return res.status(200).json({ review });
+  } catch (err) {
+    next(err);
+  }
+});
+
+router.put("/update",security.requireAuthenticatedUser, async (req, res, next) => {
+  try {
+    const review = await Review.editReview(req.body);
     
     return res.status(200).json({ review });
   } catch (err) {

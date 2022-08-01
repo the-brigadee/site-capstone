@@ -1,0 +1,19 @@
+.review-card {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+}
+
+.review-detail h5, .review-detail p {
+    margin: 0;
+}
+
+.review-detail span {
+    font-weight: normal;
+    color: rgb(125, 124, 124);
+}
+
+.review-img img{
+    width: 30px;
+    height: 30px;
+}
