@@ -31,7 +31,6 @@ CREATE TABLE recipe (
 
 CREATE TABLE reviews (
     id SERIAL PRIMARY KEY,
-    rating FLOAT NOT NULL,
     user_id INTEGER NOT NULL,
     recipe_id INTEGER NOT NULL,
     comment TEXT NOT NULL,
