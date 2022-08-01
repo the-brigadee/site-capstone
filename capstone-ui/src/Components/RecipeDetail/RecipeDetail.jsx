@@ -6,6 +6,7 @@ import './RecipeDetail.css'
 import Overlay from '../Overlay/Overlay'
 import { stripHtml } from "string-strip-html"
 import ReviewCard from '../ReviewCard/ReviewCard'
+import TextareaAutosize from 'react-autosize-textarea';
 
 
 export default function RecipeDetail() {
@@ -270,11 +271,23 @@ function RecipeReview({recipeId}) {
 
   return(
     <div className="recipe-review-main" id="review-scroll">
-      <h3>Reviews</h3>
+      <h1>Reviews</h1>
       {/* Add review form */}
       <div className="add-review">
-        <input type="text" placeholder='Leave a review' onChange={handleOnInputChange} value={comment}/>
-        <button onClick={handleOnPost}>{isLoading ? "Loading" : "Post"}</button>
+        <div className='add-review-image'>
+        {
+          user
+          ?
+          <img src={user.imageUrl} alt="user profile" />
+          :
+          <img src="https://toppng.com/uploads/preview/circled-user-icon-user-pro-icon-11553397069rpnu1bqqup.png" alt="default profile" />
+        }
+        </div>
+        <div className='add-review-text'>
+          <TextareaAutosize placeholder='Leave a review' onChange={handleOnInputChange} value={comment}/>
+          <hr />
+          <button onClick={handleOnPost}>{isLoading ? "Loading" : "Post"}</button>
+          </div>
       </div>
       {reviews.map((review) => (
         <ReviewCard review={review}  key={review.id} setReviews={setReviews}/>

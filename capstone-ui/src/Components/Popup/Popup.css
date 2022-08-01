@@ -216,9 +216,11 @@
     border-radius: 5px;
     cursor: pointer;
 }
-.meal-suggestion{
+.meal-suggestion {
     position: relative;
     background-color: transparent;
+    overflow-y: scroll;
+    max-height: 170px;
 }
 
 .suggestion-grid{
