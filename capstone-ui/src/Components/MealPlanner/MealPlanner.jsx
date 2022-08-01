@@ -7,11 +7,12 @@ import ApiClient from '../../Services/ApiClient'
 
 
 export default function MealPlanner({imageUrl}) {
-  const {user, isLoading, showMealPlannerForm, mealPlan, getMealPlan, deleteMealPlan, setPopupType, setDeleteAction, showPopup, setDisplaySuggestion, deleteallgetMealPlan} = useAuthNavContext()
+  const {user, isLoading, showMealPlannerForm,showMealPlannerShoppingList, mealPlan, getMealPlan, deleteMealPlan, setPopupType, setDeleteAction, showPopup, setDisplaySuggestion, deleteallgetMealPlan} = useAuthNavContext()
   
   // ingredient array containing all of the ingredients needed
   const ingredientList = []
 
+  //Array containingg selected ingredients from list
   const shoppingList=[]
 
   //Used for formatting shopping cart message
@@ -42,26 +43,16 @@ export default function MealPlanner({imageUrl}) {
  //Function to push selected recipes from shopping list to shopping list array
  const shoppingListSms=(item,idx)=>{
    shoppingList.push(item);
-   // shoppingList.map((id,index) =>{
-   //    console.log(ingredientList[idx]);
-   //    console.log(id);
-   //    if(ingredientList[idx]===item && index!==0){
-   //       shoppingList.pop(item);
-   //       shoppingList.pop(id);
-   //    }
-   // })
-   console.log(shoppingList);
  }
 
  //Function that formats shopping list and sending it to the user
- const sendsms= async(message)=>{
+ const sendsms= async()=>{
    shoppingListMessage=`Hello ${user.first_name}!\nHere is your Shopping List: \n`
    ingredientList.map((ingr, idx) =>{
          shoppingListMessage+= "-" + ingr +"\n";
-      
    })
-   console.log(shoppingListMessage);
-   // await ApiClient.sendsms({to:`+17869717888`, body:shoppingListMessage})
+   localStorage.setItem("shoppinglist",shoppingListMessage)
+   showMealPlannerShoppingList();
  }
 return (
 <div className="MealPlannerPage">
@@ -165,7 +156,7 @@ return (
                <button className="footer-btn deletemealplan" disabled={isLoading} onClick={handleOnDelete}>
                   {isLoading ? "Loading..." : "Reset Mealplan"}
                </button>
-            <Overlay />
+            <Overlay message={shoppingListMessage}/>
          </div>
    </div>
    <div className="shopping-list">
@@ -182,7 +173,9 @@ return (
                })}
             </div>
             <div className="shopping-list-footer">
-               <button onClick={sendsms}>Send Shopping List</button>
+               <button onClick={()=>{
+                  sendsms();
+               }}>Send Shopping List</button>
             </div>
    </div>
 </div>
