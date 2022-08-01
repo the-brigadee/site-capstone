@@ -22,5 +22,8 @@
     "morgan": "^1.10.0",
     "nodemon": "^2.0.19",
     "pg": "^8.7.3"
+  },
+  "devDependencies": {
+    "twilio": "^3.80.0"
   }
 }

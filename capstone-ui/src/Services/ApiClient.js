@@ -156,6 +156,11 @@ class ApiClient {
     async getRecipeIdByName(name){
         return await this.request({ endpoint: `mealplanner/getid/${name}`, method: `GET`, data:{} })
     }
+
+    //function that allows user to send themselves their shopping list
+    async sendsms(creds){
+        return await this.request({endpoint: `api/messages`, method: `POST`, data:{creds}})
+    }
 }
 
 export default new ApiClient("http://localhost:3001")
