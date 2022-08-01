@@ -47,6 +47,8 @@ app.get("/",(req, res, next) => {
 
 app.post('/api/messages', (req, res) => {
     res.header('Content-Type', 'application/json');
+    console.log(req.body.creds);
+    // console.log(res);
     client.messages
       .create({
         from: TWILIO_PHONE_NUMBER,

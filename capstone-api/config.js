@@ -5,7 +5,7 @@ const PORT = process.env.PORT ? Number(process.env.PORT) : 3001;
 const BCRYPT_WORK_FACTOR = process.env.BCRYPT_WORK_FACTOR ? Number(process.env.BCRYPT_WORK_FACTOR) : 13;
 const SECRET_KEY = process.env.SECRET_KEY || "SKAJDFHJKAHSDFJHBHAJS";
 const TWILIO_ACCOUNT_SID = process.env.TWILIO_ACCOUNT_SID || "AC23120cdafbb69630be74dbe7202c0e91";
-const TWILIO_AUTH_TOKEN = process.env.TWILIO_AUTH_TOKEN || "a9d26f3de6a69c6c1a94d3b039e30205";
+const TWILIO_AUTH_TOKEN = process.env.TWILIO_AUTH_TOKEN || "2a3961f013c133cf55b671a6aea3f6e4";
 const TWILIO_PHONE_NUMBER = process.env.TWILIO_PHONE_NUMBER || "+12058460221";
 
 function getDatabaseUri() {

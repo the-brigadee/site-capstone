@@ -177,6 +177,10 @@
     cursor: pointer;
 }
 
+.popup-card .special-label{
+    visibility: hidden;
+}
+
 .error {
     margin-top: 5px;
     color: rgb(193, 0, 0); 
