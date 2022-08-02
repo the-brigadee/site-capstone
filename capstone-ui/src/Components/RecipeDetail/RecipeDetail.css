@@ -150,9 +150,8 @@ Review section styling
 .add-review {
     display: flex;
     flex-direction: row;
-    border: 1px solid var(--border-color);
     border-radius: 12px;
-    justify-content: space-between;
+    gap: 20px;
 }
 
 .add-review input {
@@ -176,3 +175,43 @@ Review section styling
     gap: 10px;
 }
 
+.add-review img {
+    width: 75px;
+    height: 75px;
+    border-radius: 50%;
+    border: 3px solid black;
+}
+
+.add-review-text textarea:focus {
+    border-bottom: 3px solid black;
+}
+
+.add-review-text textarea {
+    width: 100%;
+    border: 0px;
+    line-height: 45px;
+    font-size: 22.5px;
+}
+
+.add-review-text {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    width: 90%;
+    padding: 30px;
+    border: 1px solid var(--border-color);
+    box-shadow: 0px 0px 10px lightgray;
+    border-radius: 12px;
+}
+
+.add-review-text hr {
+    margin: 10px 0px 10px 0px;
+    width: 100%;
+    border-color: black;
+}
+
+.add-review-image {
+    justify-content: center;
+    align-items: center;
+    display: flex;
+}
