@@ -1,6 +1,7 @@
 const db= require("../db")
 const bcrypt = require("bcrypt")
 const {BCRYPT_WORK_FACTOR} = require("../config")
+const emailExistence = require('email-existence')
 const {BadRequestError,UnauthorizedError } = require("../utils/errors");
 
 class User{
@@ -148,6 +149,20 @@ class User{
         if(existingUserName){
             throw new BadRequestError(`Duplicate username: ${credentials.userName}`)
         }
+
+        // Check if the email being used is real i.e. is hosted on a real domain
+        var emailExists
+        emailExistence.check(credentials.email, function(error, response){
+            emailExists = response
+        }
+        )
+        
+        // if the email is not real, then throw an error
+        if(!emailExists){
+            // console.log("This email is " +response)
+            throw new BadRequestError("Please use a Real email")
+        }
+
 
 
 
