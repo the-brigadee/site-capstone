@@ -299,12 +299,16 @@ export default function UserProfilePage() {
     showPopup()
   }
 
+  function isImage(url) {
+  return /\.(jpg|jpeg|png|webp|avif|gif|svg)$/.test(url);
+}
+  
   return (
     <div className='user-profile-container'>
         <div className="user-profile">
           <div className="left-profile">
             <div className="profile-img">
-              {user?.imageUrl ? <img src={user.imageUrl} alt='profile img' /> : <img src="https://cdn.icon-icons.com/icons2/933/PNG/512/round-account-button-with-user-inside_icon-icons.com_72596.png" alt='profile img' /> }
+              {isImage(user?.imageUrl) ? <img src={user.imageUrl} alt='profile img' /> : <img src="https://toppng.com/uploads/preview/circled-user-icon-user-pro-icon-11553397069rpnu1bqqup.png" alt='profile img' /> }
             </div>
             { isChangingImg ? <DragDropFile /> : null }
             <button className="change-img" onClick={handleUpdateImg}>
