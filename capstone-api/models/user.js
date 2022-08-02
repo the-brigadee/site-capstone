@@ -159,7 +159,6 @@ class User{
         
         // if the email is not real, then throw an error
         if(!emailExists){
-            // console.log("This email is " +response)
             throw new BadRequestError("Please use a Real email")
         }
 
