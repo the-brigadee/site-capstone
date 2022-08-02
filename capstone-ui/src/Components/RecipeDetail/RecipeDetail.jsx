@@ -284,11 +284,13 @@ function RecipeReview({recipeId}) {
         }
         </div>
         <div className='add-review-text'>
-          <TextareaAutosize placeholder='Leave a review' onChange={handleOnInputChange} value={comment}/>
+          <TextareaAutosize placeholder='Leave a review' onChange={handleOnInputChange} value={comment} style={{ minHeight: 20}}/>
           <hr />
           <button onClick={handleOnPost}>{isLoading ? "Loading" : "Post"}</button>
           </div>
       </div>
+
+      <br />
       {reviews.map((review) => (
         <ReviewCard review={review}  key={review.id} setReviews={setReviews}/>
       ))}

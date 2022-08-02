@@ -53,12 +53,6 @@ export default function ReviewCard({review}) {
                 <p>{review?.comment}</p>
             </div>
             <div className="review-btns" onClick={handleOnDelete}>
-                {/* {user?.id === review?.user_id ? <i className="fa-solid fa-ellipsis-vertical"></i> : null }
-                <div className="menu-popup">
-                    <div className="menu-popup-item">
-                        Delete
-                    </div>
-                </div> */}
                 {user?.id === review?.user_id ? <span className='close-btn'>x</span> : null }
             </div>
         </div>
